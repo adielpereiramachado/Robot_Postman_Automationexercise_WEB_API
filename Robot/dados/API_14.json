@@ -1,0 +1,21 @@
+{
+    "responseCode": 200,
+    "user": {
+      "id": 428058,
+      "name": "Nome b",
+      "email": "teste202410041448@teste.com",
+      "title": "Mr",
+      "birth_date": "1",
+      "birth_month": "1",
+      "birth_year": "1977",
+      "first_name": "Nome 1",
+      "last_name": "Sobre nome",
+      "company": "Empresa",
+      "address1": "Rua dos bobo",
+      "address2": "",
+      "country": "India",
+      "state": "Estado",
+      "city": "Cidade",
+      "zipcode": "11111111"
+    }
+  }

@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.1 (Python 3.12.6 on win32)" generated="2024-11-04T11:29:12.435107" rpa="false" schemaversion="5">
+<suite id="s1" name="Caso Teste" source="C:\Arquivos\ADIEL\Projetos-etc\Git\Repositorio_Privado\Desafios\04_Projeto_Robot_Automationexercise\Caso_Teste.robot">
+<test id="s1-t1" name="WEB Test Case 6: Contact Us Form" line="91">
+<kw name="WEB 06: Launch browser" owner="Resource_Exec">
+<kw name="WEB 01: Launch browser" owner="Resource_Exec">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-11-04T11:29:14.176567" level="INFO">Slept 1 second.</msg>
+<arg>1</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-11-04T11:29:13.176456" elapsed="1.000111"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:14.178700" level="INFO">
+0 Browser passado é:&lt;HeadlessFirefox&gt;</msg>
+<arg>\n0 Browser passado é:&lt;${BROWSER}&gt;</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.177701" elapsed="0.001897"/>
+</kw>
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'Chrome'">
+<kw name="Log" owner="BuiltIn">
+<arg>\n1 Browser é Chrome: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.180697" elapsed="0.000000"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<arg>options=add_argument("--force-device-scale-factor=0.8");add_experimental_option("excludeSwitches", ["enable-logging"]);add_argument("--window-size=1550,800")</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.180697" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.180697" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:14.179598" elapsed="0.001099"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'HeadlessChrome'">
+<kw name="Log" owner="BuiltIn">
+<arg>\n2 Browser é HeadlessChrome: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.181690" elapsed="0.000000"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<arg>options=add_argument("--force-device-scale-factor=0.8");add_experimental_option("excludeSwitches", ["enable-logging"]);add_argument("--window-size=1550,800")</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.181690" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.182695" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:14.181690" elapsed="0.001005"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'Firefox'">
+<kw name="Log" owner="BuiltIn">
+<arg>\n3 Browser é Firefox: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.182695" elapsed="0.000000"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].FirefoxOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.182695" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>set_preference</arg>
+<arg>layout.css.devPixelsPerPx</arg>
+<arg>0.8</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.183687" elapsed="0.000000"/>
+</kw>
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<arg>Firefox</arg>
+<arg>options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.183687" elapsed="0.000000"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<arg>about:blank</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.183687" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:14.183687" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:14.182695" elapsed="0.000992"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'HeadlessFirefox'">
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:14.184683" level="INFO">
+4 Browser é HeadlessFirefox: HeadlessFirefox</msg>
+<arg>\n4 Browser é HeadlessFirefox: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.183687" elapsed="0.000996"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-11-04T11:29:14.185583" level="INFO">${options} = &lt;selenium.webdriver.chrome.options.Options object at 0x0000029076EAA930&gt;</msg>
+<var>${options}</var>
+<arg>sys.modules['selenium.webdriver'].ChromeOptions()</arg>
+<arg>sys</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.184683" elapsed="0.000900"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--headless</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.185583" elapsed="0.000000"/>
+</kw>
+<kw name="Call Method" owner="BuiltIn">
+<arg>${options}</arg>
+<arg>add_argument</arg>
+<arg>--disable-gpu</arg>
+<doc>Calls the named method of the given object with the provided arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.185583" elapsed="0.000000"/>
+</kw>
+<kw name="Create Webdriver" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:14.185583" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<arg>Chrome</arg>
+<arg>options=${options}</arg>
+<doc>Creates an instance of Selenium WebDriver.</doc>
+<status status="PASS" start="2024-11-04T11:29:14.185583" elapsed="1.566229"/>
+</kw>
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:15.751812" level="INFO">Opening url 'about:blank'</msg>
+<arg>about:blank</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2024-11-04T11:29:15.751812" elapsed="0.013994"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:15.766809" level="INFO">Executing JavaScript:
+var docEl = document.documentElement;docEl.style.transform = 'scale(0.8)';docEl.style.transformOrigin = 'top left';
+Without any arguments.</msg>
+<arg>var docEl = document.documentElement;docEl.style.transform = 'scale(0.8)';docEl.style.transformOrigin = 'top left';</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:15.765806" elapsed="0.006979"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" start="2024-11-04T11:29:15.773806" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:14.183687" elapsed="1.590119"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'Edge'">
+<kw name="Log" owner="BuiltIn">
+<arg>\n5 Browser é Edge: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000000"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<arg>options=add_argument("--force-device-scale-factor=0.8")</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:15.773806" elapsed="0.000999"/>
+</branch>
+<branch type="ELSE">
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'HeadlessEdge'">
+<kw name="Log" owner="BuiltIn">
+<arg>\n6 Definindo Browser como sendo HeadlessEdge: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000000"/>
+</kw>
+<kw name="Open Browser" owner="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>Edge</arg>
+<arg>options=add_argument("--headless");add_argument("--disable-gpu");add_argument("--force-device-scale-factor=0.8")</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.775799" elapsed="0.000000"/>
+</kw>
+<kw name="Set Selenium Speed" owner="SeleniumLibrary">
+<arg>${SELENIUM_SPEED}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.775799" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000994"/>
+</branch>
+<branch type="ELSE">
+<kw name="Log" owner="BuiltIn">
+<arg>\n7 Reveja definição do BROWSER pois foi passado: ${BROWSER}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:15.775799" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:15.775799" elapsed="0.000000"/>
+</branch>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000994"/>
+</if>
+<status status="NOT RUN" start="2024-11-04T11:29:15.774805" elapsed="0.000994"/>
+</branch>
+<status status="NOT RUN" start="2024-11-04T11:29:15.773806" elapsed="0.001993"/>
+</if>
+<status status="NOT RUN" start="2024-11-04T11:29:15.773806" elapsed="0.001993"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:14.183687" elapsed="1.592112"/>
+</if>
+<status status="PASS" start="2024-11-04T11:29:14.183687" elapsed="1.592112"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:14.182695" elapsed="1.593104"/>
+</if>
+<status status="PASS" start="2024-11-04T11:29:14.182695" elapsed="1.593104"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:14.181690" elapsed="1.594109"/>
+</if>
+<status status="PASS" start="2024-11-04T11:29:14.181690" elapsed="1.594109"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:14.179598" elapsed="1.596201"/>
+</if>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2024-11-04T11:29:15.775799" elapsed="0.128206"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:13.175450" elapsed="2.728555"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:13.174355" elapsed="2.730267"/>
+</kw>
+<kw name="WEB 06: Navigate to url" owner="Resource_Exec">
+<kw name="WEB 01: Navigate to url" owner="Resource_Exec">
+<kw name="Go To" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:15.906742" level="INFO">Opening url 'http://automationexercise.com'</msg>
+<arg>${HOME_URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<status status="PASS" start="2024-11-04T11:29:15.905637" elapsed="2.277315"/>
+</kw>
+<arg>${HOME_URL}</arg>
+<status status="PASS" start="2024-11-04T11:29:15.905637" elapsed="2.277315"/>
+</kw>
+<arg>http://automationexercise.com</arg>
+<status status="PASS" start="2024-11-04T11:29:15.904622" elapsed="2.279365"/>
+</kw>
+<kw name="WEB 06: Verify that home page is visible successfully" owner="Resource_Exec">
+<kw name="WEB 01: Verify that home page is visible successfully" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${HOME_BUNNER_PRINCIPAL}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:18.187073" elapsed="0.244811"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:18.185979" elapsed="0.247000"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:18.184979" elapsed="0.248000"/>
+</kw>
+<kw name="WEB 06: Click on 'Contact Us' button" owner="Resource_Exec">
+<kw name="aguarda_e_clica_javascript" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${elemento_alvo_do_click}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:18.437087" elapsed="0.237688"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:18.675830" level="INFO">Executing JavaScript:
+document.evaluate("//a[contains(.,'Contact us')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+Without any arguments.</msg>
+<arg>document.evaluate("${elemento_alvo_do_click}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:18.674775" elapsed="1.176902"/>
+</kw>
+<arg>${HOME_BTN_CONTACT_US}</arg>
+<status status="PASS" start="2024-11-04T11:29:18.436093" elapsed="1.415584"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:18.435100" elapsed="1.417595"/>
+</kw>
+<kw name="WEB 06: Verify 'GET IN TOUCH' is visible" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_LBL_GET_IN_TOUCH}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:19.853694" elapsed="0.270235"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:19.852695" elapsed="0.271747"/>
+</kw>
+<kw name="WEB 06: Enter name, email, subject and message" owner="Resource_Exec">
+<kw name="Obter dados" owner="Resource_Exec">
+<kw name="Load Json From File" owner="JSONLibrary">
+<msg time="2024-11-04T11:29:20.127072" level="INFO">${CONTEUDO_ARQ_DADOS_PARA_CADASTRO} = {'responseCode': 200, 'user': {'name': 'Nome b', 'email': 'teste202410041448@teste.com', 'title': 'Mr', 'birth_day': '11', 'birth_month': '9', 'birth_year': '2011', 'first_name': 'Nome 1', 'last_name'...</msg>
+<var>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}</var>
+<arg>C:\\Arquivos\\ADIEL\\Projetos-etc\\Git\\Repositorio_Privado\\Desafios\\04_Projeto_Robot_Automationexercise/dados/dados_para_cadastro.json</arg>
+<doc>Load JSON from file.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.126070" elapsed="0.001002"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.133968" level="INFO">${NOME_ESPERADO} = Nome b</msg>
+<arg>${NOME_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["name"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.127072" elapsed="0.006896"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.139968" level="INFO">${EMAIL_ESPERADO} = teste202410041448@teste.com</msg>
+<arg>${EMAIL_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["email"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.133968" elapsed="0.007003"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.144967" level="INFO">${TITULO_ESPERADO} = Mr</msg>
+<arg>${TITULO_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["title"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.140971" elapsed="0.003996"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.148972" level="INFO">${DIA_ANIVERSARIO_ESPERADO} = 11</msg>
+<arg>${DIA_ANIVERSARIO_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_day"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.145975" elapsed="0.002997"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.151972" level="INFO">${MES_ANIVERSARIO_ESPERADO} = 9</msg>
+<arg>${MES_ANIVERSARIO_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_month"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.148972" elapsed="0.004001"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.155974" level="INFO">${ANO_ANIVERSARIO_ESPERADO} = 2011</msg>
+<arg>${ANO_ANIVERSARIO_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_year"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.152973" elapsed="0.003001"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.159974" level="INFO">${PRIMEIRO_NOME_ESPERADO} = Nome 1</msg>
+<arg>${PRIMEIRO_NOME_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["first_name"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.155974" elapsed="0.004000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.164177" level="INFO">${SOBRE_NOME_ESPERADO} = Sobre nome</msg>
+<arg>${SOBRE_NOME_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["last_name"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.159974" elapsed="0.004203"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.167176" level="INFO">${EMPRESA_ESPERADO} = Empresa</msg>
+<arg>${EMPRESA_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["company"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.164177" elapsed="0.002999"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.170175" level="INFO">${ENDERECO1_ESPERADO} = Rua exemplo</msg>
+<arg>${ENDERECO1_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address1"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.167176" elapsed="0.004000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.174175" level="INFO">${ENDERECO2_ESPERADO} = </msg>
+<arg>${ENDERECO2_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address2"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.171176" elapsed="0.002999"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.177175" level="INFO">${PAIS_ESPERADO} = India</msg>
+<arg>${PAIS_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["country"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.174175" elapsed="0.003000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.180282" level="INFO">${ESTADO_ESPERADO} = Estado</msg>
+<arg>${ESTADO_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["state"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.177175" elapsed="0.003107"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.183279" level="INFO">${CIDADE_ESPERADO} = Cidade</msg>
+<arg>${CIDADE_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["city"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.180282" elapsed="0.002997"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.185273" level="INFO">${CEP_ESPERADO} = 11111111</msg>
+<arg>${CEP_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["zipcode"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.183279" elapsed="0.002992"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.189175" level="INFO">${PASSWORD_ESPERADO} = 1234567890</msg>
+<arg>${PASSWORD_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.186271" elapsed="0.002904"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:20.192175" level="INFO">${CELULAR_ESPERADO} = 999999999</msg>
+<arg>${CELULAR_ESPERADO}</arg>
+<arg>${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["mobile_number"]}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.189175" elapsed="0.003000"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:20.126070" elapsed="0.066105"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_INPUT_NAME}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.192175" elapsed="0.227737"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_INPUT_EMAIL}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.420937" elapsed="0.234239"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_INPUT_SUBJECT}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.657256" elapsed="0.235043"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_INPUT_MESSAGE}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:20.892949" elapsed="0.238983"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:21.132995" level="INFO">Typing text 'Nome b' into text field '//input[contains(@name,'name')]'.</msg>
+<arg>${CONTACT_INPUT_NAME}</arg>
+<arg>${NOME_ESPERADO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:21.132995" elapsed="0.411925"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:21.544920" level="INFO">Typing text 'teste202410041448@teste.com' into text field '//input[contains(@data-qa,'email')]'.</msg>
+<arg>${CONTACT_INPUT_EMAIL}</arg>
+<arg>${EMAIL_ESPERADO}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:21.544920" elapsed="0.427524"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:21.973569" level="INFO">Typing text 'Assunto de teste' into text field '//input[contains(@data-qa,'subject')]'.</msg>
+<arg>${CONTACT_INPUT_SUBJECT}</arg>
+<arg>Assunto de teste</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:21.973569" elapsed="0.426221"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:22.401806" level="INFO">Typing text 'Essa é uma mensagem de teste' into text field '//textarea[contains(@name,'message')]'.</msg>
+<arg>${CONTACT_INPUT_MESSAGE}</arg>
+<arg>Essa é uma mensagem de teste</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.399790" elapsed="0.409270"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:20.124957" elapsed="2.684103"/>
+</kw>
+<kw name="WEB 06: Upload file" owner="Resource_Exec">
+<kw name="resolver_caminho_so" owner="Resource_Exec">
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:22.812385" level="INFO">
+&gt;&gt;&gt;Ver entrada:&lt;/dados/API_14_Zerado.json&gt;</msg>
+<arg>\n&gt;&gt;&gt;Ver entrada:&lt;${CAMINHO_RESOLVER}&gt;</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.811387" elapsed="0.001999"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2024-11-04T11:29:22.814389" level="INFO">${SO} = Windows</msg>
+<var>${SO}</var>
+<arg>platform.system()</arg>
+<arg>platform</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.813386" elapsed="0.001003"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:22.814389" level="INFO">
+Sistema Operacional identificado como sendo...:&lt;Windows&gt;</msg>
+<arg>\nSistema Operacional identificado como sendo...:&lt;${SO}&gt;</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.814389" elapsed="0.000996"/>
+</kw>
+<if>
+<branch type="IF" condition="'${BROWSER}' == 'HeadlessFirefox' or '${BROWSER}' == 'Firefox'">
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:22.816383" level="INFO">
+0SO Lin:&lt;Windows&gt;</msg>
+<arg>\n0SO Lin:&lt;${SO}&gt;</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.816383" elapsed="0.001007"/>
+</kw>
+<if>
+<branch type="IF" condition="'${SO}'=='Linux'">
+<kw name="Replace String" owner="String">
+<var>${CAMINHO_RESOLVER}</var>
+<arg>${CAMINHO_RESOLVER}</arg>
+<arg>/</arg>
+<arg>//</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" start="2024-11-04T11:29:22.818385" elapsed="0.000000"/>
+</kw>
+<status status="NOT RUN" start="2024-11-04T11:29:22.817390" elapsed="0.000995"/>
+</branch>
+<branch type="ELSE">
+<kw name="Replace String" owner="String">
+<msg time="2024-11-04T11:29:22.818385" level="INFO">${CAMINHO_RESOLVER} = \dados\API_14_Zerado.json</msg>
+<var>${CAMINHO_RESOLVER}</var>
+<arg>${CAMINHO_RESOLVER}</arg>
+<arg>/</arg>
+<arg>\\</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.818385" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:22.818385" elapsed="0.001095"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:22.817390" elapsed="0.002090"/>
+</if>
+<status status="PASS" start="2024-11-04T11:29:22.815385" elapsed="0.004095"/>
+</branch>
+<status status="PASS" start="2024-11-04T11:29:22.815385" elapsed="0.004095"/>
+</if>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:22.819480" level="INFO">
+&gt;&gt;&gt; Ver saida :&lt;\dados\API_14_Zerado.json&gt;</msg>
+<arg>\n&gt;&gt;&gt; Ver saida :&lt;${CAMINHO_RESOLVER}&gt;</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.819480" elapsed="0.001033"/>
+</kw>
+<return>
+<value>${CAMINHO_RESOLVER}</value>
+<status status="PASS" start="2024-11-04T11:29:22.820513" elapsed="0.000000"/>
+</return>
+<msg time="2024-11-04T11:29:22.821531" level="INFO">${CAMINHO_ARQ_ENVIAR} = \dados\API_14_Zerado.json</msg>
+<var>${CAMINHO_ARQ_ENVIAR}</var>
+<arg>${CAMINHO_ARQ_ENVIAR}</arg>
+<status status="PASS" start="2024-11-04T11:29:22.811387" elapsed="0.010144"/>
+</kw>
+<kw name="pausar" owner="Resource_Exec">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nIniciando pausar.</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.822528" elapsed="0.001005"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2024-11-04T11:29:25.505498" level="INFO">${pausar} = </msg>
+<var>${pausar}</var>
+<arg>Click OK para liberar e voltar o teste | ${msg_complementar}.</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2024-11-04T11:29:22.824529" elapsed="2.680969"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Finalizando pausar.\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-11-04T11:29:25.505498" elapsed="0.000997"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:25.506495" level="INFO">${pausar} = </msg>
+<arg>${pausar}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:25.506495" elapsed="0.000000"/>
+</kw>
+<arg>avaliar!!!</arg>
+<status status="PASS" start="2024-11-04T11:29:22.821531" elapsed="2.684964"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:25.507495" level="INFO">${CAMINHO_ARQ_ENVIAR} = C:\Arquivos\ADIEL\Projetos-etc\Git\Repositorio_Privado\Desafios\04_Projeto_Robot_Automationexercise\dados\API_14_Zerado.json</msg>
+<var>${CAMINHO_ARQ_ENVIAR}</var>
+<arg>C:\\Arquivos\\ADIEL\\Projetos-etc\\Git\\Repositorio_Privado\\Desafios\\04_Projeto_Robot_Automationexercise${CAMINHO_ARQ_ENVIAR}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2024-11-04T11:29:25.506495" elapsed="0.001000"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_UPLOAD_LOCATOR}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:25.507495" elapsed="0.255291"/>
+</kw>
+<kw name="Mouse Over" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:25.764809" level="INFO">Simulating Mouse Over on element '//input[contains(@type,'file')]'.</msg>
+<arg>${CONTACT_UPLOAD_LOCATOR}</arg>
+<doc>Simulates hovering the mouse over the element ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:25.763816" elapsed="0.499767"/>
+</kw>
+<kw name="Get WebElement" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:26.373256" level="INFO">${element} = &lt;selenium.webdriver.remote.webelement.WebElement (session="e5e5a145c683b89e01557a41da654a88", element="f.7A0EDE7D546EE435C0F47642F79A1287.d.77E7B76250B90A0EB6DE3A0351625DDC.e.114")&gt;</msg>
+<var>${element}</var>
+<arg>${CONTACT_UPLOAD_LOCATOR}</arg>
+<doc>Returns the first WebElement matching the given ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.263583" elapsed="0.109673"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:26.373760" level="INFO">
+:1&lt;selenium.webdriver.remote.webelement.WebElement (session="e5e5a145c683b89e01557a41da654a88", element="f.7A0EDE7D546EE435C0F47642F79A1287.d.77E7B76250B90A0EB6DE3A0351625DDC.e.114")&gt;</msg>
+<arg>\n:1${element}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.373256" elapsed="0.000504"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2024-11-04T11:29:26.374764" level="INFO">
+:1C:\Arquivos\ADIEL\Projetos-etc\Git\Repositorio_Privado\Desafios\04_Projeto_Robot_Automationexercise\dados\API_14_Zerado.json</msg>
+<arg>\n:1${CAMINHO_ARQ_ENVIAR}</arg>
+<arg>console=true</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.374764" elapsed="0.000000"/>
+</kw>
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:26.375764" level="INFO">Typing text 'C:\Arquivos\ADIEL\Projetos-etc\Git\Repositorio_Privado\Desafios\04_Projeto_Robot_Automationexercise\dados\API_14_Zerado.json' into text field '//input[contains(@type,'file')]'.</msg>
+<arg>${CONTACT_UPLOAD_LOCATOR}</arg>
+<arg>${CAMINHO_ARQ_ENVIAR}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.374764" elapsed="0.389071"/>
+</kw>
+<kw name="pausar" owner="Resource_Exec">
+<kw name="Log To Console" owner="BuiltIn">
+<arg>\nIniciando pausar.</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.765885" elapsed="0.001999"/>
+</kw>
+<kw name="Get Value From User" owner="Dialogs">
+<msg time="2024-11-04T11:29:28.640345" level="INFO">${pausar} = </msg>
+<var>${pausar}</var>
+<arg>Click OK para liberar e voltar o teste | ${msg_complementar}.</arg>
+<doc>Pauses execution and asks user to input a value.</doc>
+<status status="PASS" start="2024-11-04T11:29:26.767884" elapsed="1.872461"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Finalizando pausar.\n</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.640345" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2024-11-04T11:29:28.641798" level="INFO">${pausar} = </msg>
+<arg>${pausar}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.640345" elapsed="0.001453"/>
+</kw>
+<arg>Ver se deu certo!</arg>
+<status status="PASS" start="2024-11-04T11:29:26.764895" elapsed="1.876903"/>
+</kw>
+<arg>/dados/API_14_Zerado.json</arg>
+<status status="PASS" start="2024-11-04T11:29:22.810389" elapsed="5.831409"/>
+</kw>
+<kw name="WEB 06: Click 'Submit' button" owner="Resource_Exec">
+<kw name="aguarda_e_clica_javascript" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${elemento_alvo_do_click}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.644811" elapsed="0.229994"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:28.874805" level="INFO">Executing JavaScript:
+document.evaluate("//input[contains(@type,'submit')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+Without any arguments.</msg>
+<arg>document.evaluate("${elemento_alvo_do_click}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.874805" elapsed="0.114944"/>
+</kw>
+<arg>${CONTACT_UPLOAD_SUBMIT}</arg>
+<status status="PASS" start="2024-11-04T11:29:28.642811" elapsed="0.346938"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:28.641798" elapsed="0.348554"/>
+</kw>
+<kw name="WEB 06: Click OK button" owner="Resource_Exec">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Handle Alert" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:28.991366" level="INFO">HANDLE::&lt;class 'NoneType'&gt;::None</msg>
+<arg>accept</arg>
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.991366" elapsed="0.312091"/>
+</kw>
+<arg>10s</arg>
+<arg>2s</arg>
+<arg>Handle Alert</arg>
+<arg>accept</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2024-11-04T11:29:28.991366" elapsed="0.312091"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:28.990352" elapsed="0.313642"/>
+</kw>
+<kw name="WEB 06: Verify success message 'Success! Your details have been submitted successfully.' is visible" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${CONTACT_LBL_SUBMITTED_SUCCESSFULLY}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:29.306108" elapsed="0.225513"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:29.305010" elapsed="0.226611"/>
+</kw>
+<kw name="WEB 06: Click 'Home' button and verify that landed to home page successfully" owner="Resource_Exec">
+<kw name="aguarda_e_clica_javascript" owner="Resource_Exec">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${elemento_alvo_do_click}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:29.532627" elapsed="0.217656"/>
+</kw>
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2024-11-04T11:29:29.751339" level="INFO">Executing JavaScript:
+document.evaluate("//a[@class='btn btn-success'][contains(.,'Home')]", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+Without any arguments.</msg>
+<arg>document.evaluate("${elemento_alvo_do_click}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2024-11-04T11:29:29.750283" elapsed="21.398093"/>
+</kw>
+<arg>${CONTACT_BTN_HOME}</arg>
+<status status="PASS" start="2024-11-04T11:29:29.532627" elapsed="21.616885"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${HOME_BUNNER_PRINCIPAL}</arg>
+<arg>timeout=${TEMPO_ESPERA}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2024-11-04T11:29:51.150417" elapsed="0.237028"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:29.531621" elapsed="21.855824"/>
+</kw>
+<kw name="Fechar browser" owner="Resource_Exec" type="TEARDOWN">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2024-11-04T11:29:51.389899" elapsed="2.248506"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2024-11-04T11:29:55.639943" level="INFO">Slept 2 seconds.</msg>
+<arg>2</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2024-11-04T11:29:53.638405" elapsed="2.002634"/>
+</kw>
+<status status="PASS" start="2024-11-04T11:29:51.389899" elapsed="4.251140"/>
+</kw>
+<tag>WEB 06</tag>
+<tag>WEB OK</tag>
+<status status="PASS" start="2024-11-04T11:29:13.173354" elapsed="42.468671"/>
+</test>
+<doc>Suite de Teste https://automationexercise.com WEB(e2e) + API
+Importante para revisar:
+1. Melhorar valores passados para add produto pois em um lugar pede add x e em outro vai cobrar y selecionado.</doc>
+<status status="PASS" start="2024-11-04T11:29:12.436115" elapsed="43.208930"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">WEB 06</stat>
+<stat pass="1" fail="0" skip="0">WEB OK</stat>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Caso Teste">Caso Teste</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
