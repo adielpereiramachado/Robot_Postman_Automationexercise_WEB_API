@@ -1,9 +1,9 @@
 # Teste utilizando Postman e Newman : REST API Automation Exercise :
 ## Os testes foram apontando para o site Automation Exercise: https://automationexercise.com
-![Página do teste](https://github.com/adielpereiramachado/Github_Cursos/blob/main/Desafios/ladybug.png)
-![homepage](https://user-images.githubusercontent.com/124753072/235929032-4471bd18-9133-46ae-84da-931f0d94bb35.jpg)
+![Página do teste](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Site%20Automation%20Exercise.png)
 
-O projeto foi feito para praticar habilidades de teste de API no Postman. Testes automatizados foram escritos para os cenários de teste mostrados abaixo. Os testes foram executados diretamente no aplicativo Postman e por meio da linha de comando Collection Runner (Newman), que permite executar e testar uma coleção Postman diretamente da linha de comando.
+Este teste é resultado da vontade de demonstrar na prática como realizo e organizo os artefatos utilizados.
+O conteúdo 
 
 ## :one: Postman:
 ![postman_x](https://user-images.githubusercontent.com/124753072/236633314-80ae1e22-8cdc-4e73-997d-aac1bd801f81.jpg)
