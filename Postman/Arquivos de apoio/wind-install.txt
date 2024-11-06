@@ -1,0 +1,5 @@
+Site Postman:
+https://www.postman.com
+
+Instalando Newman:
+npm install -g newman
