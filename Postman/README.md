@@ -14,17 +14,17 @@ Na data deste post, a versão utilizada do Postman Web é: 11.18.1-241106-0747**
 
 - Node.js:
   
-**Para instalar o Node.js no seu computador, acesse o site abaixo e siga o passo a passo:
+**Para instalar o Node.js no seu computador, acesse o site abaixo e siga o passo a passo:**
 https://nodejs.org/en/
 
 
 - Newman:
 
-**Para instalar o Newman no seu computador,  execute em um console:
+**Para instalar o Newman no seu computador,  execute em um console:**
 ```bash
 npm install -g newman
 ```
-Para verificar que a instalação ocorreu com sucesso, execute o comando abaixo, onde deverá exibir a versão instalada: 
+**Para verificar que a instalação ocorreu com sucesso, execute o comando abaixo, onde deverá exibir a versão instalada:** 
 ```bash
 newman --version
 ```
