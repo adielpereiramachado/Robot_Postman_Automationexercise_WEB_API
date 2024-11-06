@@ -1,10 +1,9 @@
-# Testes REST API utilizando: Automation Exercise ( https://automationexercise.com/ )
-## :diamond_shape_with_a_dot_inside: Automated API tests created in Postman
-## :earth_africa: Website home page
+# Teste utilizando Postman e Newman : REST API Automation Exercise :
+## Os testes foram apontando para o site Automation Exercise: https://automationexercise.com
+![Página do teste](https://github.com/adielpereiramachado/Github_Cursos/blob/main/Desafios/ladybug.png)
 ![homepage](https://user-images.githubusercontent.com/124753072/235929032-4471bd18-9133-46ae-84da-931f0d94bb35.jpg)
 
-## :information_source: About this project
-The project was made to practice API testing skills in Postman. Automated tests were written for the test scenarios shown below. The tests were run directly in the Postman app and via the command-line Collection Runner (Newman), which allows you to run and test a Postman Collection directly from the command-line.
+O projeto foi feito para praticar habilidades de teste de API no Postman. Testes automatizados foram escritos para os cenários de teste mostrados abaixo. Os testes foram executados diretamente no aplicativo Postman e por meio da linha de comando Collection Runner (Newman), que permite executar e testar uma coleção Postman diretamente da linha de comando.
 
 ## :one: Postman:
 ![postman_x](https://user-images.githubusercontent.com/124753072/236633314-80ae1e22-8cdc-4e73-997d-aac1bd801f81.jpg)
