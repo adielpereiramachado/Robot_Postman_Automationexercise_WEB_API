@@ -1,3 +1,6 @@
+## Postman - Newman - Github Actions
+
+
 **Este conteúdo é o resultado da intenção de demonstrar na prática como realizo e organizo os artefatos utilizados em um teste API utilizando Postman, Newman e Git Actions.**
 
 **Para execução dos testes será necessário 3 software/ferramentas: Postman, Node.js e Newman.**
@@ -41,6 +44,9 @@ Para mim exibiu na data deste post, a versão: 6.2.1
 ![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Postman.png)
 
 
+-------------
+
+
 - Newman:
 **Os mesmos arquivos podem ser usados para execução do script com Newman. Para tanto, basta abrir um console de comando (cmd ou konsole) e executar o comando abaixo:**
 
@@ -53,5 +59,17 @@ newman run API_automationexercise.postman_collection.json -e VAR_API.postman_env
 ![Newman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Newman.png)
 
 
+-------------
+
+
+
+- Github: 
+**Uma vez configurada o workflow, em havendo algum evento que dispare os teste, o Github Actions executa os testes e tive os resultados como exibido abaixo, onde durou 26 segundos e mais abaixo tem link para relatórios de execução do Newman:**
+
+![Github_action](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions.png)
+
+![Github_action_Dash](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions_Newman_Dash.png)
+
+![Github_action_Req](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions_Newman_Req.png)
 
 
