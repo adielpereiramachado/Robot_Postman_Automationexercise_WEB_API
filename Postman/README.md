@@ -6,18 +6,21 @@ Este teste conteúdo é o resultado da intenção de demonstrar na prática como
 
 O conteúdo está organizado da seguinte maneira:
 
-##Postman: ### Os arquivos API_automationexercise.postman_collection.json e VAR_API.postman_environment.json, podem ser importados no Postman e terá o resultado dos testes como exibido abaixo:
+## Postman: ### Os arquivos API_automationexercise.postman_collection.json e VAR_API.postman_environment.json, podem ser importados no Postman e terá o resultado dos testes como exibido abaixo:
 
 ![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Postman.png)
 
+## Newman: ### Os mesmos arquivos podem ser usados para execução do script com Newman:
+newman run API_automationexercise.postman_collection.json -e VAR_API.postman_environment.json -r cli,htmlextra
 
-## :two: Newman:
+Terá o resultado como exibido abaixo:
+![Newman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Newman.png)
 
 
-## :one: Postman:
-![postman_x](https://user-images.githubusercontent.com/124753072/236633314-80ae1e22-8cdc-4e73-997d-aac1bd801f81.jpg)
-## :two: Newman:
-` newman run AutomationExercise_API_Testing.postman_collection.json -e AutomationExercise.postman_environment.json `
+
+
+
+### Teste
 
 ![newmanX1](https://user-images.githubusercontent.com/124753072/236633835-dd52103d-98df-4b2b-b184-f1589b0626d7.jpg)
 ![newman_7-13](https://user-images.githubusercontent.com/124753072/236633759-ade9b709-d3f8-48ba-bd98-4b6e4ca045f3.jpg)
