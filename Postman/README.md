@@ -2,8 +2,11 @@
 ## Os testes foram apontando para o site Automation Exercise: https://automationexercise.com
 ![Página do teste](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Site%20Automation%20Exercise.png)
 
-Este teste é resultado da vontade de demonstrar na prática como realizo e organizo os artefatos utilizados.
-O conteúdo 
+Este teste conteúdo é o resultado da intenção de demonstrar na prática como realizo e organizo os artefatos utilizados em um teste API utilizando Postman, Newman e Git Actions.
+O conteúdo está organizado da seguinte maneira:
+. Os arquivos API_automationexercise.postman_collection.json e VAR_API.postman_environment.json, podem ser importados no Postman e terá o resultado dos testes como exibido abaixo:
+![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Postman.png)
+
 
 ## :one: Postman:
 ![postman_x](https://user-images.githubusercontent.com/124753072/236633314-80ae1e22-8cdc-4e73-997d-aac1bd801f81.jpg)
