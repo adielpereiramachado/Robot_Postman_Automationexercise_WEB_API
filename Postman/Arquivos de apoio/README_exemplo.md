@@ -1,4 +1,4 @@
-# :gem: Automation Exercise - REST API Testing
+# Automation Exercise - REST API Testing
 ## :diamond_shape_with_a_dot_inside: Automated API tests created in Postman
 ## :earth_africa: Website home page
 ![homepage](https://user-images.githubusercontent.com/124753072/235929032-4471bd18-9133-46ae-84da-931f0d94bb35.jpg)
