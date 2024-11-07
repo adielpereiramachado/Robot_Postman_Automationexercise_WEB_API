@@ -1,5 +1,6 @@
-## Postman - Newman - Github Actions ##
+### Postman - Newman - Github Actions ###
 
+----------
 
 **Este conteúdo é o resultado da intenção de demonstrar na prática como realizo teste em API e organizo os artefatos, utilizando Postman, Newman e Git Actions.**
 
@@ -10,7 +11,7 @@ Vale reforçar que para os testes utilizei uma API pública da qual não sou aut
 
 Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
 
------------
+-------------
 
 **Para execução dos testes será necessário 3 software/ferramentas: Postman, Node.js e Newman.**
 
