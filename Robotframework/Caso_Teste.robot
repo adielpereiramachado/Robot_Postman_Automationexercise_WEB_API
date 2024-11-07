@@ -1,5 +1,5 @@
 *** Settings ***
-Documentation    Suite de Teste https://automationexercise.com WEB(e2e) + API
+Documentation    Suite de Teste https://automationexercise.com  interface WEB(UI) + API
 ...    Importante para revisar:
 ...    1. Melhorar valores passados para add produto pois em um lugar pede add x e em outro vai cobrar y selecionado.
 
@@ -58,13 +58,12 @@ WEB Test Case 3: Login User with incorrect email and password
     WEB 03: Enter incorrect email address and password    
     WEB 03: Click 'login' button
     WEB 03: Verify error 'Your email or password is incorrect!' is visible
-    #temporario
-    # Pos-condicao não ter usuario cadastrado chamando api de delecao 
+    Condicao não ter usuario cadastrado: chamando api de delecao
 
 
 WEB Test Case 4: Logout User
     [tags]  WEB 04    WEB OK
-    # Condicao ter usuario cadastrado: chamando api de criacao 
+    Condicao ter usuario cadastrado: chamando api de criacao 
     WEB 04: Launch browser
     WEB 04: Navigate to url    http://automationexercise.com
     WEB 04: Verify that home page is visible successfully
@@ -75,7 +74,6 @@ WEB Test Case 4: Logout User
     WEB 04: Verify that 'Logged in as username' is visible
     WEB 04: Click 'Logout' button
     WEB 04: Verify that user is navigated to login page
-
 
 WEB Test Case 5: Register User with existing email
     [tags]  WEB 05    WEB OK
@@ -129,7 +127,7 @@ WEB Test Case 9: Search Product
     WEB 09: Verify that home page is visible successfully
     WEB 09: Click on 'Products' button
     WEB 09: Verify user is navigated to ALL PRODUCTS page successfully
-    WEB 09: Enter product name in search input and click search button    Men Tshirt     #Blue Top    #Stylish Dress    # Men Tshirt   Blue Top  Winter Top
+    WEB 09: Enter product name in search input and click search button    Men Tshirt    
     WEB 09: Verify 'SEARCHED PRODUCTS' is visible
     WEB 09: Verify all the products related to search are visible
 
@@ -143,7 +141,6 @@ WEB Test Case 10: Verify Subscription in home page
     WEB 10: Enter email address in input and click arrow button
     WEB 10: Verify success message 'You have been successfully subscribed!' is visible
 
-
 WEB Test Case 11: Verify Subscription in Cart page
    [Tags]    WEB 11    WEB OK
     WEB 11: Launch browser
@@ -154,7 +151,6 @@ WEB Test Case 11: Verify Subscription in Cart page
     WEB 11: Verify text 'SUBSCRIPTION'
     WEB 11: Enter email address in input and click arrow button
     WEB 11: Verify success message 'You have been successfully subscribed!' is visible
-
 
 WEB Test Case 12: Add Products in Cart
     [Tags]    WEB 12    WEB OK
@@ -174,9 +170,9 @@ WEB Test Case 13: Verify Product quantity in Cart
     WEB 13: Launch browser
     WEB 13: Navigate to url    http://automationexercise.com
     WEB 13: Verify that home page is visible successfully
-    WEB 13: Click 'View Product' for any product on home page    6    # ( só até 8  )
+    WEB 13: Click 'View Product' for any product on home page    1
     WEB 13: Verify product detail is opened
-    WEB 13: Increase quantity to    10
+    WEB 13: Increase quantity to    3
     WEB 13: Click 'Add to cart' button
     WEB 13: Click 'View Cart' button
     WEB 13: Verify that product is displayed in cart page with exact quantity
@@ -248,7 +244,6 @@ WEB Test Case 16: Place Order: Login before Checkout
     WEB 16: Click 'Delete Account' button
     WEB 16: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
-
 WEB Test Case 17: Remove Products From Cart
     [Tags]    WEB 17    WEB OK 
     WEB 17: Launch browser
@@ -265,8 +260,8 @@ WEB Test Case 18: View Category Products
     WEB 18: Launch browser
     WEB 18: Navigate to url    http://automationexercise.com
     WEB 18: Verify that categories are visible on left side bar
-    WEB 18: Click on 'Women' category    Women    #Men
-    WEB 18: Click on any category link under 'Women' category, for example: Dress    Tops    #Jeans    
+    WEB 18: Click on 'Women' category    Women    
+    WEB 18: Click on any category link under 'Women' category, for example: Dress    Tops     
     WEB 18: Verify that category page is displayed and confirm text 'WOMEN - TOPS PRODUCTS'
     WEB 18: On left side bar, click on any sub-category link of 'Men' category    Men    Jeans 
     WEB 18: Verify that user is navigated to that category page
@@ -279,7 +274,7 @@ WEB Test Case 19: View & Cart Brand Products
     WEB 19: Verify that Brands are visible on left side bar
     WEB 19: Click on any brand name   H&M 
     WEB 19: Verify that user is navigated to brand page and brand products are displayed
-    WEB 19: On left side bar, click on any other brand link    Polo    #Mast & Harbour    #Polo
+    WEB 19: On left side bar, click on any other brand link    Polo    
     WEB 19: Verify that user is navigated to that brand page and can see products
 
 WEB Test Case 20: Search Products and Verify Cart After Login
@@ -289,7 +284,7 @@ WEB Test Case 20: Search Products and Verify Cart After Login
     WEB 20: Navigate to url    http://automationexercise.com 
     WEB 20: Click on 'Products' button
     WEB 20: Verify user is navigated to ALL PRODUCTS page successfully
-    WEB 20: Enter product name in search input and click search button     Men Tshirt     #Blue Top    #Stylish Dress    # Men Tshirt   Blue Top  Winter Top
+    WEB 20: Enter product name in search input and click search button     Men Tshirt     
     WEB 20: Verify 'SEARCHED PRODUCTS' is visible
     WEB 20: Verify all the products related to search are visible
     WEB 20: Add those products to cart    1
@@ -375,7 +370,6 @@ WEB Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down function
     WEB 25: Click on arrow at bottom right side to move upward
     WEB 25: Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
 
-
 WEB Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality
     [Tags]    WEB 26    WEB OK
     WEB 26: Launch browser
@@ -387,16 +381,10 @@ WEB Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functi
     WEB 26: Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
 
 
-
-
-
-
-
 WEB Test Case X nos 6 tipos de Browser
     [Tags]    Multiplos
     Executa teste usando
 
-# # inicio código API # #
 
 API 01: Get All Products List
     [tags]  API
@@ -494,7 +482,6 @@ API 14: GET user account detail by email
     [tags]  API
     Cria sessao
     API 14: Dispara requisicao    /dados/API_11.json 
-#    >Talvez não precisa. Falta fazer import dos dados retornado do get no arq 14 para comparar com o arq 11 gerado no momento da criação do user tendo como base o arq dados_para_cadastro
     API 14: Verifica Status code    200
     API 14: Verifica Response Code    200
     API 14: Verifica retorno dados cadastro   /dados/API_11.json     
@@ -506,19 +493,3 @@ API 12: DELETE METHOD To Delete User Account
     API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
     API 12: Verifica Status code    200    
     API 12: Verifica Response Code     200    Account deleted!
-
-
-
-
-
-
- 
-
-
-Avaliacao
-    [Tags]    Teste s
-    Instrucao
-
-Apoio
-    [Tags]    Apoio
-    Exemplo FOR    2

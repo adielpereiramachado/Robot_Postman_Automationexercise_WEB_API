@@ -2493,14 +2493,6 @@ Executa teste usando
 
 
 
-
-
-
-
-
-
-
-
 # inicio código API
 Cria sessao
     Create Session      MINHA_SESSAO_API   ${BASE_URL}   verify=true  #headers=${HEADERS}     disable_warnings=True
@@ -2510,28 +2502,20 @@ API 01: Dispara requisicao
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
 
-
 API 01: Verifica Status code 
     [Arguments]  ${STATUS_CODE_ESPERADO}    
     Log    \nSTATUS_CODE:<${STATUS_CODE}>    console=${True}
     Log    \STATUS_CODE_ESPERADO:<${STATUS_CODE_ESPERADO}>    console=${True}
     Should Be Equal As Numbers    ${STATUS_CODE}    ${STATUS_CODE_ESPERADO}
 
-
 API 01: Verifica tipo Schema/Contrato
     ${TIPO}    Evaluate    str(type(${DADOS_RETORNO_API.json()}))
     Should Be Equal    ${TIPO}    <class 'dict'>
-
 
 API 01: Verifica o Schema/Contrato modelo no caminho
     [Arguments]    ${CAMINHO_CONTRATO_API_01-02}
     ${CAMINHO_CONTRATO_API_01-02}    Set Variable    ${CURDIR}${CAMINHO_CONTRATO_API_01-02}
     Validate Json By Schema File    ${DADOS_RETORNO_API.json()}    ${CAMINHO_CONTRATO_API_01-02}
-
-
-
-
-
 
 API 02: Dispara requisicao      
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_PRODUCTSLIST}
@@ -2542,21 +2526,17 @@ API 02: Verifica Status code
     [Arguments]  ${STATUS_CODE_ESPERADO}    
     Should Be Equal As Numbers    ${STATUS_CODE}    ${STATUS_CODE_ESPERADO}
 
-
 API 02: Verifica Response Code 
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
-
 
 API 03: Dispara requisicao
     ${DADOS_RETORNO_API}      GET On Session    MINHA_SESSAO_API    ${END_POINT_BRANDSLIST}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
-    
 
 API 03: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2567,11 +2547,9 @@ API 03: Verifica Response Code
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
 
-
 API 03: Verifica tipo Schema/Contrato
     ${TIPO}    Evaluate    str(type(${DADOS_RETORNO_API.json()}))
     Should Be Equal    ${TIPO}    <class 'dict'>
-
 
 API 03: Verifica o Schema/Contrato modelo no caminho
     [Arguments]    ${CAMINHO_CONTRATO_API_03}
@@ -2622,10 +2600,6 @@ API 14: Verifica o Schema/Contrato modelo no caminho    # /dados/modelo_contrato
     ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}    Set Variable    ${CURDIR}${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     Validate Json By Schema File    ${DADOS_RETORNO_API.json()}    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
 
-
-
-
-
 API 04: Dispara requisicao    
     ${DADOS_RETORNO_API}      PUT On Session    MINHA_SESSAO_API    ${END_POINT_BRANDSLIST}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
@@ -2641,9 +2615,6 @@ API 04: Verifica Response Code
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
-
-
-
 
 API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
     [Arguments]    ${ARQ_DADOS_PARA_CADASTRO}    ${ARQ_API_11}
@@ -2678,11 +2649,9 @@ API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
     #ver resultado
     # Log    \n 6:<${DADOS_RETORNO_API}>    console=${LOG_CONSOLE}
     # Log    \n 7:<${DADOS_RETORNO_API.json()}>    console=${LOG_CONSOLE}
-    
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode    
-
     # inicio do disparo do get pra pegar o id e add no arq 11
     &{PARAMS}           Create Dictionary    email=${EMAIL_ESPERADO}
     ${uri}     Set Variable  /getUserDetailByEmail?email=${PARAMS.email}
@@ -2729,8 +2698,6 @@ API 11: Verifica Response Code
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-
-
     ${RESPONSE_CODE_MESSAGE}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE_ESPERADO}    ${RESPONSE_CODE_MESSAGE}    
 
@@ -2764,7 +2731,6 @@ API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/
     ...  company=${EMPRESA_ESPERADO}  address1=${NOVO_ENDERECO1_ESPERADO}  address2=${ENDERECO2_ESPERADO}  country=${PAIS_ESPERADO}  state=${ESTADO_ESPERADO}  
     ...  city=${CIDADE_ESPERADO}  zipcode=${CEP_ESPERADO}  password=${PASSWORD_ESPERADO}  mobile_number=${CELULAR_ESPERADO}
     Log    \n103:${DADOS_ENVIAR}    console=${LOG_CONSOLE}
-    
 
     
     #Envia requisição
@@ -2772,7 +2738,6 @@ API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/
     #ver resultado
     Log    \n 6:<${DADOS_RETORNO_API}>    console=${LOG_CONSOLE}
     Log    \n 7:<${DADOS_RETORNO_API.json()}>    console=${LOG_CONSOLE}
-    
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode    
@@ -2781,9 +2746,6 @@ API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/
     # ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.user.birth_date    ${DIA_ANIVERSARIO_ESPERADO} 
     ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.user.address1    ${NOVO_ENDERECO1_ESPERADO}
     Dump Json To File    ${CURDIR}${ARQ_API_11}    ${CONTEUDO_ARQ_API_11}
-
-
-
 
 API 13: Verifica Status code 
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2795,7 +2757,6 @@ API 13: Verifica Response Code
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
@@ -2805,7 +2766,6 @@ API 05: Dispara requisicao    # tshirt
     # Log    \n1:${PRODUTO_PARA_PESQUISAR}    console=${LOG_CONSOLE}
     Set Suite Variable  ${PRODUTO_PARA_PESQUISAR}    ${PRODUTO_PARA_PESQUISAR}    
     # Log    \n2:${PRODUTO_PARA_PESQUISAR}    console=${LOG_CONSOLE}
-    
     ${DADOS_ENVIAR}=    Evaluate    {'search_product': (None, '${PRODUTO_PARA_PESQUISAR}')}
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_SEARCHPRODUCT}     data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
@@ -2813,8 +2773,6 @@ API 05: Dispara requisicao    # tshirt
     # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
     # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
-
-
 API 05: Verifica Status code     #200
     [Arguments]  ${STATUS_CODE_ESPERADO}      
     # Log    \nSTATUS_CODE:<${STATUS_CODE}>    console=${True}
@@ -2826,23 +2784,17 @@ API 05: Verifica Response Code     #200
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
 
-
 API 05: Verifica retorno dados cadastro
-
     # Passo 4: Obter o conteúdo JSON da resposta
     # ${DADOS_RETORNO_API_json}    Evaluate    ${DADOS_RETORNO_API.json()}    json=${DADOS_RETORNO_API}
-
     # Passo 5: Extrair a lista de produtos
     ${REGISTRO}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    products
     ${QTDE_REGISTRO}    Get Length    ${REGISTRO}
     # Log    \n Dados 9:${REGISTRO}      console=${LOG_CONSOLE}
     # Log    \n Dados 8:${QTDE_REGISTRO}      console=${LOG_CONSOLE}
     Run Keyword If    ${QTDE_REGISTRO} == 0    Fail    Nenhum produto foi retornado pela API
-
     #Fazer verificação para qdo não retorna registro dar erro
-
     # Log    \n 1 :${REGISTRO}      console=${LOG_CONSOLE}
-
     FOR    ${REGISTRO}    IN    @{REGISTRO}
         # Log   \n1: ${REGISTRO}    console=${LOG_CONSOLE}
         ${category}    Get From Dictionary    ${REGISTRO['category']}    category
@@ -2859,8 +2811,6 @@ API 05: Verifica o Schema/Contrato modelo no caminho    # /dados/modelo_contrato
     ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}    Set Variable    ${CURDIR}${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     Validate Json By Schema File    ${DADOS_RETORNO_API.json()}    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
 
-
-
 API 06: Dispara requisicao    
     # ${DADOS_ENVIAR}=    Evaluate    {'search_product': (None, '${PRODUTO_PARA_PESQUISAR}')}
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_SEARCHPRODUCT}    #data=${DADOS_ENVIAR}    #como pede o teste não enviar dados
@@ -2869,12 +2819,9 @@ API 06: Dispara requisicao
     Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
     Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
 
-
-
 API 06: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
     Should Be Equal As Numbers    ${STATUS_CODE}    ${STATUS_CODE_ESPERADO}
-
 
 API 06: Verifica Response Code 
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
@@ -2883,8 +2830,6 @@ API 06: Verifica Response Code
     
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
-
-
 
 API 07: Dispara requisicao
     [Arguments]    ${ARQ_API_11}    ${ARQ_DADOS_PARA_CADASTRO}
@@ -2915,7 +2860,6 @@ API 07: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
-
 API 08: Dispara requisicao
     [Arguments]    ${ARQ_DADOS_PARA_CADASTRO}
     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}${ARQ_DADOS_PARA_CADASTRO}
@@ -2939,9 +2883,6 @@ API 08: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
-
-
-
 API 09: Dispara requisicao
     ${DADOS_RETORNO_API}      DELETE On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}    #data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
@@ -2960,7 +2901,6 @@ API 09: Verifica Response Code
     
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
-
 
 API 10: Dispara requisicao
     [Arguments]    ${ARQ_API_11}   
@@ -3002,13 +2942,6 @@ API 12: Dispara requisicao
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
     Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
-
-
-
-
-
-
-
     
 API 12: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -3022,8 +2955,6 @@ API 12: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
-
-
 Limpa Preco
     [Arguments]    ${PREÇO_DE_ENTRADA}
     ${RESULTADO}    Replace String    ${PREÇO_DE_ENTRADA}    Rs.${SPACE}     ${EMPTY}
@@ -3034,7 +2965,6 @@ Retirar todos espacos
     ${RESULTADO}    Replace String    ${TEXTO_ORIGINAL}    ${SPACE}     ${EMPTY}
     RETURN    ${RESULTADO}
 
-####  até aqui em uso ####
 
 
 
@@ -3043,162 +2973,58 @@ Retirar todos espacos
 
 
 
-Gerar Data e Hora String
-    ${DATA_HORA_STRING}    Get Current Date    result_format=%Y%m%d%H%M%S
-    Log    \nData_HORA:${DATA_HORA_STRING}         console=${LOG_CONSOLE}
-    RETURN    ${DATA_HORA_STRING}
-
-
-
-Exemplo FOR
-    [Arguments]    ${qtde_exec}
-    FOR    ${counter}    IN RANGE    1    ${qtde_exec}
-        Log    \nQtde exec.:${counter}    console=${LOG_CONSOLE}
-    END
-    No Operation
-
-
-
-
-Apoio Compara 2 arquivos
-    ${ARQ_API_11}    Set Variable    /dados/API_11.json
-    ${ARQ_API_14}    Set Variable    /dados/API_14.json
-    ${ARQ_API_14}    Load JSON From File    ${CURDIR}${ARQ_API_14}
-    ${ARQ_API_11}    Load JSON From File    ${CURDIR}${ARQ_API_11}
-    Log    \n arq-11:${ARQ_API_11}    console=${LOG_CONSOLE}
-    Log    \n arq-14:${ARQ_API_14}    console=${LOG_CONSOLE}
-    Should Be Equal As Strings    ${ARQ_API_11}   ${ARQ_API_14}
 
 
 
 
 
-Apoio Ler arquivo para cadastro
-    *****
-    {
-    "responseCode": 200,
-    "user": {
-        "id": 427177,
-        "name": "Nome b",
-        "email": "teste202410041448@teste.com",
-        "title": "Mr",
-        "birth_date": "1",
-        "birth_month": "2",
-        "birth_year": "1977",
-        "first_name": "Nome 1",
-        "last_name": "Sobre nome",
-        "company": "Empresa",
-        "address1": "Rua dos bobo",
-        "address2": "",
-        "country": "India",
-        "state": "Estado",
-        "city": "Cidade",
-        "zipcode": "11111111"
-    }
-    }
-    *****
-    ${DADOS_PARA_CADASTRAR}    Load Json From File    ${CURDIR}/dados/dados_cadastro.json
-    ${ID}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.id
-    ${NOME}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.name
-    ${EMAIL}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.email
-    Log    \n DADOS_PARA_CADASTRAR ID: ${ID}    console=${LOG_CONSOLE}
-    Log    \n DADOS_PARA_CADASTRAR NOME: ${NOME}    console=${LOG_CONSOLE}
-    Log    \n DADOS_PARA_CADASTRAR EMAIL: ${EMAIL}    console=${LOG_CONSOLE}
-    ${DATA_HORA_STRING}    Set Suite Variable    ${DATA_HORA_STRING}
-    Log    ${DATA_HORA_STRING}    console=${LOG_CONSOLE}
-
-    ${DADOS_PARA_CADASTRAR}    Load Json From File    ${CURDIR}/dados/dados_cadastro.json
-    ${ID_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.id
-    ${NOME_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.name
-    ${EMAIL_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}     user.email
-    ${TITULO_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.title
-    ${DIA_ANIVERSARIO_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.birth_date
-    ${MES_ANIVERSARIO_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.birth_month
-    ${ANO_ANIVERSARIO_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.birth_year
-    ${PRIMEIRO_NOME_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.first_name
-    ${SOBRE_NOME_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.last_name
-    ${EMPRESA_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.company
-    ${ENDERECO1_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.address1
-    ${ENDERECO2_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.address2
-    ${PAIS_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.country
-    ${ESTADO_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.state
-    ${CIDADE_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.city
-    ${CEP_ESPERADO}    Get Value From Json    ${DADOS_PARA_CADASTRAR}  user.zipcode
 
 
 
-Apoio Exibe valor de dentro do json
-    ${DADOS_RETORNO_API}      GET On Session    MINHA_SESSAO_API    ${END_POINT_BRANDSLIST}
-    Log    \n$DADOS_RETORNO_API.json(): ${DADOS_RETORNO_API.json()}    console=${LOG_CONSOLE}                    #Exibe conteúdo do retorno da requisição
-    ${PRIMEIRO_ID}         Get Value From Json    ${DADOS_RETORNO_API.json()}    $.brands[1].brand
-    Log    \n PRIMEIRO_ID_do_objto_brands: ${PRIMEIRO_ID}    console=${LOG_CONSOLE}
-
-    ${OBJETOS_JSON}    Get Dictionary Keys    ${DADOS_RETORNO_API.json()}
-    Log    \n OBJETOS_JSON: ${OBJETOS_JSON}    console=${LOG_CONSOLE}                    # Exibe somente os objetos Pai do Json
-
-    ${QTDE_OBJETOS_JSON}    Get Length    ${DADOS_RETORNO_API.json()}
-    Log    \n QTDE_OBJETOS_JSON: ${QTDE_OBJETOS_JSON}    console=${LOG_CONSOLE}        # Conta qtos obj Pais existem dentro do JSON
-    Should Be Equal    "${QTDE_OBJETOS_JSON}"    "2"
-
-    ${OBJETO}    Replace String    ${END_POINT_BRANDSLIST}    /    ${EMPTY}
-    Log    \n OBJETO: ${OBJETO}    console=${LOG_CONSOLE}
-    ${OBJETO}    Replace String     ${OBJETO}    List    ${EMPTY}
-    Log    \n OBJETO: ${OBJETO}    console=${LOG_CONSOLE}
-    Dictionary Should Contain Key    ${DADOS_RETORNO_API.json()}    ${OBJETO}    # Verifica se o segundo obj dentro do JSON é o texto final sem o sufixo 'List'
-
-    # Exibe valor de dentro do Json
-    ${PRIMEIRO_ID}          Get Value From Json    ${DADOS_RETORNO_API.json()}    $.brands[1].brand
-    Log    \n O primeiro ID é: ${PRIMEIRO_ID}    console=${LOG_CONSOLE}
-
-   
-    
-    
-Apoio Ler arquivo e converter em json
-    ${DADOS_RETORNO_API}     GET On Session          MINHA_SESSAO_API   ${END_POINT_PRODUCTSLIST} 
-    Log    \n DADOS_RETORNO_API: ${DADOS_RETORNO_API}    console=${LOG_CONSOLE}
-    ${DADOS_RETORNO_API_EM_JSON}    Set Variable    ${DADOS_RETORNO_API.json()}
-    Log    \n DADOS_RETORNO_API_EM_JSON: ${DADOS_RETORNO_API_EM_JSON}    console=${LOG_CONSOLE}
-
-
-POST To Verify Login with valid details
-    ${DADOS_ENVIAR}=    Evaluate    {'email': (None, 'teste202410041448@teste.com'), 'password': (None, '1234567890')}
-    # Log    \n Status:${DADOS_ENVIAR}      console=${LOG_CONSOLE}
-    ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    /verifyLogin     files=${DADOS_ENVIAR}
-    # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
-
-GET user account detail by email
-    &{PARAMS}           Create Dictionary    email=teste202410041448@teste.com
-    ${uri}     Set Variable  /getUserDetailByEmail?email=${PARAMS.email}
-    ${DADOS_RETORNO_API}        GET On Session          MINHA_SESSAO_API   ${uri}    params=${PARAMS}
-    # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
 
 
 
-Apoio Verifica Response Code
-    #[Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
-    ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
-    # Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    Log    \n RESPONSE_CODE_STATUS:<${RESPONSE_CODE_STATUS}>     console=${LOG_CONSOLE}
-    Log    \n RESPONSE_CODE_STATUS.json:<${DADOS_RETORNO_API.json()}>     console=${LOG_CONSOLE}
-    # Validação do preço do primeiro produto da lista
-    ${VL_PRIMEIRO_PRODUTO}=    Get From Dictionary    ${DADOS_RETORNO_API.json()['products'][1]}    price
-    Should Be Equal    ${VL_PRIMEIRO_PRODUTO}    Rs. 400
 
 
-Apoio Adicionar dados no arquivo em branco
-    # Etapa 1: Criar um dicionário para representar o JSON em branco
-    ${RESPONSECODE}    Set Variable    200
-    ${RESPONSECODE}    Convert To Integer    ${RESPONSECODE}
-    ${JSON_FILE_PATH}        Set Variable    cadastro_API_13_em_branco.json
-    ${JSON_FILE_PATH-2}      Set Variable    cadastro_API_13_em_branco-2.json
-    ${file}    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH}
-    ${json_data}   Update Value To Json    ${file}     $.responseCode    ${RESPONSECODE}
-    Dump Json To File    ${CURDIR}/dados/${JSON_FILE_PATH}    ${json_data}
-    ${json_1}=    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH}
-    ${json_2}=    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH-2}
-    Should Be Equal As Strings     ${json_1}    ${json_2}
+# POST To Verify Login with valid details
+#     ${DADOS_ENVIAR}=    Evaluate    {'email': (None, 'teste202410041448@teste.com'), 'password': (None, '1234567890')}
+#     # Log    \n Status:${DADOS_ENVIAR}      console=${LOG_CONSOLE}
+#     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    /verifyLogin     files=${DADOS_ENVIAR}
+#     # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
+#     # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
+
+# GET user account detail by email
+#     &{PARAMS}           Create Dictionary    email=teste202410041448@teste.com
+#     ${uri}     Set Variable  /getUserDetailByEmail?email=${PARAMS.email}
+#     ${DADOS_RETORNO_API}        GET On Session          MINHA_SESSAO_API   ${uri}    params=${PARAMS}
+#     # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
+#     # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
+
+
+
+# Apoio Verifica Response Code
+#     #[Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
+#     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
+#     # Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
+#     Log    \n RESPONSE_CODE_STATUS:<${RESPONSE_CODE_STATUS}>     console=${LOG_CONSOLE}
+#     Log    \n RESPONSE_CODE_STATUS.json:<${DADOS_RETORNO_API.json()}>     console=${LOG_CONSOLE}
+#     # Validação do preço do primeiro produto da lista
+#     ${VL_PRIMEIRO_PRODUTO}=    Get From Dictionary    ${DADOS_RETORNO_API.json()['products'][1]}    price
+#     Should Be Equal    ${VL_PRIMEIRO_PRODUTO}    Rs. 400
+
+
+# Apoio Adicionar dados no arquivo em branco
+#     # Etapa 1: Criar um dicionário para representar o JSON em branco
+#     ${RESPONSECODE}    Set Variable    200
+#     ${RESPONSECODE}    Convert To Integer    ${RESPONSECODE}
+#     ${JSON_FILE_PATH}        Set Variable    cadastro_API_13_em_branco.json
+#     ${JSON_FILE_PATH-2}      Set Variable    cadastro_API_13_em_branco-2.json
+#     ${file}    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH}
+#     ${json_data}   Update Value To Json    ${file}     $.responseCode    ${RESPONSECODE}
+#     Dump Json To File    ${CURDIR}/dados/${JSON_FILE_PATH}    ${json_data}
+#     ${json_1}=    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH}
+#     ${json_2}=    Load JSON From File    ${CURDIR}/dados/${JSON_FILE_PATH-2}
+#     Should Be Equal As Strings     ${json_1}    ${json_2}
 
 
 
