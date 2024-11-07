@@ -1,7 +1,15 @@
 ## Postman - Newman - Github Actions
 
 
-**Este conteúdo é o resultado da intenção de demonstrar na prática como realizo e organizo os artefatos utilizados em um teste API utilizando Postman, Newman e Git Actions.**
+**Este conteúdo é o resultado da intenção de demonstrar na prática como realizo teste em API e organizo os artefatos, utilizando Postman, Newman e Git Actions.**
+
+Vale reforçar que para os testes utilizei uma API pública da qual não sou autor de URL: https://automationexercise.com/api e foram realizados todos os desafios contidos no Site: https://automationexercise.com. 
+
+Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
+
+![Site_Teste_API]()
+
+-----------
 
 **Para execução dos testes será necessário 3 software/ferramentas: Postman, Node.js e Newman.**
 
