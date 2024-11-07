@@ -5,9 +5,10 @@
 
 Vale reforçar que para os testes utilizei uma API pública da qual não sou autor de URL: https://automationexercise.com/api e foram realizados todos os desafios contidos no Site: https://automationexercise.com. 
 
-Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
 
-![Site_Teste_API]()
+![Site_Teste_API](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Site_Teste_API.png)
+
+Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
 
 -----------
 
