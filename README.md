@@ -18,7 +18,7 @@ Este repositório contém o código de scripts de testes automatizados para um p
 
 Escolhi este site para usar nos testes, pois com ele foi possível realizar tanto os testes de interface web (UI) quanto os de API. Além de no próprio site conter lista com itens a serem verificados tanto no escopo UI quanto API.
 
-![Página com Lista](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Site_lista_teste.png)
+![Página com Lista](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Site_lista_teste.png)
 
 
 Como citado anteriormente os testes abrangem interface web (UI) e API. 
