@@ -7,7 +7,7 @@
 Vale reforçar que para os testes utilizei uma API pública da qual não sou autor de URL: https://automationexercise.com/api e foram realizados todos os desafios contidos no Site: https://automationexercise.com. 
 
 
-![Site_Teste_API](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Site_Teste_API.png)
+![Site_Teste_API](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Site_Teste_API.png)
 
 Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
 
@@ -51,7 +51,7 @@ Para mim exibiu na data deste post, a versão: 6.2.1
 - Postman: 
 **Os arquivos "API_automationexercise.postman_collection.json" e "VAR_API.postman_environment.json", podem ser importados diretamente no Postman e executado os testes, onde terá o resultado dos testes como exibido abaixo:**
 
-![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Postman.png)
+![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Postman.png)
 
 
 -------------
@@ -66,7 +66,7 @@ newman run API_automationexercise.postman_collection.json -e VAR_API.postman_env
 
 **Depois de executado terá o resultado dos testes como exibido abaixo:**
 
-![Newman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Newman.png)
+![Newman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Newman.png)
 
 
 -------------
@@ -76,9 +76,9 @@ newman run API_automationexercise.postman_collection.json -e VAR_API.postman_env
 - Github: 
 **Uma vez configurada o workflow, em havendo algum evento que dispare os teste, o Github Actions executa os testes e tive os resultados como exibido abaixo, onde durou 26 segundos e mais abaixo tem link para relatórios de execução do Newman:**
 
-![Github_action](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions.png)
+![Github_action](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions.png)
 
-![Github_action_Dash](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions_Newman_Dash.png)
+![Github_action_Dash](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions_Newman_Dash.png)
 
 ![Github_action_Req](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions_Newman_Req.png)
 
