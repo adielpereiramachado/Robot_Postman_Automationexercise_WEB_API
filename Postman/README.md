@@ -80,6 +80,6 @@ newman run API_automationexercise.postman_collection.json -e VAR_API.postman_env
 
 ![Github_action_Dash](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions_Newman_Dash.png)
 
-![Github_action_Req](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Postman/Arquivos%20de%20apoio/Git_Actions_Newman_Req.png)
+![Github_action_Req](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions_Newman_Req.png)
 
 
