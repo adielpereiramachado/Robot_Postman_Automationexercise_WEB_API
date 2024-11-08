@@ -88,6 +88,11 @@ pip install robotframework-requests
 pip install robotframework --break-system-packages
 ```
 
+Na data deste post, as versões utilizadas: 
+
+robotframework==7.1 | robotframework-assertion-engine==3.0.3 | robotframework-browser==18.8.0 | robotframework-difflibrary==0.1.0 | robotframework-jsonlibrary==0.5 | robotframework-jsonschemalibrary==1.0 | robotframework-requests==0.9.7 | robotframework-seleniumlibrary==6.6.1
+
+
 - **Webdrivers**:
 
 Para instalar os Webdrivers em seu computador, devemos baixar cada um deles (Chrome, Firefox e Edge) e salvar em uma pasta, como veremos mais abaixo.
@@ -101,6 +106,14 @@ Na data deste post, a versão utilizada é: 130.0.6723.116
 - Edge: Para baixar devemos acessar o endereço https://developer.microsoft.com/pt-br/microsoft-edge/tools/webdriver/?form=MA13LH e click para baixar o arquivo, dê prederência a versões estáveis. 
 Na data deste post, a versão utilizada é: 130.0.2849.80
 
+Abaixo demonstro uma sugestão de pasta para levar os 3 executateis de webdriver.
+Abra a opção de 'Variaveis de Ambiente', depois descubra qual o caminho da variavél 'Path', pois a recomendação é colocar os executavéis na mesma pasta.
 
-xxxxxxxxxxxxxxxxxx
+![Pasta_webdriver](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Pasta_webdriver.png)
+
+:white_check_mark: Com isso, temos um ambiente configurado para escrever e executar os scripts de testes com Robotframework.
+
+---------------
+
+textook
 
