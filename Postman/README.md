@@ -48,14 +48,14 @@ Para mim exibiu na data deste post, a versão: 6.2.1
 ### Organização e Execução do teste ###
 
 
-O conteúdo está organizadop para execução da seguinte maneira:
+O conteúdo está organizado para execução da seguinte maneira:
 
 **- Postman**: Os arquivos "API_automationexercise.postman_collection.json" e "VAR_API.postman_environment.json", podem ser importados diretamente no Postman e executado os testes, onde terá o resultado dos testes como exibido abaixo:
 
 ![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Postman.png)
 
 
-**- Newman**:Os mesmos arquivos podem ser usados para execução do script com Newman. Para tanto, basta abrir um console de comando (cmd ou konsole) e executar o comando abaixo:
+**- Newman**: Os mesmos arquivos podem ser usados para execução do script com Newman. Para tanto, basta abrir um console de comando (cmd ou konsole) e executar o comando abaixo:
 
 ```bash
 newman run API_automationexercise.postman_collection.json -e VAR_API.postman_environment.json -r cli,htmlextra
