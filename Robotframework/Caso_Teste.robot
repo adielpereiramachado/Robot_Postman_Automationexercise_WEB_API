@@ -379,10 +379,6 @@ WEB Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functi
     WEB 26: Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
 
 
-# WEB Test Case X nos 6 tipos de Browser
-#     [Tags]    Multiplos
-#     Executa teste usando
-
 
 API 01: Get All Products List
     [tags]   TC_API_01    TC_API
@@ -491,3 +487,10 @@ API 12: DELETE METHOD To Delete User Account
     API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
     API 12: Verifica Status code    200    
     API 12: Verifica Response Code     200    Account deleted!
+
+
+
+
+# WEB Test Case X nos 6 tipos de Browser. Tem que copiar e colar os CT no Resource em questão
+#     [Tags]    Multiplos
+#     Executa teste usando
