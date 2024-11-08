@@ -2,84 +2,105 @@
 
 ----------
 
-**Este conteúdo é o resultado da intenção de demonstrar na prática como realizo teste em API e organizo os artefatos, utilizando Postman, Newman e Git Actions.**
+Este conteúdo é o resultado da intenção de demonstrar na prática como realizo teste em interface WEB (UI) e API utilizando Robotframework.
 
-Vale reforçar que para os testes utilizei uma API pública da qual não sou autor de URL: https://automationexercise.com/api e foram realizados todos os desafios contidos no Site: https://automationexercise.com. 
+Vale reforçar que para os testes utilizei um Site público do qual não sou autor de URL: https://automationexercise.com e foram realizados todos os desafios contidos na lista do referido Site.
 
 
-![Site_Teste_API](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Site_Teste_API.png)
+![Site_Teste_WEB](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Site_lista_teste.png)
 
 Aproveito para agradecer aos autores a publicação do Site e dos serviços nele contidos.
 
 -------------
 
-**Para execução dos testes será necessário 3 software/ferramentas: Postman, Node.js e Newman.**
+Para a escrita e execução dos testes foi necessário 4 software/ferramentas: VS Code, Python, Robotframework e Webdrivers (e suas bibliotecas opcionais)
 
-- Postman:
+VS Code, para escrever o script de teste.
+
+Pyhon, pois os scripts de testes são interpretados pelo interpretador Python.
+
+Robotframework, que é o framework no qual escrevemos os comandos de execução do teste.
+
+Webdrivers, são drivers que possibilitam controle dos Browser ao Robotframework.
+
+- **VS Code**:
   
-**O Postman pode ser instalado no seu computador, para mais informações, acesse: https://www.postman.com  
-Como opção pode ser utilizado a versão WEB acessando no mesmo link citado acima (foi a que optei).
-Na data deste post, a versão utilizada do Postman Web é: 11.18.1-241106-0747**
+Para instalar o VS Code em seu computador, consulte: https://code.visualstudio.com/download  
+Na data deste post, a versão utilizada é: 1.95.2
+
+- **Python**:
+
+Para instalar o Python em seu computador, consulte: https://www.python.org/downloads
+
+:information_source: Importante: Durane a instalação, marque as opções: 'Use admin privileges when installing py.exe' e 'Add python.exe to PATH'.
 
 
-- Node.js:
+Para verificar se a instalação ocorreu com sucesso, execute o comando abaixo, onde deve ser exibida a versão do Python instalado:
+
+
+```bash
+python --version
+```
+
+Na data deste post, a versão utilizada é: 3.12.6
+
+- **Robotframework**:
+
+Para instalar o Robotframework em seu computador, execute o comando abaixo em um console aberto com permissões Admin
+
+```bash
+pip install robotframework
+```
+
+Para instalar as bibliotécas segue abaixo as que tenho instalado. Da mesma forma execute o comando abaixo em um console aberto com permissões Admin:
+
+```bash
+pip install robotframework-assertion-engine
+```
+
+```bash
+pip install robotframework-browser
+```
+
+```bash
+pip install robotframework-difflibrary
+```
+
+```bash
+pip install robotframework-seleniumlibrary
+```
+
+```bash
+pip install robotframework-jsonlibrary
+```
+
+```bash
+pip install robotframework-jsonschemalibrary
+```
+
+```bash
+pip install robotframework-requests
+```
+
+:information_source: Caso esteja instalando em Linux (snap) considere adicionar o sufixo '--break-system-packages' em todos os comandos descritos, dessa forma o comando de instação do robotframework, ficaria como descrito abaixo: 
+
+```bash
+pip install robotframework --break-system-packages
+```
+
+- **Webdrivers**:
+
+Para instalar os Webdrivers em seu computador, devemos baixar cada um deles (Chrome, Firefox e Edge) e salvar em uma pasta, como veremos mais abaixo.
+
+- Chrome: Para baixar devemos acessar o endereço https://developer.chrome.com/docs/chromedriver/downloads?hl=pt-br e depois, caso sua versão não seja exibida, deverá clicar em uma opção da página com o texto 'painel de disponibilidade do Chrome for Testing'. Recomendo baixar versão 'Stable' e para isso, click no link ao lado da identificação da 'Platforma' equivalente ao seu computador. 
+Na data deste post, a versão utilizada é: 130.0.6723.116
   
-**Para instalar o Node.js no seu computador, acesse o site abaixo e siga o passo a passo:**
-https://nodejs.org/en/
+- Firefox: Para baixar devemos acessar o endereço https://github.com/mozilla/geckodriver/releases e clicar baixar o arquivo de plataforma/formato equivalente ao seu computador (no caso de windows 64bits escolha por exemplo: geckodriver-v0.35.0-win-aarch64.zip). 
+  Na data deste post, a versão utilizada é: 0.35.0
+
+- Edge: Para baixar devemos acessar o endereço https://developer.microsoft.com/pt-br/microsoft-edge/tools/webdriver/?form=MA13LH e click para baixar o arquivo, dê prederência a versões estáveis. 
+Na data deste post, a versão utilizada é: 130.0.2849.80
 
 
-- Newman:
-
-**Para instalar o Newman no seu computador,  execute em um console:**
-```bash
-npm install -g newman
-```
-**Para verificar que a instalação ocorreu com sucesso, execute o comando abaixo, onde deverá exibir a versão instalada:** 
-```bash
-newman --version
-```
-Para mim exibiu na data deste post, a versão: 6.2.1
-
-
--------------
-
-
-
-
-**O conteúdo está organizado da seguinte maneira:**
-
-- Postman: 
-**Os arquivos "API_automationexercise.postman_collection.json" e "VAR_API.postman_environment.json", podem ser importados diretamente no Postman e executado os testes, onde terá o resultado dos testes como exibido abaixo:**
-
-![Postman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Postman.png)
-
-
--------------
-
-
-- Newman:
-**Os mesmos arquivos podem ser usados para execução do script com Newman. Para tanto, basta abrir um console de comando (cmd ou konsole) e executar o comando abaixo:**
-
-```bash
-newman run API_automationexercise.postman_collection.json -e VAR_API.postman_environment.json -r cli,htmlextra
-```
-
-**Depois de executado terá o resultado dos testes como exibido abaixo:**
-
-![Newman](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Newman.png)
-
-
--------------
-
-
-
-- Github: 
-**Uma vez configurada o workflow, em havendo algum evento que dispare os teste, o Github Actions executa os testes e tive os resultados como exibido abaixo, onde durou 26 segundos e mais abaixo tem link para relatórios de execução do Newman:**
-
-![Github_action](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions.png)
-
-![Github_action_Dash](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions_Newman_Dash.png)
-
-![Github_action_Req](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Git_Actions_Newman_Req.png)
-
+xxxxxxxxxxxxxxxxxx
 
