@@ -19,7 +19,7 @@ Para a escrita e execução dos testes foi necessário 4 software/ferramentas: V
 
 VS Code, para escrever o script de teste.
 
-Pyhon, pois os scripts de testes são interpretados pelo interpretador Python.
+Python, pois os scripts de testes são interpretados pelo interpretador Python.
 
 Robotframework, que é o framework no qual escrevemos os comandos de execução do teste.
 
@@ -34,7 +34,7 @@ Na data deste post, a versão utilizada é: 1.95.2
 
 Para instalar o Python em seu computador, consulte: https://www.python.org/downloads
 
-:information_source: Importante: Durane a instalação, marque as opções: 'Use admin privileges when installing py.exe' e 'Add python.exe to PATH'.
+:information_source: Importante: Durante a instalação, marque as opções: 'Use admin privileges when installing py.exe' e 'Add python.exe to PATH'.
 
 
 Para verificar se a instalação ocorreu com sucesso, execute o comando abaixo, onde deve ser exibida a versão do Python instalado:
@@ -54,7 +54,7 @@ Para instalar o Robotframework em seu computador, execute o comando abaixo em um
 pip install robotframework
 ```
 
-Para instalar as bibliotécas segue abaixo as que tenho instalado. Da mesma forma execute o comando abaixo em um console aberto com permissões Admin:
+Para instalar as bibliotecas segue abaixo as que tenho instalado. Da mesma forma execute o comando abaixo em um console aberto com permissões Admin:
 
 ```bash
 pip install robotframework-assertion-engine
@@ -108,8 +108,8 @@ Na data deste post, a versão utilizada é: 130.0.6723.116
 - Edge: Para baixar devemos acessar o endereço https://developer.microsoft.com/pt-br/microsoft-edge/tools/webdriver/?form=MA13LH e click para baixar o arquivo, dê prederência a versões estáveis. 
 Na data deste post, a versão utilizada é: 130.0.2849.80
 
-Abaixo demonstro uma sugestão de pasta para levar os 3 executateis de webdriver.
-Abra a opção de 'Variaveis de Ambiente', depois descubra qual o caminho da variavél 'Path', pois a recomendação é colocar os executavéis na mesma pasta.
+Abaixo demonstro uma sugestão de pasta para levar os 3 executáveis de webdriver.
+Abra a opção de ''Variáveis de Ambiente', depois descubra qual o caminho da variável 'Path', pois a recomendação é colocar os executáveis na mesma pasta.
 
 ![Pasta_webdriver](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Pasta_webdriver.png)
 
@@ -125,7 +125,7 @@ Para executar um script Robot, temos de abrir um console ou o terminal do VS Cod
 robot Caso_Teste.robot 
 ```
 
-No entanto, o Robot permite realizar alguns parametros como veremos.
+No entanto, o Robot permite realizar alguns parâmetros como veremos.
 
 Gerando uma pasta de Log para receber os arquivos de report que o Robot gera. Para tanto, basta adicionar o parâmetro -d [nome da pasta].
 
@@ -138,7 +138,7 @@ Abaixo o relatório gerado de todos os Casos de Testes (WEB + API):
 ![Robot_Report_Geral](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Robot_Report_Geral.png)
 
 
-Um outro parametro interassante disponível que foi configurado é executar somente alguns Casos de Testes espefíficos, onde para tanto, basta adicionar tags no código '[tags] TC_WEB_01 TC_WEB'. 
+Um outro parâmetro interessante disponível que foi configurado é executar somente alguns Casos de Testes específicos, onde para tanto, basta adicionar tags no código '[tags] TC_WEB_01 TC_WEB'. 
 Desta forma, temos como executar todos os Casos de Testes WEB passando somente o parâmetro '-i "tag desejada"', como abaixo:
 
 ```bash
@@ -172,13 +172,13 @@ robot -d Logs -i "TC_API_03"  Caso_Teste.robot
 
 ![Robot_Report_API_03](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/blob/main/Arquivos%20de%20apoio/Robot_Report_API_03.png)
 
-O Robot permite ainda passar na linha de comando de execução do teste um parametro mudando valor de variaveis dentro do script, assim sendo desnecessário abrir, alterar e salvar o código para executar com o novo valor, ao invé disso, basta passar o parâmetro -v [nome da variavel:valor] e com isso somente nessa execução a variavel terá o valor conforme passado na linha de comando.
+O Robot permite ainda passar na linha de comando de execução do teste um parâmetro mudando valor de variáveis dentro do script, assim sendo desnecessário abrir, alterar e salvar o código para executar com o novo valor, ao invé disso, basta passar o parâmetro -v [nome da variável:valor] e com isso somente nessa execução a variável terá o valor conforme passado na linha de comando.
 
 No código foi previsto algumas variaveis que podemos mudar o valor pela linha de comando, são elas:
 
 '${BROWSER}' -> Indica o Browser usado no testes, podendo ser Chrome; HeadlessChrome; Firefox; HeadlessFirefox; Edge; HeadlessEdge. Valor pardão 'Chrome'.
 
-'${TEMPO_ESPERA}'   -> Especifica o tempo de espera para encontrar um elemento esperado na página. Valor pardão '10'.
+'${TEMPO_ESPERA}'   -> Especifica o tempo de espera para encontrar um elemento esperado na página. Valor padrão '10'.
 
 '${SELENIUM_SPEED}' -> Especifica o 'rápido' os testes serão atrasados quanto a velocidade máxima padrão. No caso configurei para ter 0.2 de atraso.
 
