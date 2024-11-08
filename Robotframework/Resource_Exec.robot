@@ -23,74 +23,26 @@ ${BROWSER}    Chrome
 # ${BROWSER}    HeadlessEdge
 ${TEMPO_ESPERA}        10
 ${SELENIUM_SPEED}      0.2
-${LOG_CONSOLE}         true 
+${LOG_CONSOLE}         false 
 
 *** Keywords ***
 
-Fechar browser
-    # Capture Page Screenshot
-    Close Browser
-    Sleep    2    # As vezes o site está sendo derrubado, deve ser devido a qtde de acesso sequenciais
 
-pausar
-    [Arguments]    ${msg_complementar}
-    Log    \nIniciando pausar.      console=${LOG_CONSOLE}
-    ${pausar}    Get Value From User    Click OK para liberar e voltar o teste | ${msg_complementar}.
-    Log    Finalizando pausar.\n    console=${LOG_CONSOLE}
-    Set Suite Variable   ${pausar}    
-
-
-Obter dados 
-    # /dados/dados_para_cadastro    /dados/API_11.json
-    # [Arguments]    ${ARQ_DADOS_PARA_CADASTRO}    ${ARQ_API_11}
-    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}/dados/dados_para_cadastro.json
-    # Log    \n 1: ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}   console=${LOG_CONSOLE}
-    Set Suite Variable    ${NOME_ESPERADO}     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["name"]}
-    Set Suite Variable    ${EMAIL_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["email"]}    
-    Set Suite Variable    ${TITULO_ESPERADO}     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["title"]}
-    Set Suite Variable    ${DIA_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_day"]}
-    Set Suite Variable    ${MES_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_month"]}
-    Set Suite Variable    ${ANO_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_year"]}
-    Set Suite Variable    ${PRIMEIRO_NOME_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["first_name"]}
-    Set Suite Variable    ${SOBRE_NOME_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["last_name"]}
-    Set Suite Variable    ${EMPRESA_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["company"]}
-    Set Suite Variable    ${ENDERECO1_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address1"]}
-    Set Suite Variable    ${ENDERECO2_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address2"]}
-    Set Suite Variable    ${PAIS_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["country"]}
-    Set Suite Variable    ${ESTADO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["state"]}
-    Set Suite Variable    ${CIDADE_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["city"]}
-    Set Suite Variable    ${CEP_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["zipcode"]}
-    Set Suite Variable    ${PASSWORD_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}
-    Set Suite Variable    ${CELULAR_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["mobile_number"]}
-
-
-Condicao ter usuario cadastrado: chamando api de criacao
-    Cria sessao
-    API 11: Dispara requisicao   /dados/dados_para_cadastro.json    /dados/API_11.json
-
-Condicao não ter usuario cadastrado: chamando api de delecao
-    Cria sessao
-    API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
-
-
-
-
-# inicio código WEB
 WEB 01: Launch browser 
     Sleep    1    # As vezes o site está sendo derrubado, deve ser devido a qtde de acesso sequenciais 
-    Log    \n0 Browser passado é:<${BROWSER}>    console=${LOG_CONSOLE}
+    Log    \n0 Browser passado é:<${BROWSER}>                   console=${LOG_CONSOLE}
     IF    '${BROWSER}' == 'Chrome'
-        Log    \n1 Browser é Chrome: ${BROWSER}    console=${LOG_CONSOLE}
+        Log    \n1 Browser é Chrome: ${BROWSER}                 console=${LOG_CONSOLE}
         Open Browser         about:blank    ${BROWSER}      options=add_argument("--force-device-scale-factor=0.8");add_experimental_option("excludeSwitches", ["enable-logging"]);add_argument("--window-size=1550,800")
         Set Selenium Speed    ${SELENIUM_SPEED}
     ELSE
         IF    '${BROWSER}' == 'HeadlessChrome'
-            Log    \n2 Browser é HeadlessChrome: ${BROWSER}    console=${LOG_CONSOLE}
+            Log    \n2 Browser é HeadlessChrome: ${BROWSER}     console=${LOG_CONSOLE}
             Open Browser         about:blank    ${BROWSER}      options=add_argument("--force-device-scale-factor=0.8");add_experimental_option("excludeSwitches", ["enable-logging"]);add_argument("--window-size=1550,800")
             Set Selenium Speed    ${SELENIUM_SPEED}
         ELSE
             IF    '${BROWSER}' == 'Firefox'    
-                Log    \n3 Browser é Firefox: ${BROWSER}    console=${LOG_CONSOLE}
+                Log    \n3 Browser é Firefox: ${BROWSER}        console=${LOG_CONSOLE}
                 ${options}=    Evaluate    sys.modules['selenium.webdriver'].FirefoxOptions()    sys
                 Call Method    ${options}    set_preference    layout.css.devPixelsPerPx    0.8
                 Create Webdriver    Firefox    options=${options}
@@ -108,8 +60,7 @@ WEB 01: Launch browser
                     Set Selenium Speed    ${SELENIUM_SPEED}
                 ELSE
                     IF    '${BROWSER}' == 'Edge' 
-                        Log    \n5 Browser é Edge: ${BROWSER}    console=${LOG_CONSOLE}
-                        # Open Browser   about:blank     ${BROWSER}
+                        Log    \n5 Browser é Edge: ${BROWSER}   console=${LOG_CONSOLE}
                         Open Browser   about:blank     ${BROWSER}    options=add_argument("--force-device-scale-factor=0.8")
                         Set Selenium Speed    ${SELENIUM_SPEED}
                     ELSE
@@ -143,26 +94,24 @@ WEB 01: Click on 'Signup / Login' button
     Wait Until Element Is Visible               ${HOME_SIGNUP_LOGIN}         timeout=${TEMPO_ESPERA}
     Wait Until Element Is Enabled               ${HOME_SIGNUP_LOGIN}         timeout=${TEMPO_ESPERA}
     Mouse Over                                  ${HOME_SIGNUP_LOGIN}
-    aguardar_e_clicar_javascript    ${HOME_SIGNUP_LOGIN}
+    aguardar_e_clicar_javascript                ${HOME_SIGNUP_LOGIN}
     # Click Element                               ${HOME_SIGNUP_LOGIN}
 
 
 WEB 01: Verify 'New User Signup!' is visible
-    Wait Until Element Is Visible                ${LOGIN_LBL_NEW_USER_SIGNUP}    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible               ${LOGIN_LBL_NEW_USER_SIGNUP}    timeout=${TEMPO_ESPERA}
 
 
 WEB 01: Enter name and email address
     Obter dados 
-    Wait Until Element Is Visible                ${LOGIN_INPUT_EMAIL}    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible                ${LOGIN_INPUT_EMAIL}      timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible                ${LOGIN_INPUT_USUARIO}    timeout=${TEMPO_ESPERA}
     Input Text                                   ${LOGIN_INPUT_USUARIO}    ${NOME_ESPERADO}
-    Input Text                                   ${LOGIN_INPUT_EMAIL}    ${EMAIL_ESPERADO}
+    Input Text                                   ${LOGIN_INPUT_EMAIL}      ${EMAIL_ESPERADO}
 
 
 WEB 01: Click 'Signup' button
-    aguardar_e_clicar_javascript    ${LOGIN_BTN_SIGNUP}
-    # Wait Until Element Is Visible    ${LOGIN_BTN_SIGNUP}     timeout=${TEMPO_ESPERA}
-    # Click Element    ${LOGIN_BTN_SIGNUP}
+    aguardar_e_clicar_javascript     ${LOGIN_BTN_SIGNUP}
     
 
 WEB 01: Verify that 'ENTER ACCOUNT INFORMATION' is visible
@@ -172,24 +121,20 @@ WEB 01: Verify that 'ENTER ACCOUNT INFORMATION' is visible
 WEB 01: Fill details: Title, Name, Email, Password, Date of birth
     Wait Until Element Is Visible            ${LOGIN_INPUT_PASSWORD}              timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible            ${LOGIN_LIST_DATE_DAY}               timeout=${TEMPO_ESPERA}    
-    aguardar_e_clicar_javascript    ${LOGIN_RADIO_BTN_TITLE}
-    # Wait Until Element Is Visible            ${LOGIN_RADIO_BTN_TITLE}             timeout=${TEMPO_ESPERA}
-    # Click Element                            ${LOGIN_RADIO_BTN_TITLE}   
-    Input Text                                   ${LOGIN_INPUT_PASSWORD}    ${PASSWORD_ESPERADO}
+    aguardar_e_clicar_javascript             ${LOGIN_RADIO_BTN_TITLE}
+    Input Text                               ${LOGIN_INPUT_PASSWORD}     ${PASSWORD_ESPERADO}
 
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position      ${LOGIN_LIST_DATE_DAY}
     ${POSICAO_X_DO_ELEMENTO}=    Get Horizontal Position    ${LOGIN_LIST_DATE_DAY}
     Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})
           
-    Select From List By Value    ${LOGIN_LIST_DATE_DAY}    ${DIA_ANIVERSARIO_ESPERADO}
+    Select From List By Value    ${LOGIN_LIST_DATE_DAY}      ${DIA_ANIVERSARIO_ESPERADO}
     Select From List By Value    ${LOGIN_LIST_DATE_MONTH}    ${MES_ANIVERSARIO_ESPERADO}
-    Select From List By Value    ${LOGIN_LIST_DATE_YEAR}    ${ANO_ANIVERSARIO_ESPERADO}
+    Select From List By Value    ${LOGIN_LIST_DATE_YEAR}     ${ANO_ANIVERSARIO_ESPERADO}
     
 
 WEB 01: Select checkbox 'Sign up for our newsletter!'
     aguardar_e_clicar_javascript    ${LOGIN_SELECT_SIGN_UP_FOR_OUR_NEWSLETTER}
-    # Wait Until Element Is Visible    ${LOGIN_SELECT_SIGN_UP_FOR_OUR_NEWSLETTER}    timeout=${TEMPO_ESPERA}
-    # Click Element    ${LOGIN_SELECT_SIGN_UP_FOR_OUR_NEWSLETTER}
     
 WEB 01: Select checkbox 'Receive special offers from our partners!'
     Wait Until Element Is Visible    ${LOGIN_SELECT_RECEIVE_SPECIAL_OFFERS_FROM_OUR_PARTNERS}    timeout=${TEMPO_ESPERA}
@@ -202,14 +147,14 @@ WEB 01: Select checkbox 'Receive special offers from our partners!'
     
 WEB 01: Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
     Wait Until Element Is Visible    ${LOGIN_INPUT_FIRST_NAME}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_LAST_NAME}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_COMPANY}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_ADDRESS}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_ADDRESS_2}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_COUNTRY}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_STATE}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_CITY}    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${LOGIN_INPUT_ZIPCODE}    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_LAST_NAME}     timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_COMPANY}       timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_ADDRESS}       timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_ADDRESS_2}     timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_COUNTRY}       timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_STATE}         timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_CITY}          timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${LOGIN_INPUT_ZIPCODE}       timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible    ${LOGIN_INPUT_MOBILE_NUMBER}    timeout=${TEMPO_ESPERA}
     Wait Until Element Is Enabled    ${LOGIN_INPUT_MOBILE_NUMBER}    timeout=${TEMPO_ESPERA}
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${LOGIN_INPUT_FIRST_NAME}
@@ -217,185 +162,116 @@ WEB 01: Fill details: First name, Last name, Company, Address, Address2, Country
     Scroll Element Into View    ${LOGIN_INPUT_FIRST_NAME} 
     Input Text        ${LOGIN_INPUT_FIRST_NAME}    ${PRIMEIRO_NOME_ESPERADO}
     Input Text        ${LOGIN_INPUT_LAST_NAME}    ${SOBRE_NOME_ESPERADO}    
-    Input Text        ${LOGIN_INPUT_COMPANY}    ${EMPRESA_ESPERADO}
-    Input Text        ${LOGIN_INPUT_ADDRESS}    ${ENDERECO1_ESPERADO}
-    
+    Input Text        ${LOGIN_INPUT_COMPANY}      ${EMPRESA_ESPERADO}
+    Input Text        ${LOGIN_INPUT_ADDRESS}      ${ENDERECO1_ESPERADO}    
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${LOGIN_INPUT_ADDRESS}
-    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-    
-    Scroll Element Into View    ${LOGIN_INPUT_ADDRESS} 
-    
+    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})    
+    Scroll Element Into View    ${LOGIN_INPUT_ADDRESS}     
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${LOGIN_INPUT_ADDRESS_2}
     Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-
     Input Text        ${LOGIN_INPUT_ADDRESS_2}    ${ENDERECO2_ESPERADO}
-    Scroll Element Into View    ${LOGIN_INPUT_ADDRESS_2} 
-    Select From List By Value       ${LOGIN_INPUT_COUNTRY}       ${PAIS_ESPERADO}
-    # Scroll Element Into View    ${LOGIN_INPUT_STATE} 
-
+    Scroll Element Into View        ${LOGIN_INPUT_ADDRESS_2} 
+    Select From List By Value       ${LOGIN_INPUT_COUNTRY}       ${PAIS_ESPERADO} 
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${LOGIN_INPUT_STATE}
     Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-
-    Input Text        ${LOGIN_INPUT_STATE}    ${ESTADO_ESPERADO}    
-    Input Text        ${LOGIN_INPUT_CITY}    ${CIDADE_ESPERADO}
+    Input Text        ${LOGIN_INPUT_STATE}      ${ESTADO_ESPERADO}    
+    Input Text        ${LOGIN_INPUT_CITY}       ${CIDADE_ESPERADO}
     Input Text        ${LOGIN_INPUT_ZIPCODE}    ${CEP_ESPERADO}
-    # Scroll Element Into View    ${LOGIN_INPUT_MOBILE_NUMBER} 
-    Input Text        ${LOGIN_INPUT_MOBILE_NUMBER}    ${CELULAR_ESPERADO}
-    
+    Input Text        ${LOGIN_INPUT_MOBILE_NUMBER}    ${CELULAR_ESPERADO}    
     ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${LOGIN_BTN_CREATE_ACCOUNT}
     Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-
     Scroll Element Into View    ${LOGIN_BTN_CREATE_ACCOUNT}
     
 WEB 01: Click 'Create Account button'
-    aguardar_e_clicar_javascript    ${LOGIN_BTN_CREATE_ACCOUNT}
-    # Wait Until Element Is Visible    ${LOGIN_BTN_CREATE_ACCOUNT}    timeout=${TEMPO_ESPERA}
-    # #Click Element    ${LOGIN_BTN_CREATE_ACCOUNT} 
-    # Execute JavaScript    ${LOGIN_BTN_CREATE_ACCOUNT_JAVASCRIPT}    #inserido qdo fazendo web 14
-
+    aguardar_e_clicar_javascript     ${LOGIN_BTN_CREATE_ACCOUNT}
 
 WEB 01: Verify that 'ACCOUNT CREATED!' is visible
-    Wait Until Element Is Visible    ${LOGIN_LBL_ACCOUNT_CREATED}     timeout=${TEMPO_ESPERA}
-    
+    Wait Until Element Is Visible    ${LOGIN_LBL_ACCOUNT_CREATED}     timeout=${TEMPO_ESPERA}    
 
 WEB 01: Click 'Continue' button
     Wait Until Element Is Enabled    ${LOGIN_LBL_ACCOUNT_CREATED}     timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible    ${LOGIN_BTN_CONTINUE}            timeout=${TEMPO_ESPERA}
-    aguardar_e_clicar_javascript    ${LOGIN_BTN_CONTINUE}
-    # Wait Until Element Is Enabled    ${LOGIN_BTN_CONTINUE}            timeout=${TEMPO_ESPERA}
-    # Click Element                    ${LOGIN_BTN_CONTINUE}          
-
+    aguardar_e_clicar_javascript     ${LOGIN_BTN_CONTINUE}    
 
 WEB 01: Verify that 'Logged in as username' is visible
     Wait Until Element Is Visible    ${LOGIN_LBL_LOGGED_IN_A_USERNAME}            timeout=${TEMPO_ESPERA}
 
 
 WEB 01: Click 'Delete Account' button
-    aguardar_e_clicar_javascript    ${LOGIN_BTN_DELETE_ACCOUNT}
-    # Wait Until Element Is Visible    ${LOGIN_BTN_DELETE_ACCOUNT}    timeout=${TEMPO_ESPERA}
-    # Click Element                     ${LOGIN_BTN_DELETE_ACCOUNT} 
-    
+    aguardar_e_clicar_javascript    ${LOGIN_BTN_DELETE_ACCOUNT}    
     
 WEB 01: Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-    aguardar_e_clicar_javascript    ${LOGIN_LBL_ACCOUNT_DELETED}
-    # Wait Until Element Is Visible        ${LOGIN_LBL_ACCOUNT_DELETED}     timeout=${TEMPO_ESPERA}
-    # Click Element                     ${LOGIN_LBL_ACCOUNT_DELETED} 
+    aguardar_e_clicar_javascript         ${LOGIN_LBL_ACCOUNT_DELETED}
     Wait Until Element Is Visible        ${LOGIN_BTN_CONTINUE}      timeout=${TEMPO_ESPERA}    
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 WEB 02: Launch browser 
     WEB 01: Launch browser 
 
-
 WEB 02: Navigate to url
-     [Arguments]    ${HOME_URL} 
-     WEB 01: Navigate to url    ${HOME_URL} 
-
+    [Arguments]    ${HOME_URL} 
+    WEB 01: Navigate to url    ${HOME_URL} 
      
 WEB 02: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
 
-    
 WEB 02: Click on 'Signup / Login' button
     WEB 01: Click on 'Signup / Login' button
 
-
 WEB 02: Verify 'Login to your account' is visible   
-    Wait Until Element Is Visible    ${HOME_LBL_LOGIN_TO_YOUR_ACCOUNT}        timeout=${TEMPO_ESPERA}
-
+    Wait Until Element Is Visible     ${HOME_LBL_LOGIN_TO_YOUR_ACCOUNT}        timeout=${TEMPO_ESPERA}
 
 WEB 02: Enter correct email address and password  
     Obter dados 
-    Wait Until Element Is Visible     ${HOME_INPUT_EMAIL}     timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible     ${HOME_INPUT_SENHA}     timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible     ${HOME_INPUT_EMAIL}        timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible     ${HOME_INPUT_SENHA}        timeout=${TEMPO_ESPERA}
     Input Text                        ${HOME_INPUT_EMAIL}        ${EMAIL_ESPERADO}
     Input Text                        ${HOME_INPUT_SENHA}        ${PASSWORD_ESPERADO}    
 
-
 WEB 02: Click 'login' button
     aguardar_e_clicar_javascript    ${HOME_BTN_LOGIN}
-    # Wait Until Element Is Visible     ${HOME_BTN_LOGIN}     timeout=${TEMPO_ESPERA}
-    # Click Element                     ${HOME_BTN_LOGIN} 
-
 
 WEB 02: Verify that 'Logged in as username' is visible
     WEB 01: Verify that 'Logged in as username' is visible
     
 WEB 02: Click 'Delete Account' button
-    WEB 01: Click 'Delete Account' button
-    
+    WEB 01: Click 'Delete Account' button    
 
 WEB 02: Verify that 'ACCOUNT DELETED!' is visible
     WEB 01: Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
     aguardar_e_clicar_javascript    ${LOGIN_BTN_CONTINUE}
-    # Click Element             ${LOGIN_BTN_CONTINUE} 
-
-
+    
 
 
 WEB 03: Launch browser 
     WEB 01: Launch browser 
 
-
 WEB 03: Navigate to url
     [Arguments]    ${HOME_URL} 
     WEB 01: Navigate to url    ${HOME_URL} 
-
      
 WEB 03: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
-
     
 WEB 03: Click on 'Signup / Login' button
     WEB 01: Click on 'Signup / Login' button
 
-
 WEB 03: Verify 'Login to your account' is visible    
     Wait Until Element Is Visible    ${HOME_LBL_LOGIN_TO_YOUR_ACCOUNT}        timeout=${TEMPO_ESPERA}
 
-
 WEB 03: Enter incorrect email address and password    
     Obter dados 
-    Wait Until Element Is Visible     ${HOME_INPUT_EMAIL}     timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible     ${HOME_INPUT_SENHA}     timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible     ${HOME_INPUT_EMAIL}        timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible     ${HOME_INPUT_SENHA}        timeout=${TEMPO_ESPERA}
     Input Text                        ${HOME_INPUT_EMAIL}        ${EMAIL_ESPERADO}
     Input Text                        ${HOME_INPUT_SENHA}        PASSWORD_ERRADA 
     
-
 WEB 03: Click 'login' button
     WEB 02: Click 'login' button
     
 WEB 03: Verify error 'Your email or password is incorrect!' is visible
     Wait Until Element Is Visible        ${LOGIN_LBL_PASSWORD_IS_INCORRECT}         timeout=${TEMPO_ESPERA}
-
-
 
 WEB 04: Launch browser
     WEB 01: Launch browser
@@ -424,36 +300,39 @@ WEB 04: Verify that 'Logged in as username' is visible
 
 WEB 04: Click 'Logout' button
     aguardar_e_clicar_javascript    ${LOGIN_BTN_LOGOUT}
-    # Wait Until Element Is Visible            ${LOGIN_BTN_LOGOUT}        timeout=${TEMPO_ESPERA}
-    # Click Element                            ${LOGIN_BTN_LOGOUT}
 
 WEB 04: Verify that user is navigated to login page
     Wait Until Element Is Visible            ${LOGIN_LBL_LOGOUT}        timeout=${TEMPO_ESPERA}
 
 
+
 WEB 05: Launch browser
     WEB 01: Launch browser
+
 WEB 05: Navigate to url   
     [Arguments]    ${HOME_URL} 
     WEB 01: Navigate to url    ${HOME_URL} 
+
 WEB 05: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
+
 WEB 05: Click on 'Signup / Login' button
     WEB 01: Click on 'Signup / Login' button
+
 WEB 05: Verify 'New User Signup!' is visible
     WEB 01: Verify 'New User Signup!' is visible
+
 WEB 05: Enter name and already registered email address
     Obter dados 
-    Wait Until Element Is Visible                ${LOGIN_INPUT_EMAIL}    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible                ${LOGIN_INPUT_EMAIL}      timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible                ${LOGIN_INPUT_USUARIO}    timeout=${TEMPO_ESPERA}
     Input Text                                   ${LOGIN_INPUT_USUARIO}    NOME_NOVO
-    Input Text                                   ${LOGIN_INPUT_EMAIL}    ${EMAIL_ESPERADO}
+    Input Text                                   ${LOGIN_INPUT_EMAIL}      ${EMAIL_ESPERADO}
 
 WEB 05: Click 'Signup' button
     WEB 01: Click 'Signup' button
 WEB 05: Verify error 'Email Address already exist!' is visible    
     Wait Until Element Is Visible                ${LOGIN_LBL_EMAIL_ALREADY_EXIST}        timeout=${TEMPO_ESPERA}
-
 
 WEB 06: Launch browser
     WEB 01: Launch browser
@@ -467,82 +346,45 @@ WEB 06: Verify that home page is visible successfully
 
 WEB 06: Click on 'Contact Us' button
     aguardar_e_clicar_javascript    ${HOME_BTN_CONTACT_US}
-    # Wait Until Element Is Visible            ${HOME_BTN_CONTACT_US}            timeout=${TEMPO_ESPERA}
-    # Click Element                            ${HOME_BTN_CONTACT_US} 
 
 WEB 06: Verify 'GET IN TOUCH' is visible        
-    Wait Until Element Is Visible            ${CONTACT_LBL_GET_IN_TOUCH}         timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible         ${CONTACT_LBL_GET_IN_TOUCH}      timeout=${TEMPO_ESPERA}
 
 WEB 06: Enter name, email, subject and message
     Obter dados 
-    Wait Until Element Is Visible            ${CONTACT_INPUT_NAME}            timeout=${TEMPO_ESPERA}        
-    Wait Until Element Is Visible            ${CONTACT_INPUT_EMAIL}           timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible            ${CONTACT_INPUT_SUBJECT}          timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible            ${CONTACT_INPUT_MESSAGE}          timeout=${TEMPO_ESPERA}                       
+    Wait Until Element Is Visible         ${CONTACT_INPUT_NAME}            timeout=${TEMPO_ESPERA}        
+    Wait Until Element Is Visible         ${CONTACT_INPUT_EMAIL}           timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible         ${CONTACT_INPUT_SUBJECT}         timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible         ${CONTACT_INPUT_MESSAGE}         timeout=${TEMPO_ESPERA}                       
     Input Text                            ${CONTACT_INPUT_NAME}            ${NOME_ESPERADO}        
     Input Text                            ${CONTACT_INPUT_EMAIL}           ${EMAIL_ESPERADO}
-    Input Text                            ${CONTACT_INPUT_SUBJECT}          Assunto de teste
-    Input Text                            ${CONTACT_INPUT_MESSAGE}          Essa é uma mensagem de teste
+    Input Text                            ${CONTACT_INPUT_SUBJECT}         Assunto de teste
+    Input Text                            ${CONTACT_INPUT_MESSAGE}         Essa é uma mensagem de teste
     
 WEB 06: Upload file
     [Arguments]    ${CAMINHO_ARQ_ENVIAR}
     ${CAMINHO_ARQ_ENVIAR}    resolver_caminho_so    ${CAMINHO_ARQ_ENVIAR}
-
-    
-
-    # Original
-    # IF    '${BROWSER}' == 'HeadlessFirefox' or '${BROWSER}' == 'Firefox'
-    #     # log     \n:0${CAMINHO_ARQ_ENVIAR}    console=${LOG_CONSOLE}
-    #     ${CAMINHO_ARQ_ENVIAR}    Replace String    ${CAMINHO_ARQ_ENVIAR}    /     \\
-    #     # log     \n:0.1${CAMINHO_ARQ_ENVIAR}    console=${LOG_CONSOLE}
-    # # ELSE
-    #     # log     \n:0.1${CAMINHO_ARQ_ENVIAR}    console=${LOG_CONSOLE}
-    # END
-
-
-
     ${CAMINHO_ARQ_ENVIAR}    Set Variable    ${CURDIR}${CAMINHO_ARQ_ENVIAR}    
     Wait Until Element Is Visible            ${CONTACT_UPLOAD_LOCATOR}               timeout=${TEMPO_ESPERA}
     Mouse Over            ${CONTACT_UPLOAD_LOCATOR}  
     ${element}=    Get WebElement    ${CONTACT_UPLOAD_LOCATOR}
     log     \n:1${element}    console=${LOG_CONSOLE}
     log     \n:1${CAMINHO_ARQ_ENVIAR}    console=${LOG_CONSOLE}    
-
     Input Text    ${CONTACT_UPLOAD_LOCATOR}    ${CAMINHO_ARQ_ENVIAR}
-    
-
-    
-resolver_caminho_so
-    [Arguments]    ${CAMINHO_RESOLVER}
-    Log    \n>>>Ver entrada:<${CAMINHO_RESOLVER}>    console=${LOG_CONSOLE}
-    ${SO}=    Evaluate    platform.system()    platform
-    Log    \nSistema Operacional identificado como sendo...:<${SO}>    console=${LOG_CONSOLE}
-    IF    '${BROWSER}' == 'HeadlessFirefox' or '${BROWSER}' == 'Firefox'
-        Log    \n0SO Lin:<${SO}>    console=${LOG_CONSOLE}
-        IF    '${SO}'=='Linux'
-            ${CAMINHO_RESOLVER}    Replace String    ${CAMINHO_RESOLVER}    /     //
-        ELSE
-            ${CAMINHO_RESOLVER}    Replace String    ${CAMINHO_RESOLVER}    /     \\
-        END
-    END 
-    Log    \n>>> Ver saida :<${CAMINHO_RESOLVER}>    console=${LOG_CONSOLE}
-    RETURN    ${CAMINHO_RESOLVER}
-    
 
 WEB 06: Click 'Submit' button
-    aguardar_e_clicar_javascript    ${CONTACT_UPLOAD_SUBMIT}
-    # Wait Until Element Is Visible        ${CONTACT_UPLOAD_SUBMIT}          timeout=${TEMPO_ESPERA}   
-    # Click Element                        ${CONTACT_UPLOAD_SUBMIT}
+    aguardar_e_clicar_javascript    ${CONTACT_UPLOAD_SUBMIT} 
+
 WEB 06: Click OK button
-    Wait Until Keyword Succeeds    10s    2s    Handle Alert    accept    #Verifica a cada 2 segundos se exibiu o alert e faz essas tentativas por 10 s
+    Wait Until Keyword Succeeds    10s    2s    Handle Alert    accept   
     
 WEB 06: Verify success message 'Success! Your details have been submitted successfully.' is visible
     Wait Until Element Is Visible            ${CONTACT_LBL_SUBMITTED_SUCCESSFULLY}             timeout=${TEMPO_ESPERA} 
+
 WEB 06: Click 'Home' button and verify that landed to home page successfully
     aguardar_e_clicar_javascript    ${CONTACT_BTN_HOME}
-    #  Wait Until Element Is Visible            ${CONTACT_BTN_HOME}             timeout=${TEMPO_ESPERA} 
-    #  Click Element    ${CONTACT_BTN_HOME}
      Wait Until Element Is Visible            ${HOME_BUNNER_PRINCIPAL}             timeout=${TEMPO_ESPERA} 
+
 
 
 WEB 07: Launch browser
@@ -554,10 +396,9 @@ WEB 07: Navigate to url
 
 WEB 07: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
+
 WEB 07: Click on 'Test Cases' button
-    # Wait Until Element Is Visible            ${HOME_BTN_TESTE_CASES}             timeout=${TEMPO_ESPERA} 
-    # Click Element                            ${HOME_BTN_TESTE_CASES}
-    aguardar_e_clicar_javascript               ${HOME_BTN_TESTE_CASES}
+    aguardar_e_clicar_javascript             ${HOME_BTN_TESTE_CASES}
 
 WEB 07: Verify user is navigated to test cases page successfully
     Wait Until Element Is Visible            ${TESTE_CASE_LBL_TEST_CASES}             timeout=${TEMPO_ESPERA} 
@@ -573,46 +414,32 @@ WEB 08: Navigate to url
 
 WEB 08: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
-WEB 08: Click on 'Products' button
-    # Wait Until Element Is Visible            ${HOME_BTN_PRODUCTS}                    timeout=${TEMPO_ESPERA}  
-    # Click Element                            ${HOME_BTN_PRODUCTS}  
-    aguardar_e_clicar_javascript               ${HOME_BTN_PRODUCTS}
+
+WEB 08: Click on 'Products' button 
+    aguardar_e_clicar_javascript        ${HOME_BTN_PRODUCTS}
 
 WEB 08: Verify user is navigated to ALL PRODUCTS page successfully
-    Wait Until Element Is Visible            ${PRODUCTS_LBL_ALL_PRODUCTS}                    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible       ${PRODUCTS_LBL_ALL_PRODUCTS}           timeout=${TEMPO_ESPERA}
     
 WEB 08: The products list is visible    
     Wait Until Element Is Visible       ${PRODUCTS_LBL_LIST_PRODUCTS}          timeout=${TEMPO_ESPERA}
     ${conteudo}    Get Text    //div[@class='features_items']
-    #Log    \n1:${conteudo}    console=${LOG_CONSOLE}
     ${qtde_conteudo}=     Get Length    ${conteudo} 
-    #Log    \n1:${qtde_conteudo}    console=${LOG_CONSOLE}
     Should Not Contain    ${conteudo}    SEARCHED PRODUCTS    msg=A string "SEARCHED PRODUCTS" foi encontrada no conteúdo, ou seja, a lista está vazia!
-    # Should Not Be String    SEARCHED PRODUCTS    msg=A lista de produto, não tem nenhum conteudo    #a ideia de verificar se contem acho melhor, manter aqui por enquanto
     
 WEB 08: Click on 'View Product' of first product
-    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_1}       timeout=${TEMPO_ESPERA}    
-    #Scroll Element Into View            ${PRODUCTS_BTN_VIEW_PRODUCT_1}  
-    
+    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_1}       timeout=${TEMPO_ESPERA} 
     ${ELEMENTO_PARA_BUSCA}       Set Variable              ${PRODUCTS_INPUT_PESQUISA}
     ${POSICAO_Y_DO_ELEMENTO}    Get Vertical Position      ${ELEMENTO_PARA_BUSCA}
     ${POSICAO_X_DO_ELEMENTO}    Get Horizontal Position    ${ELEMENTO_PARA_BUSCA}
-    Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})  
-    
-    Log    \n\nPRODUCTS_BTN_VIEW_PRODUCT_1:${PRODUCTS_BTN_VIEW_PRODUCT_1}    console=${LOG_CONSOLE}
-    
+    Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})      
+    Log    \n\nPRODUCTS_BTN_VIEW_PRODUCT_1:${PRODUCTS_BTN_VIEW_PRODUCT_1}    console=${LOG_CONSOLE}    
     ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}1${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}
     Wait Until Element Is Visible    ${PRODUCTS_LBL_NOME_PRODUTO_X}     timeout=${TEMPO_ESPERA}
-
     ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_X} 
-    #${nome_produto_original}    Set Variable    ${SPACE}CARRO${SPACE}CARRO
     Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
-
-    #${nome_produto_original}    Set Variable    a${SPACE}texto
-    # Ver se o 1º caracter for espaco, então remover, senao segue
     ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
     Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
-    
     IF    '${primeiro_character}' == '${SPACE}'
         Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
         ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
@@ -623,13 +450,9 @@ WEB 08: Click on 'View Product' of first product
         Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
     END
     Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
-
     ${nome_produto}    Replace String    ${nome_produto}    ${SPACE}${SPACE}     ${EMPTY}
-    
-    #${nome_produto}    Set Variable    ${nome_produto_original}
-    #${nome_produto}    Replace String    ${nome_produto}    ${SPACE}    ${EMPTY}
     ${metade}=    Evaluate    len('${nome_produto}')//2
-    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
+    ${primeira_metade}=   Get Substring    ${nome_produto}    0    ${metade}
     ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
     Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
     Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
@@ -637,38 +460,15 @@ WEB 08: Click on 'View Product' of first product
         ${nome_produto}   Set Variable    ${primeira_metade}
         Set Suite Variable    ${nome_produto}
         Log    \n3 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
-    ELSE
-        #Set Suite Variable   ${nome_produto_original}    
+    ELSE  
         Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
         Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-
-        #${nome_produto}   Set Variable    ${nome_produto_original}
         Set Suite Variable    ${nome_produto}
         Log    \n6.: Não precisa alterar:${nome_produto}    console=${LOG_CONSOLE}
-        
     END
-    
-
-    ## Para obter nome 1º do produto  
-    ##${nome_produto}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_X}  
-    ##${nome_produto}    Replace String    ${nome_produto}    ${SPACE}    ${EMPTY}
-    ###Set Suite Variable     ${nome_produto}   ${nome_produto}
-
-    #${tamanho_nome_produto}=    Get Length   ${nome_produto} 
-    #Log    \n1. O nome do produto:<${nome_produto}>    console=${LOG_CONSOLE}
-    #Log    \n2. Tamanho nome do produto:${tamanho_nome_produto}    console=${LOG_CONSOLE}
-    #${metade_tamanho_nome_produto}    Evaluate     ${tamanho_nome_produto}/2 
-    #Log    \n3. Metade amanho nome do produto:${metade_tamanho_nome_produto}    console=${LOG_CONSOLE}
-    #pausar
-    # ${PRODUCTS_BTN_VIEW_PRODUCT_1} //a[@href='/product_details/1'][contains(.,'View Product')]  
-    # acho que tenho de descobrir uma forma de selecionar view de produto independente da refe product_details/1 ou 2, tenho que clicar no primeiro que aparecer, além de clicar
-    # ... pegar o nome do produto para comparar com o nome da próxima tela
-
     Log    \nConseguiu achar o PRIMEIRO produto da lista!    console=${LOG_CONSOLE}     
-    Wait Until Element Is Visible            ${PRODUCTS_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}    # ${PRODUCTS_LBL_SUBSCRIPTION} = //h2[contains(.,'Subscription')]
-    #Estava dando erro ao executar web 21 com firefox Scroll Element Into View                  ${PRODUCTS_LBL_SUBSCRIPTION} 
-    # Click Element                            ${PRODUCTS_BTN_VIEW_PRODUCT_1}
-    aguardar_e_clicar_javascript               ${PRODUCTS_BTN_VIEW_PRODUCT_1}
+    Wait Until Element Is Visible    ${PRODUCTS_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
+    aguardar_e_clicar_javascript     ${PRODUCTS_BTN_VIEW_PRODUCT_1}
 
 WEB 08: User is landed to product detail page
     Wait Until Element Is Visible    ${PRODUCTS_LBL_WRITE_YOUR_REVIEW}        timeout=${TEMPO_ESPERA}
@@ -678,15 +478,12 @@ WEB 08: Verify that detail detail is visible: product name, category, price, ava
     Wait Until Element Is Visible    ${PRODUCTS_DETAILS_LBL_PRICE}        timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible    ${PRODUCTS_DETAILS_LBL_AVAILABILITY}        timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible    ${PRODUCTS_DETAILS_LBL_CONDITION}        timeout=${TEMPO_ESPERA}        
-    
     Log    \nPRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_1/2:${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_1/2}    console=${LOG_CONSOLE}
     Log    \nPRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_2/2:${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_2/2}    console=${LOG_CONSOLE}
     Log    \nPRODUCTS_DETAILS_LBL_NOME_PRODUTO_X:${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_1/2}${nome_produto}${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_2/2}    console=${LOG_CONSOLE}
     ${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_1/2}${nome_produto}${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X_2/2}
     Wait Until Element Is Visible    ${PRODUCTS_DETAILS_LBL_NOME_PRODUTO_X}        timeout=${TEMPO_ESPERA}
     Wait Until Element Is Visible    ${PRODUCTS_DETAILS_LBL_BRAND}        timeout=${TEMPO_ESPERA}    
-
-
 
 
 
@@ -701,43 +498,27 @@ WEB 09: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
 
 WEB 09: Click on 'Products' button
-    # Wait Until Element Is Visible            ${HOME_BTN_PRODUCTS}                    timeout=${TEMPO_ESPERA}  
-    # Click Element                            ${HOME_BTN_PRODUCTS}
-    aguardar_e_clicar_javascript               ${HOME_BTN_PRODUCTS}
+    aguardar_e_clicar_javascript        ${HOME_BTN_PRODUCTS}
 
 WEB 09: Verify user is navigated to ALL PRODUCTS page successfully
-    Wait Until Element Is Visible            ${PRODUCTS_LBL_ALL_PRODUCTS}                    timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible       ${PRODUCTS_LBL_ALL_PRODUCTS}      timeout=${TEMPO_ESPERA}
 
 WEB 09: Enter product name in search input and click search button
     [Arguments]    ${NOME_PRODUTO_PESQUISAR}    
     Set Suite Variable    ${NOME_PRODUTO_PESQUISAR} 
-    Wait Until Element Is Visible        ${PRODUCTS_INPUT_PESQUISA}             timeout=${TEMPO_ESPERA}
-    Input Text                            ${PRODUCTS_INPUT_PESQUISA}             ${NOME_PRODUTO_PESQUISAR} 
-    # Wait Until Element Is Visible        ${PRODUCTS_BTN_PESQUISA}             timeout=${TEMPO_ESPERA}
-    # Click Element                        ${PRODUCTS_BTN_PESQUISA}
-    aguardar_e_clicar_javascript               ${PRODUCTS_BTN_PESQUISA}
+    Wait Until Element Is Visible       ${PRODUCTS_INPUT_PESQUISA}        timeout=${TEMPO_ESPERA}
+    Input Text                          ${PRODUCTS_INPUT_PESQUISA}        ${NOME_PRODUTO_PESQUISAR} 
+    aguardar_e_clicar_javascript        ${PRODUCTS_BTN_PESQUISA}
 
 WEB 09: Verify 'SEARCHED PRODUCTS' is visible
-    # pausar    Possibilita alterar nome do produto
-    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_1}       timeout=${TEMPO_ESPERA}    
-    Scroll Element Into View            ${PRODUCTS_BTN_VIEW_PRODUCT_1}    
-    #pausar    # possibilita pesquisar um produto diferente para testar
-    #Mouse Over    //img[@src='/get_product_picture/1']
+    Wait Until Element Is Visible       ${PRODUCTS_BTN_VIEW_PRODUCT_1}    timeout=${TEMPO_ESPERA}    
+    Scroll Element Into View            ${PRODUCTS_BTN_VIEW_PRODUCT_1}  
     ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}1${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}
     Wait Until Element Is Visible    ${PRODUCTS_LBL_NOME_PRODUTO_X}     timeout=${TEMPO_ESPERA}
-
-
     ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_X} 
-    #${nome_produto_original}    Set Variable    ${SPACE}CARRO${SPACE}CARRO
     Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
-
-
-
-    #${nome_produto_original}    Set Variable    a${SPACE}texto
-    # Ver se o 1º caracter for espaco, então remover, senao segue
     ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
     Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
-    
     IF    '${primeiro_character}' == '${SPACE}'
         Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
         ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
@@ -749,14 +530,8 @@ WEB 09: Verify 'SEARCHED PRODUCTS' is visible
     END
     Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
     ${nome_produto}    Replace String Using Regexp    ${nome_produto}    '    ${EMPTY}
-    # pausar    Ver nome do produto se duplica e com apostrofo
-
-    #${nome_produto}    Replace String    ${nome_produto}    ${SPACE}${SPACE}     ${EMPTY}
-    
-    #${nome_produto}    Set Variable    ${nome_produto_original}
-    #${nome_produto}    Replace String    ${nome_produto}    ${SPACE}    ${EMPTY}
     ${metade}=    Evaluate    len('${nome_produto}')//2
-    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
+    ${primeira_metade}=   Get Substring    ${nome_produto}    0    ${metade}
     ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
     Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
     Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
@@ -764,30 +539,19 @@ WEB 09: Verify 'SEARCHED PRODUCTS' is visible
         ${nome_produto}   Set Variable    ${primeira_metade}
         Set Suite Variable    ${nome_produto}
         Log    \n3 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
-    ELSE
-        #Set Suite Variable   ${nome_produto_original}    
+    ELSE 
         Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
         Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-
-        #${nome_produto}   Set Variable    ${nome_produto_original}
         Set Suite Variable    ${nome_produto}
         Log    \n6.: Não precisa alterar:${nome_produto}    console=${LOG_CONSOLE}
-        
     END
 
-
 WEB 09: Verify all the products related to search are visible
-    Log    \nNome_produto_exibido_na_tela<${nome_produto}>                        console=${LOG_CONSOLE}
+    Log    \nNome_produto_exibido_na_tela<${nome_produto}>             console=${LOG_CONSOLE}
     Log    \NOME_PRODUTO_INPUT_PESQUISAR<${NOME_PRODUTO_PESQUISAR}>    console=${LOG_CONSOLE}
-    ${nome_produto}    Replace String    ${nome_produto}    ${SPACE}     ${EMPTY}
-    ${NOME_PRODUTO_PESQUISAR}    Replace String    ${nome_produto}    ${SPACE}     ${EMPTY}
+    ${nome_produto}    Replace String    ${nome_produto}    ${SPACE}   ${EMPTY}
+    ${NOME_PRODUTO_PESQUISAR}    Replace String    ${nome_produto}     ${SPACE}     ${EMPTY}
     Should Be Equal As Strings    ${nome_produto}    ${NOME_PRODUTO_PESQUISAR}
-
-
-
-    
-
-
 
 
 
@@ -808,23 +572,18 @@ WEB 10: Scroll down to footer
     ${POSICAO_X_DO_ELEMENTO}    Get Horizontal Position    ${ELEMENTO_PARA_BUSCA}
     Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})  
 
-    # Scroll Element Into View                  ${HOME_LBL_SUBSCRIPTION} 
-
 WEB 10: Verify text 'SUBSCRIPTION'
-    Wait Until Element Is Visible            ${HOME_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA} 
+    Wait Until Element Is Visible             ${HOME_LBL_SUBSCRIPTION}              timeout=${TEMPO_ESPERA} 
+
 WEB 10: Enter email address in input and click arrow button
     Obter dados 
-    Wait Until Element Is Visible            ${HOME_INPUT_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
-    Input Text    ${HOME_INPUT_SUBSCRIPTION}    ${EMAIL_ESPERADO}
-    # Wait Until Element Is Visible            ${HOME_BTN_SUBMIT_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
-    # Click Element    ${HOME_BTN_SUBMIT_SUBSCRIPTION}
-    aguardar_e_clicar_javascript               ${HOME_BTN_SUBMIT_SUBSCRIPTION}
+    Wait Until Element Is Visible             ${HOME_INPUT_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
+    Input Text    ${HOME_INPUT_SUBSCRIPTION}  ${EMAIL_ESPERADO}
+    aguardar_e_clicar_javascript              ${HOME_BTN_SUBMIT_SUBSCRIPTION}
     
 WEB 10: Verify success message 'You have been successfully subscribed!' is visible
     Wait Until Element Is Visible        ${HOME_LSL_MSG_SUBMIT_SUBSCRIPTION_SUCESS}    timeout=${TEMPO_ESPERA}   
     Log    \nOK!    console=${LOG_CONSOLE}
-
-
 
 WEB 11: Launch browser
     WEB 01: Launch browser
@@ -837,25 +596,21 @@ WEB 11: Verify that home page is visible successfully
     WEB 01: Verify that home page is visible successfully
 
 WEB 11: Click 'Cart' button
-    # Wait Until Element Is Visible              ${HOME_BTN_CART}                timeout=${TEMPO_ESPERA} 
-    # Click Element                              ${HOME_BTN_CART}
     aguardar_e_clicar_javascript               ${HOME_BTN_CART}
 
 WEB 11: Scroll down to footer
-    Wait Until Element Is Visible             ${CART_LBL_TELA_CART}                timeout=${TEMPO_ESPERA}    #mexido qdo web 14
-    Wait Until Element Is Visible             ${CART_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}    
-    Scroll Element Into View                  ${CART_LBL_SUBSCRIPTION} 
+    Wait Until Element Is Visible              ${CART_LBL_TELA_CART}                timeout=${TEMPO_ESPERA}   
+    Wait Until Element Is Visible              ${CART_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}    
+    Scroll Element Into View                   ${CART_LBL_SUBSCRIPTION} 
 
 WEB 11: Verify text 'SUBSCRIPTION'
-    Wait Until Element Is Visible             ${CART_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}  
+    Wait Until Element Is Visible              ${CART_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}  
 
 WEB 11: Enter email address in input and click arrow button
     Obter dados 
-    Wait Until Element Is Visible            ${HOME_INPUT_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
-    Input Text    ${HOME_INPUT_SUBSCRIPTION}    ${EMAIL_ESPERADO}
-    # Wait Until Element Is Visible            ${HOME_BTN_SUBMIT_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
-    # Click Element    ${HOME_BTN_SUBMIT_SUBSCRIPTION}
-    aguardar_e_clicar_javascript               ${HOME_BTN_SUBMIT_SUBSCRIPTION}
+    Wait Until Element Is Visible             ${HOME_INPUT_SUBSCRIPTION}            timeout=${TEMPO_ESPERA}   
+    Input Text    ${HOME_INPUT_SUBSCRIPTION}  ${EMAIL_ESPERADO}
+    aguardar_e_clicar_javascript              ${HOME_BTN_SUBMIT_SUBSCRIPTION}
 
 WEB 11: Verify success message 'You have been successfully subscribed!' is visible
     Wait Until Element Is Visible        ${HOME_LSL_MSG_SUBMIT_SUBSCRIPTION_SUCESS}    timeout=${TEMPO_ESPERA}   
@@ -880,281 +635,140 @@ WEB 12: Hover over first product and click 'Add to cart'
     [Arguments]    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_1}
     Set Suite Variable    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_1}
     Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 1 
-    #Trecho retirado para experimento dando prob web 12 firefox   
-    Wait Until Element Is Visible            ${PRODUCTS_LBL_SUBSCRIPTION}                    timeout=${TEMPO_ESPERA}
-    # Scroll Element Into View                 ${PRODUCTS_LBL_SUBSCRIPTION}
-    #Dava erro web 20  Wait Until Element Is Visible            ${PRODUCTS_LBL_ALL_PRODUCTS}                    timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_1}                  timeout=${TEMPO_ESPERA}    
-    # Scroll Element Into View                 ${PRODUCTS_BTN_VIEW_PRODUCT_1}    
-    #pausar    # possibilita pesquisar um produto diferente para testar
-
-Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 1
-    ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}1${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}
-    Wait Until Element Is Visible         ${PRODUCTS_LBL_NOME_PRODUTO_X}             timeout=${TEMPO_ESPERA} 
-
-    # ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_LBL_NOME_PRODUTO_X}
-    # ${POSICAO_X_DO_ELEMENTO}=    Get Horizontal Position    ${PRODUCTS_LBL_NOME_PRODUTO_X}
-    # Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})
-
-    Sleep    0.7
-    Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_X}             
-    Sleep    0.5
-
-    # ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}
-    # ${POSICAO_X_DO_ELEMENTO}=    Get Horizontal Position    ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}
-    # Execute JavaScript    window.scrollTo(${POSICAO_X_DO_ELEMENTO}, ${POSICAO_Y_DO_ELEMENTO})
-    
-    # a linha abaixo está dando erro no web 20
-    Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod    
-    
-    # inicio para pegar o nome do produto que será add no carrinho
-    ${PREÇO_PRODUTO_1_TELA}=    Get Text    ${PRODUCTS_LBL_PRECO_PRODUTO_1_MO} 
-    Set Suite Variable                ${PREÇO_PRODUTO_1_TELA}
-    Log    \nPREÇO_PRODUTO_1:${PREÇO_PRODUTO_1_TELA}    console=${LOG_CONSOLE}
-    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_1_MO} 
-    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
-    # Ver se o 1º caracter for espaco, então remover, senao segue
-    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
-    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}    
-    IF    '${primeiro_character}' == '${SPACE}'
-        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
-        Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}    Set Variable    ${nome_produto_original}
-        Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    END
-    Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
-    ${metade}=    Evaluate    len('${nome_produto}')//2
-    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
-    ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
-    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
-    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
-    IF    '${primeira_metade}' == '${segunda_metade}'
-        ${nome_produto}   Set Variable    ${primeira_metade}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    ELSE   
-        Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
-        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    END
-    ${nome_produto_1}    Set Variable   ${nome_produto}
-    Set Suite Variable    ${nome_produto_1}
-    #Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_X}             
-    #Sleep    0.4
-    # Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
-    # Click Element                         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}
-    aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}
-    Wait Until Element Is Visible         ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
+    Wait Until Element Is Visible             ${PRODUCTS_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible             ${PRODUCTS_BTN_VIEW_PRODUCT_1}           timeout=${TEMPO_ESPERA}    
 
 WEB 12: Click 'Continue Shopping' button
     FOR    ${counter}    IN RANGE    1    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_1}    
-        # Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}    timeout=${TEMPO_ESPERA} 
-        # Click Element                        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
         aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
         Log    \n*counter<${counter}>    console=${LOG_CONSOLE}
         Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 1
     END
-    # Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}    timeout=${TEMPO_ESPERA} 
-    # Click Element                        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
     aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
 
 WEB 12: Hover over second product and click 'Add to cart'
     [Arguments]    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}
-    #${QTDE_LIMITE_SELECIONAR_PRODUTO_2}=    Evaluate    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}-1
-    #Set Suite Variable    ${QTDE_LIMITE_SELECIONAR_PRODUTO_2}
     Set Suite Variable    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}
-    FOR    ${counter}    IN RANGE    0    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}    #${QTDE_LIMITE_SELECIONAR_PRODUTO_2}
+    FOR    ${counter}    IN RANGE    0    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}    
         Log    \n*counter<${counter}>    console=${LOG_CONSOLE}
         Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 2
-        # Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}    timeout=${TEMPO_ESPERA} 
-        # Click Element                        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
         aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
     END    
     Wait Until Element Is Visible    ${PRODUCTS_LBL_SUBSCRIPTION}
-    #Dando erro web 12 Firefox Scroll Element Into View    ${PRODUCTS_LBL_SUBSCRIPTION}
     Wait Until Element Is Visible            ${PRODUCTS_LBL_ALL_PRODUCTS}                    timeout=${TEMPO_ESPERA}
-    #pausar    # possibilita pesquisar um produto diferente para testar
-
-Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 2
-    Wait Until Element Is Visible         ${PRODUCTS_LBL_NOME_PRODUTO_2}             timeout=${TEMPO_ESPERA} 
-    Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
-    Sleep    0.5
-    Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
-    # inicio para pegar o nome do produto que será add no carrinho
-    ${PREÇO_PRODUTO_2_TELA}=    Get Text    ${PRODUCTS_LBL_PRECO_PRODUTO_2_MO} 
-    Set Suite Variable                ${PREÇO_PRODUTO_2_TELA}
-    Log    \nPREÇO_PRODUTO_2:${PREÇO_PRODUTO_2_TELA}    console=${LOG_CONSOLE}
-    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_2_MO} 
-    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
-    # Ver se o 1º caracter for espaco, então remover, senao segue
-    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
-    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
-    IF    '${primeiro_character}' == '${SPACE}'
-        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
-        Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}    Set Variable    ${nome_produto_original}
-        Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    END
-    Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
-    ${metade}=    Evaluate    len('${nome_produto}')//2
-    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
-    ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
-    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
-    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
-    IF    '${primeira_metade}' == '${segunda_metade}'
-        ${nome_produto}   Set Variable    ${primeira_metade}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
-        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    END
-    ${nome_produto_2}    Set Variable   ${nome_produto}
-    Set Suite Variable    ${nome_produto_2}
-    #Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_X}             
-    #Sleep    0.4
-    # Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
-    # Click Element                         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
-    aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
-    Wait Until Element Is Visible         ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
 
 
-<<< ORIGINAL WEB 12: Hover over second product and click 'Add to cart'    #pode retirar depois
-    Wait Until Element Is Visible         ${PRODUCTS_LBL_NOME_PRODUTO_2}                    timeout=${TEMPO_ESPERA} 
-    Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
-    Sleep    0.5
-    Wait Until Element Is Visible        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
-    Wait Until Element Is Visible        ${PRODUCTS_LBL_NOME_PRODUTO_2}
 
-    ${PREÇO_PRODUTO_2_TELA}=    Get Text    ${PRODUCTS_LBL_PRECO_PRODUTO_2_MO} 
-    Set Suite Variable                ${PREÇO_PRODUTO_2_TELA}
-    Log    \nPREÇO_PRODUTO_2:${PREÇO_PRODUTO_2_TELA}    console=${LOG_CONSOLE}
 
-    # inicio para pegar o nome do produto que será add no carrinho 
-    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_2_MO}
-    #${nome_produto_original}    Set Variable    ${SPACE}CARRO${SPACE}CARRO
-    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
+# <<< ORIGINAL WEB 12: Hover over second product and click 'Add to cart'    #pode retirar depois
+#     Wait Until Element Is Visible         ${PRODUCTS_LBL_NOME_PRODUTO_2}                    timeout=${TEMPO_ESPERA} 
+#     Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
+#     Sleep    0.5
+#     Wait Until Element Is Visible        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
+#     Wait Until Element Is Visible        ${PRODUCTS_LBL_NOME_PRODUTO_2}
 
-    #${nome_produto_original}    Set Variable    a${SPACE}texto
-    # Ver se o 1º caracter for espaco, então remover, senao segue
-    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
-    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
+#     ${PREÇO_PRODUTO_2_TELA}=    Get Text    ${PRODUCTS_LBL_PRECO_PRODUTO_2_MO} 
+#     Set Suite Variable                ${PREÇO_PRODUTO_2_TELA}
+#     Log    \nPREÇO_PRODUTO_2:${PREÇO_PRODUTO_2_TELA}    console=${LOG_CONSOLE}
+
+#     # inicio para pegar o nome do produto que será add no carrinho 
+#     ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_2_MO}
+#     #${nome_produto_original}    Set Variable    ${SPACE}CARRO${SPACE}CARRO
+#     Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
+
+#     #${nome_produto_original}    Set Variable    a${SPACE}texto
+#     # Ver se o 1º caracter for espaco, então remover, senao segue
+#     ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
+#     Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
     
-    IF    '${primeiro_character}' == '${SPACE}'
-        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
-        Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${nome_produto}    Set Variable    ${nome_produto_original}
-        Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
-    END
+#     IF    '${primeiro_character}' == '${SPACE}'
+#         Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
+#         ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
+#         Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+#     ELSE
+#         Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
+#         ${nome_produto}    Set Variable    ${nome_produto_original}
+#         Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+#     END
 
-    Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
-    ${metade}=    Evaluate    len('${nome_produto}')//2
-    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
-    ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
-    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
-    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
-    IF    '${primeira_metade}' == '${segunda_metade}'
-        ${nome_produto}   Set Variable    ${primeira_metade}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    ELSE
-        #Set Suite Variable   ${nome_produto_original}    
-        Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
-        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-        #${nome_produto}   Set Variable    ${nome_produto_original}
-        Set Suite Variable    ${nome_produto}
-        Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
-    END
+#     Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
+#     ${metade}=    Evaluate    len('${nome_produto}')//2
+#     ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
+#     ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
+#     Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
+#     Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
+#     IF    '${primeira_metade}' == '${segunda_metade}'
+#         ${nome_produto}   Set Variable    ${primeira_metade}
+#         Set Suite Variable    ${nome_produto}
+#         Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+#     ELSE
+#         #Set Suite Variable   ${nome_produto_original}    
+#         Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
+#         Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
+#         #${nome_produto}   Set Variable    ${nome_produto_original}
+#         Set Suite Variable    ${nome_produto}
+#         Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+#     END
 
-    ${nome_produto_2}    Set Variable   ${nome_produto}
-    Set Suite Variable    ${nome_produto_2}
-    #Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
-    #Sleep    0.4
-    #Wait Until Element Is Visible        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
-    #Wait Until Element Is Visible        ${PRODUCTS_LBL_NOME_PRODUTO_2}
-    # Click Element                        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
-    aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
-    Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
-    # Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}    timeout=${TEMPO_ESPERA} 
-    # Click Element    ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
-    aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
+#     ${nome_produto_2}    Set Variable   ${nome_produto}
+#     Set Suite Variable    ${nome_produto_2}
+#     #Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
+#     #Sleep    0.4
+#     #Wait Until Element Is Visible        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
+#     #Wait Until Element Is Visible        ${PRODUCTS_LBL_NOME_PRODUTO_2}
+#     # Click Element                        ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
+#     aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
+#     Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
+#     # Wait Until Element Is Visible        ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}    timeout=${TEMPO_ESPERA} 
+#     # Click Element    ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
+#     aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
 
 WEB 12: Click 'View Cart' button
-    # Wait Until Element Is Visible        ${HOME_BTN_CART}     timeout=${TEMPO_ESPERA}
-    # Click Element                        ${HOME_BTN_CART} 
     aguardar_e_clicar_javascript               ${HOME_BTN_CART}
 
 WEB 12: Verify both products are added to Cart
-    Wait Until Element Is Visible             ${CART_LBL_TELA_CART}                timeout=${TEMPO_ESPERA} 
+    Wait Until Element Is Visible             ${CART_LBL_TELA_CART}             timeout=${TEMPO_ESPERA} 
     Log    \n1:${nome_produto_1}    console=${LOG_CONSOLE}
     Log    \n2:${nome_produto_2}    console=${LOG_CONSOLE}
-    Wait Until Element Is Visible                ${CART_BTN_PROCEED_TO_CHECKOUT}   timeout=${TEMPO_ESPERA}    # btn Processar para checkout
+    Wait Until Element Is Visible             ${CART_BTN_PROCEED_TO_CHECKOUT}   timeout=${TEMPO_ESPERA}   
     Page Should Contain           ${nome_produto_1} 
     Page Should Contain           ${nome_produto_2}
      
-    
 
 WEB 12: Verify their prices, quantity and total price
-    #${Nome_produto_1}=    Get Text    //tr[@id='product-1']/td[@class='cart_description']                  
-    #Log    \nNome_produto_1:<${Nome_produto_1}>    console=${LOG_CONSOLE}
-
     ${Valor_produto_1}=                Get Text    ${CART_LBL_VALOR_PRODUTO_1}
     ${Valor_produto_1_LIMPO}           Limpa Preco    ${Valor_produto_1}
     ${PREÇO_PRODUTO_1_TELA_LIMPO}      Limpa Preco    ${PREÇO_PRODUTO_1_TELA} 
-
     Should Be Equal As Strings         ${Valor_produto_1_LIMPO}    ${PREÇO_PRODUTO_1_TELA_LIMPO}
     Log    \nValor_produto_1:<${Valor_produto_1_LIMPO},${PREÇO_PRODUTO_1_TELA_LIMPO}>    console=${LOG_CONSOLE}
-
     ${Qtde_produto_1}=    Get Text     ${CART_LBL_QTDE_PRODUTO_1}
     Should Be Equal As Strings    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_1}    ${Qtde_produto_1}
     Log    \nQtde_produto_1:<${Qtde_produto_1}>    console=${LOG_CONSOLE}
-
-    ${Valor_Total_produto_1}=          Get Text    ${CART_LBL_VL_TOTAL_PRODUTO_1}
+    ${Valor_Total_produto_1}=          Get Text       ${CART_LBL_VL_TOTAL_PRODUTO_1}
     ${Valor_Total_produto_1_LIMPO}     Limpa Preco    ${Valor_Total_produto_1}
     ${PREÇO_PRODUTO_1_TELA}    Limpa Preco    ${PREÇO_PRODUTO_1_TELA}
     ${VALOR_TOTAL_PRODUTO_1_TELA_LIMPO}=    Evaluate    ${Qtde_produto_1}*${PREÇO_PRODUTO_1_TELA}
-
     Should Be Equal As Strings         ${Valor_Total_produto_1_LIMPO}     ${VALOR_TOTAL_PRODUTO_1_TELA_LIMPO}
     Log    \n>>>>>>>>>Valor_Total_produto_1:<${Valor_Total_produto_1}>    console=${LOG_CONSOLE}
     Log    \n>>>>>>>>>Valor_Total_produto_1:<${Valor_Total_produto_1_LIMPO}>    console=${LOG_CONSOLE}
     Log    \n>>>>>>>>>Valor_Total_produto_1:<${VALOR_TOTAL_PRODUTO_1_TELA_LIMPO}>    console=${LOG_CONSOLE}
-
     ${Valor_produto_2}=    Get Text    ${CART_LBL_VALOR_PRODUTO_2}
     ${Valor_produto_2_LIMPO}        Limpa Preco    ${Valor_produto_2}
     ${PREÇO_PRODUTO_2_TELA_LIMPO}   Limpa Preco    ${PREÇO_PRODUTO_2_TELA} 
-
     Should Be Equal As Strings         ${Valor_produto_2_LIMPO}    ${PREÇO_PRODUTO_2_TELA_LIMPO}
     Log    \nValor_produto_2:<${Valor_produto_2_LIMPO},${PREÇO_PRODUTO_2_TELA_LIMPO}>    console=${LOG_CONSOLE}
-
     ${Qtde_produto_2}=    Get Text     ${CART_LBL_QTDE_PRODUTO_2}
     Should Be Equal As Strings    ${QTDE_QUE_DEVE_SELECIONAR_PRODUTO_2}    ${Qtde_produto_2}
     Log    \nQtde_produto_2:<${Qtde_produto_2}>    console=${LOG_CONSOLE}
-
     ${Valor_Total_produto_2}=    Get Text    ${CART_LBL_VL_TOTAL_PRODUTO_2}
     ${Valor_Total_produto_2_LIMPO}     Limpa Preco    ${Valor_Total_produto_2}
     ${PREÇO_PRODUTO_2_TELA}    Limpa Preco    ${PREÇO_PRODUTO_2_TELA}
     ${VALOR_TOTAL_PRODUTO_2_TELA_LIMPO}=    Evaluate    ${Qtde_produto_2}*${PREÇO_PRODUTO_2_TELA}
-
     Should Be Equal As Strings         ${Valor_Total_produto_2_LIMPO}     ${VALOR_TOTAL_PRODUTO_2_TELA_LIMPO}
     Log    \n>>>>>>>>>Valor_Total_produto_2:<${Valor_Total_produto_2}>    console=${LOG_CONSOLE}
     Log    \n>>>>>>>>>Valor_Total_produto_2:<${Valor_Total_produto_2_LIMPO}>    console=${LOG_CONSOLE}
     Log    \n>>>>>>>>>Valor_Total_produto_2:<${VALOR_TOTAL_PRODUTO_2_TELA_LIMPO}>    console=${LOG_CONSOLE}
     
-
-
-
 
 
 WEB 13: Launch browser
@@ -1171,71 +785,6 @@ WEB 13: Click 'View Product' for any product on home page
     [Arguments]    ${INDICE_DO_PRODUTO}   
     Selecionar o produto X   ${INDICE_DO_PRODUTO}   
     Set Suite Variable    ${INDICE_DO_PRODUTO}
-
-Selecionar o produto X    #em uso no web13, web14, web16, web17, web20
-    [Arguments]    ${INDICE_DO_PRODUTO}   
-    ${PRODUCTS_BTN_VIEW_PRODUCT_X}    Set Variable    ${PRODUCTS_BTN_VIEW_PRODUCT_X_web13_1/2}${INDICE_DO_PRODUTO}${PRODUCTS_BTN_VIEW_PRODUCT_X_web13_2/2}
-    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA}    
-    
-    #FIREFOX
-    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_BTN_VIEW_PRODUCT_X}
-    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-    
-    # Log    \nPOSICAO_Y_DO_ELEMENTO:${POSICAO_Y_DO_ELEMENTO}    console=${LOG_CONSOLE}
-    Scroll Element Into View            ${PRODUCTS_BTN_VIEW_PRODUCT_X}    
-    #pausar    # possibilita pesquisar um produto diferente para testar
-    ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}${INDICE_DO_PRODUTO}${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}    
-
-    Wait Until Element Is Visible    ${PRODUCTS_LBL_NOME_PRODUTO_X}     timeout=${TEMPO_ESPERA}
-    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_X} 
-    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
-
-    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
-    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
-    IF    '${primeiro_character}' == '${SPACE}'
-        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${NOME_PRODUTO_TELA_PROD}=    Evaluate    "${nome_produto_original}"[1:]
-        Log    \nVDD vai pra frente assim:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
-        ${NOME_PRODUTO_TELA_PROD}    Set Variable    ${nome_produto_original}
-        Log    \nNVDD vai pra frente assim:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-    END
-    Log    \n00.:${NOME_PRODUTO_TELA_PROD}     console=${LOG_CONSOLE}
-    ${metade}=    Evaluate    len('${NOME_PRODUTO_TELA_PROD}')//2
-    ${primeira_metade}=    Get Substring    ${NOME_PRODUTO_TELA_PROD}    0    ${metade}
-    ${segunda_metade}=    Get Substring    ${NOME_PRODUTO_TELA_PROD}    ${metade}
-    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
-    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
-    IF    '${primeira_metade}' == '${segunda_metade}'
-        ${NOME_PRODUTO_TELA_PROD}   Set Variable    ${primeira_metade}
-        Set Suite Variable    ${NOME_PRODUTO_TELA_PROD}
-        Log    \n3 nome_produto:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-    ELSE
-        Log    \n4 NOME_PRODUTO_TELA_PROD:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
-        Set Suite Variable    ${NOME_PRODUTO_TELA_PROD}
-        Log    \n6.: Não precisa alterar:${NOME_PRODUTO_TELA_PROD}    console=${LOG_CONSOLE}
-        
-    END
-    Set Suite Variable   ${NOME_PRODUTO_TELA_PROD}
-    Log    \n7.:Nome FINAL do produto:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-    #Log    \nConseguiu achar o produto X ${INDICE_DO_PRODUTO} da lista!    console=${LOG_CONSOLE}     
-    Wait Until Element Is Visible            ${PRODUCTS_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
-    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_LBL_SUBSCRIPTION}
-    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
-    Scroll Element Into View                  ${PRODUCTS_LBL_SUBSCRIPTION} 
-    Log    \nPRODUCTS_BTN_VIEW_PRODUCT_X:${PRODUCTS_BTN_VIEW_PRODUCT_X}    console=${LOG_CONSOLE}     
-    #pausar    1 #dando problema de travar aqui    travando
-    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA}    
-    Wait Until Element Is Enabled            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA} 
-    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_BTN_VIEW_PRODUCT_X}
-    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO}) 
-    Mouse Over                               ${PRODUCTS_BTN_VIEW_PRODUCT_X}
-    ##Click Element                            ${PRODUCTS_BTN_VIEW_PRODUCT_X}    ORIGINAL COM ERRO AS VEZES
-    # Execute JavaScript    document.evaluate("${PRODUCTS_BTN_VIEW_PRODUCT_X}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
-    aguardar_e_clicar_javascript               ${PRODUCTS_BTN_VIEW_PRODUCT_X}
-    ##Log    \nConseguiu achar o produto X ${INDICE_DO_PRODUTO} da lista!    console=${LOG_CONSOLE}     
 
 WEB 13: Verify product detail is opened  
     #Obtem detalhe do produto selecionado        ${NOME_PRODUTO} 
@@ -1338,62 +887,39 @@ WEB 13: Increase quantity to
     Input Text    ${PRODUCTS_DETAILS_LBL_QTDE}     ${QTDE_INSERIR_PRODUTO}
     ${PRODUCTS_DETAILS_LBL_QTDE_INSERIDO}    Get value    ${PRODUCTS_DETAILS_LBL_QTDE}
     Set Suite Variable    ${PRODUCTS_DETAILS_LBL_QTDE_INSERIDO}
-
-    #Pegando Nome
     Log    \n1. NOME_TELA_DETALHE_PRODUTO:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
-    
-    #Pegando Categoria    //p[contains(.,'Category: Women > Dress')]
     Log    \n2. CATEGORIA_TELA_DETALHE_PRODUTO:<${CATEGORIA_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando avaliacao    //img[@src='/static/images/product-details/rating.png']
     Log    \n3. AVALIACAO_TELA_DETALHE_PRODUTO:<${DISPONIBILIDADE_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando preço
     Log    \n4. PRECO_TELA_DETALHE_PRODUTO:<${PRECO_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando qte    NÃO ESTÁ PEGANDO
     Log    \n5. QTDE_TELA_DETALHE_PRODUTO:<${QTDE_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando Availability    NÃO ESTÁ PEGANDO
     Log    \n6. DISPONIBILIDADE_TELA_DETALHE_PRODUTO:<${DISPONIBILIDADE_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando Condition    //p[contains(.,'Condition: New')]
     Log    \n7. CONDICAO_TELA_DETALHE_PRODUTO:<${CONDICAO_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
-    
-    #Pegando Marca     //p[contains(.,'Brand: Madame')]
     Log    \n8. MARCA_TELA_DETALHE_PRODUTO:<${MARCA_TELA_DETALHE_PRODUTO}>    console=${LOG_CONSOLE}
     
-    
 WEB 13: Click 'Add to cart' button
-    #pausar    ( add mais qtde e/ou escolher outro produto )
-    # Wait Until Element Is Visible    ${PRODUCTS_DETAILS_BTN_ADD_CART}       timeout=${TEMPO_ESPERA}
-    # Click Element                    ${PRODUCTS_DETAILS_BTN_ADD_CART}
     aguardar_e_clicar_javascript               ${PRODUCTS_DETAILS_BTN_ADD_CART}
     
     Wait Until Element Is Visible    ${PRODUCTS_MSG_ADD_CART_ADDED}        timeout=${TEMPO_ESPERA}
-    # Wait Until Element Is Visible    ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}        timeout=${TEMPO_ESPERA}
-    # Click Element                    ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
     aguardar_e_clicar_javascript               ${PRODUCTS_MSG_ADD_CART_CONTINUE_SHOPPING}
 
 WEB 13: Click 'View Cart' button
     WEB 11: Click 'Cart' button
 
 WEB 13: Verify that product is displayed in cart page with exact quantity
-    Wait Until Element Is Visible    ${CART_LBL_TELA_CART}                timeout=${TEMPO_ESPERA} 
-    Wait Until Element Is Visible    ${CART_LBL_SUBSCRIPTION}                 timeout=${TEMPO_ESPERA}    
-    #pausar   ver nome
-    Wait Until Element Is Visible    ${CART_LBL_NOME_PRODUTO_X}                   timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${CART_LBL_VALOR_PRODUTO_X}                  timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${CART_LBL_QTDE_PRODUTO_X}                   timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${CART_LBL_VL_TOTAL_PRODUTO_X}               timeout=${TEMPO_ESPERA}
-    Wait Until Element Is Visible    ${CART_BTN_EXCLUIR_PRODUTO_X}                 timeout=${TEMPO_ESPERA}    
+    Wait Until Element Is Visible    ${CART_LBL_TELA_CART}               timeout=${TEMPO_ESPERA} 
+    Wait Until Element Is Visible    ${CART_LBL_SUBSCRIPTION}            timeout=${TEMPO_ESPERA}    
+    Wait Until Element Is Visible    ${CART_LBL_NOME_PRODUTO_X}          timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${CART_LBL_VALOR_PRODUTO_X}         timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${CART_LBL_QTDE_PRODUTO_X}          timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${CART_LBL_VL_TOTAL_PRODUTO_X}      timeout=${TEMPO_ESPERA}
+    Wait Until Element Is Visible    ${CART_BTN_EXCLUIR_PRODUTO_X}       timeout=${TEMPO_ESPERA}    
     ${NOME_PRODUTO_TELA_CART}    Get text    ${CART_LBL_NOME_PRODUTO_X} 
     ${QTDE_PRODUTO_TELA_CART}    Get text    ${CART_LBL_QTDE_PRODUTO_X}
-    ${VALOR_PRODUTO_TELA_CART}    Get text    ${CART_LBL_VALOR_PRODUTO_X}
+    ${VALOR_PRODUTO_TELA_CART}   Get text    ${CART_LBL_VALOR_PRODUTO_X}
     ${VALOR_TOTAL_PRODUTO_TELA_CART}    Get text    ${CART_LBL_VL_TOTAL_PRODUTO_X}
-    Log    \n9. NOME_PRODUTO_TELA_CART:<${NOME_PRODUTO_TELA_CART}>    console=${LOG_CONSOLE}
+    Log    \n9. NOME_PRODUTO_TELA_CART:<${NOME_PRODUTO_TELA_CART}>     console=${LOG_CONSOLE}
     Log    \n10. QTDE_PRODUTO_TELA_CART:<${QTDE_PRODUTO_TELA_CART}>    console=${LOG_CONSOLE}
-    Log    \n11. VALOR_PRODUTO_TELA_CART:<${VALOR_PRODUTO_TELA_CART}>    console=${LOG_CONSOLE}
+    Log    \n11. VALOR_PRODUTO_TELA_CART:<${VALOR_PRODUTO_TELA_CART}>  console=${LOG_CONSOLE}
     Log    \n12. VALOR_TOTAL_PRODUTO_TELA_CART:<${VALOR_TOTAL_PRODUTO_TELA_CART}>    console=${LOG_CONSOLE}
     Log    \n13 NOME_PRODUTO_TELA_PROD:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
     ${NOME_PRODUTO_TELA_PROD}    Retirar todos espacos    ${NOME_PRODUTO_TELA_PROD}
@@ -1401,19 +927,17 @@ WEB 13: Verify that product is displayed in cart page with exact quantity
     Log    \n14 NOME_PRODUTO_TELA_CART_RETIRADO_ESPACOS:<${NOME_PRODUTO_TELA_CART_RETIRADO_ESPACOS}>    console=${LOG_CONSOLE}
     Should Be Equal As Strings    ${NOME_PRODUTO_TELA_PROD}    ${NOME_PRODUTO_TELA_CART_RETIRADO_ESPACOS}
     Log    \n NOME IGUAIS OK    console=${LOG_CONSOLE}
-
     Should Be Equal As Strings      ${PRECO_TELA_DETALHE_PRODUTO}   ${VALOR_PRODUTO_TELA_CART}
     Log    \n PREÇO IGUAIS OK    console=${LOG_CONSOLE}
-
     Should Be Equal As Strings    ${QTDE_INSERIR_PRODUTO}    ${QTDE_PRODUTO_TELA_CART}
     Log    \n QTDE IGUAIS OK    console=${LOG_CONSOLE}
-
     ${PRECO_TELA_DETALHE_PRODUTO}    Limpa Preco    ${PRECO_TELA_DETALHE_PRODUTO}
     ${VALOR_TOTAL_PRODUTO_TELA_CART}    Limpa Preco    ${VALOR_TOTAL_PRODUTO_TELA_CART}
     Log    \n.PRECO_TELA_ DETALHE _ PRODUTO:${PRECO_TELA_DETALHE_PRODUTO}    console=${LOG_CONSOLE}
     Log    \n.VALOR_TOTAL_PRODUTO_TELA_CART:${VALOR_TOTAL_PRODUTO_TELA_CART}    console=${LOG_CONSOLE}
     ${VALOR_TOTAL_CALCULADO}    Evaluate  ${PRECO_TELA_DETALHE_PRODUTO}*${QTDE_INSERIR_PRODUTO} 
     Should Be Equal As Strings    ${VALOR_TOTAL_CALCULADO}    ${VALOR_TOTAL_PRODUTO_TELA_CART}
+
 
 
 WEB 14: Launch browser
@@ -2379,6 +1903,223 @@ WEB 26: Verify that page is scrolled up and 'Full-Fledged practice website for A
     Wait Until Element Is Visible    ${HOME_LBL_BANNER_ENGINEERS_X}    timeout=${TEMPO_ESPERA_EM_DOBRO} 
 
 
+Fechar browser
+    Close Browser
+    Sleep    2   
+
+
+resolver_caminho_so
+    [Arguments]    ${CAMINHO_RESOLVER}
+    Log    \n>>>Ver entrada:<${CAMINHO_RESOLVER}>    console=${LOG_CONSOLE}
+    ${SO}=    Evaluate    platform.system()    platform
+    Log    \nSistema Operacional identificado como sendo...:<${SO}>    console=${LOG_CONSOLE}
+    IF    '${BROWSER}' == 'HeadlessFirefox' or '${BROWSER}' == 'Firefox'
+        Log    \n0SO Lin:<${SO}>    console=${LOG_CONSOLE}
+        IF    '${SO}'=='Linux'
+            ${CAMINHO_RESOLVER}    Replace String    ${CAMINHO_RESOLVER}    /     //
+        ELSE
+            ${CAMINHO_RESOLVER}    Replace String    ${CAMINHO_RESOLVER}    /     \\
+        END
+    END 
+    Log    \n>>> Ver saida :<${CAMINHO_RESOLVER}>    console=${LOG_CONSOLE}
+    RETURN    ${CAMINHO_RESOLVER}
+
+Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 1
+    ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}1${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}
+    Wait Until Element Is Visible          ${PRODUCTS_LBL_NOME_PRODUTO_X}              timeout=${TEMPO_ESPERA} 
+    Sleep    0.7
+    Mouse Over                             ${PRODUCTS_LBL_NOME_PRODUTO_X}             
+    Sleep    0.5
+    Wait Until Element Is Visible          ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}   timeout=${TEMPO_ESPERA}        
+    ${PREÇO_PRODUTO_1_TELA}=    Get Text   ${PRODUCTS_LBL_PRECO_PRODUTO_1_MO} 
+    Set Suite Variable                ${PREÇO_PRODUTO_1_TELA}
+    Log    \nPREÇO_PRODUTO_1:${PREÇO_PRODUTO_1_TELA}    console=${LOG_CONSOLE}
+    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_1_MO} 
+    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
+    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
+    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}    
+    IF    '${primeiro_character}' == '${SPACE}'
+        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
+        Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+    ELSE
+        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${nome_produto}    Set Variable    ${nome_produto_original}
+        Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+    END
+    Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
+    ${metade}=    Evaluate    len('${nome_produto}')//2
+    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
+    ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
+    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
+    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
+    IF    '${primeira_metade}' == '${segunda_metade}'
+        ${nome_produto}   Set Variable    ${primeira_metade}
+        Set Suite Variable    ${nome_produto}
+        Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+    ELSE   
+        Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
+        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
+        Set Suite Variable    ${nome_produto}
+        Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+    END
+    ${nome_produto_1}    Set Variable   ${nome_produto}
+    Set Suite Variable    ${nome_produto_1}
+    aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART}
+    Wait Until Element Is Visible         ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
+
+
+Execucao: Mouser Over + Obtem informacao + Adiciona carrinho - Produto 2
+    Wait Until Element Is Visible         ${PRODUCTS_LBL_NOME_PRODUTO_2}             timeout=${TEMPO_ESPERA} 
+    Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_2}             
+    Sleep    0.5
+    Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
+    # inicio para pegar o nome do produto que será add no carrinho
+    ${PREÇO_PRODUTO_2_TELA}=    Get Text    ${PRODUCTS_LBL_PRECO_PRODUTO_2_MO} 
+    Set Suite Variable                ${PREÇO_PRODUTO_2_TELA}
+    Log    \nPREÇO_PRODUTO_2:${PREÇO_PRODUTO_2_TELA}    console=${LOG_CONSOLE}
+    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_2_MO} 
+    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
+    # Ver se o 1º caracter for espaco, então remover, senao segue
+    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
+    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
+    IF    '${primeiro_character}' == '${SPACE}'
+        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${nome_produto}=    Evaluate    "${nome_produto_original}"[1:]
+        Log    \nVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+    ELSE
+        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${nome_produto}    Set Variable    ${nome_produto_original}
+        Log    \nNVDD vai pra frente assim:<${nome_produto}>    console=${LOG_CONSOLE}
+    END
+    Log    \n00.:${nome_produto}     console=${LOG_CONSOLE}
+    ${metade}=    Evaluate    len('${nome_produto}')//2
+    ${primeira_metade}=    Get Substring    ${nome_produto}    0    ${metade}
+    ${segunda_metade}=    Get Substring    ${nome_produto}    ${metade}
+    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
+    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
+    IF    '${primeira_metade}' == '${segunda_metade}'
+        ${nome_produto}   Set Variable    ${primeira_metade}
+        Set Suite Variable    ${nome_produto}
+        Log    \n6.: Precisou alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+    ELSE
+        Log    \n4 nome_produto:<${nome_produto}>    console=${LOG_CONSOLE}
+        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
+        Set Suite Variable    ${nome_produto}
+        Log    \n6.: Não precisa alterar, segue nome do produto como:${nome_produto}    console=${LOG_CONSOLE}
+    END
+    ${nome_produto_2}    Set Variable   ${nome_produto}
+    Set Suite Variable    ${nome_produto_2}
+    #Mouse Over                            ${PRODUCTS_LBL_NOME_PRODUTO_X}             
+    #Sleep    0.4
+    # Wait Until Element Is Visible         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}   timeout=${TEMPO_ESPERA}     #Exibiu tbn add cart ao Mouse Over MO 1º prod
+    # Click Element                         ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
+    aguardar_e_clicar_javascript               ${PRODUCTS_MOUSE_OVER_EXIBE_LBL_ADD_CART_2}
+    Wait Until Element Is Visible         ${PRODUCTS_MSG_ADD_CART_ADDED}                timeout=${TEMPO_ESPERA} 
+
+
+
+Selecionar o produto X   
+    [Arguments]    ${INDICE_DO_PRODUTO}   
+    ${PRODUCTS_BTN_VIEW_PRODUCT_X}    Set Variable    ${PRODUCTS_BTN_VIEW_PRODUCT_X_web13_1/2}${INDICE_DO_PRODUTO}${PRODUCTS_BTN_VIEW_PRODUCT_X_web13_2/2}
+    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA}    
+    
+    #FIREFOX
+    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_BTN_VIEW_PRODUCT_X}
+    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
+    
+    # Log    \nPOSICAO_Y_DO_ELEMENTO:${POSICAO_Y_DO_ELEMENTO}    console=${LOG_CONSOLE}
+    Scroll Element Into View            ${PRODUCTS_BTN_VIEW_PRODUCT_X}    
+    #pausar    # possibilita pesquisar um produto diferente para testar
+    ${PRODUCTS_LBL_NOME_PRODUTO_X}    Set Variable    ${PRODUCTS_LBL_NOME_PRODUTO_X_1/2}${INDICE_DO_PRODUTO}${PRODUCTS_LBL_NOME_PRODUTO_X_2/2}    
+
+    Wait Until Element Is Visible    ${PRODUCTS_LBL_NOME_PRODUTO_X}     timeout=${TEMPO_ESPERA}
+    ${nome_produto_original}=    Get text   ${PRODUCTS_LBL_NOME_PRODUTO_X} 
+    Log    \n\nNome_produto_original:${nome_produto_original}    console=${LOG_CONSOLE}
+
+    ${primeiro_character}=    Get Substring    ${nome_produto_original}    0    1
+    Log    \n0.:<${primeiro_character}>    console=${LOG_CONSOLE}
+    IF    '${primeiro_character}' == '${SPACE}'
+        Log    \n0.:Tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${NOME_PRODUTO_TELA_PROD}=    Evaluate    "${nome_produto_original}"[1:]
+        Log    \nVDD vai pra frente assim:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
+    ELSE
+        Log    \n0.:NÃO tem espaço no 1º caracter    console=${LOG_CONSOLE}
+        ${NOME_PRODUTO_TELA_PROD}    Set Variable    ${nome_produto_original}
+        Log    \nNVDD vai pra frente assim:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
+    END
+    Log    \n00.:${NOME_PRODUTO_TELA_PROD}     console=${LOG_CONSOLE}
+    ${metade}=    Evaluate    len('${NOME_PRODUTO_TELA_PROD}')//2
+    ${primeira_metade}=    Get Substring    ${NOME_PRODUTO_TELA_PROD}    0    ${metade}
+    ${segunda_metade}=    Get Substring    ${NOME_PRODUTO_TELA_PROD}    ${metade}
+    Log    \n1.primeira_metade:${primeira_metade}    console=${LOG_CONSOLE}
+    Log    \n2.segunda_metade:${segunda_metade}    console=${LOG_CONSOLE}
+    IF    '${primeira_metade}' == '${segunda_metade}'
+        ${NOME_PRODUTO_TELA_PROD}   Set Variable    ${primeira_metade}
+        Set Suite Variable    ${NOME_PRODUTO_TELA_PROD}
+        Log    \n3 nome_produto:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
+    ELSE
+        Log    \n4 NOME_PRODUTO_TELA_PROD:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
+        Log    \n5 nome_produto_original:<${nome_produto_original}>    console=${LOG_CONSOLE}
+        Set Suite Variable    ${NOME_PRODUTO_TELA_PROD}
+        Log    \n6.: Não precisa alterar:${NOME_PRODUTO_TELA_PROD}    console=${LOG_CONSOLE}
+        
+    END
+    Set Suite Variable   ${NOME_PRODUTO_TELA_PROD}
+    Log    \n7.:Nome FINAL do produto:<${NOME_PRODUTO_TELA_PROD}>    console=${LOG_CONSOLE}
+    #Log    \nConseguiu achar o produto X ${INDICE_DO_PRODUTO} da lista!    console=${LOG_CONSOLE}     
+    Wait Until Element Is Visible            ${PRODUCTS_LBL_SUBSCRIPTION}             timeout=${TEMPO_ESPERA}   
+    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_LBL_SUBSCRIPTION}
+    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO})
+    Scroll Element Into View                  ${PRODUCTS_LBL_SUBSCRIPTION} 
+    Log    \nPRODUCTS_BTN_VIEW_PRODUCT_X:${PRODUCTS_BTN_VIEW_PRODUCT_X}    console=${LOG_CONSOLE}     
+    #pausar    1 #dando problema de travar aqui    travando
+    Wait Until Element Is Visible            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA}    
+    Wait Until Element Is Enabled            ${PRODUCTS_BTN_VIEW_PRODUCT_X}       timeout=${TEMPO_ESPERA} 
+    ${POSICAO_Y_DO_ELEMENTO}=    Get Vertical Position    ${PRODUCTS_BTN_VIEW_PRODUCT_X}
+    Execute JavaScript    window.scrollTo(0, ${POSICAO_Y_DO_ELEMENTO}) 
+    Mouse Over                               ${PRODUCTS_BTN_VIEW_PRODUCT_X}
+    ##Click Element                            ${PRODUCTS_BTN_VIEW_PRODUCT_X}    ORIGINAL COM ERRO AS VEZES
+    # Execute JavaScript    document.evaluate("${PRODUCTS_BTN_VIEW_PRODUCT_X}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
+    aguardar_e_clicar_javascript               ${PRODUCTS_BTN_VIEW_PRODUCT_X}
+    
+
+
+pausar
+    [Arguments]    ${msg_complementar}
+    Log    \nIniciando pausar.      console=${LOG_CONSOLE}
+    ${pausar}    Get Value From User    Click OK para liberar e voltar o teste | ${msg_complementar}.
+    Log    Finalizando pausar.\n    console=${LOG_CONSOLE}
+    Set Suite Variable   ${pausar}    
+
+
+Obter dados 
+    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}/dados/dados_para_cadastro.json
+    Set Suite Variable    ${NOME_ESPERADO}     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["name"]}
+    Set Suite Variable    ${EMAIL_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["email"]}    
+    Set Suite Variable    ${TITULO_ESPERADO}     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["title"]}
+    Set Suite Variable    ${DIA_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_day"]}
+    Set Suite Variable    ${MES_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_month"]}
+    Set Suite Variable    ${ANO_ANIVERSARIO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["birth_year"]}
+    Set Suite Variable    ${PRIMEIRO_NOME_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["first_name"]}
+    Set Suite Variable    ${SOBRE_NOME_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["last_name"]}
+    Set Suite Variable    ${EMPRESA_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["company"]}
+    Set Suite Variable    ${ENDERECO1_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address1"]}
+    Set Suite Variable    ${ENDERECO2_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["address2"]}
+    Set Suite Variable    ${PAIS_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["country"]}
+    Set Suite Variable    ${ESTADO_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["state"]}
+    Set Suite Variable    ${CIDADE_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["city"]}
+    Set Suite Variable    ${CEP_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["zipcode"]}
+    Set Suite Variable    ${PASSWORD_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}
+    Set Suite Variable    ${CELULAR_ESPERADO}    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["mobile_number"]}
+
+Condicao ter usuario cadastrado: chamando api de criacao
+    Cria sessao
+    API 11: Dispara requisicao   /dados/dados_para_cadastro.json    /dados/API_11.json
+
+Condicao não ter usuario cadastrado: chamando api de delecao
+    Cria sessao
+    API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
 
 aguardar_e_clicar_javascript
     [Arguments]    ${elemento_alvo_do_click}
@@ -2386,6 +2127,15 @@ aguardar_e_clicar_javascript
     Sleep    0.5
     Execute JavaScript    document.evaluate("${elemento_alvo_do_click}", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
 
+Limpa Preco
+    [Arguments]    ${PREÇO_DE_ENTRADA}
+    ${RESULTADO}    Replace String    ${PREÇO_DE_ENTRADA}    Rs.${SPACE}     ${EMPTY}
+    RETURN    ${RESULTADO}
+
+Retirar todos espacos
+    [Arguments]    ${TEXTO_ORIGINAL}
+    ${RESULTADO}    Replace String    ${TEXTO_ORIGINAL}    ${SPACE}     ${EMPTY}
+    RETURN    ${RESULTADO}
 
 
 
@@ -2420,7 +2170,9 @@ Executa teste usando
             Fechar browser
         END
     END
-### Apoio web ###
+
+
+
     
 
 
@@ -2495,10 +2247,10 @@ Executa teste usando
 
 # inicio código API
 Cria sessao
-    Create Session      MINHA_SESSAO_API   ${BASE_URL}   verify=true  #headers=${HEADERS}     disable_warnings=True
+    Create Session      MINHA_SESSAO_API   ${BASE_URL}   verify=true 
 
 API 01: Dispara requisicao
-    ${DADOS_RETORNO_API}     GET On Session          MINHA_SESSAO_API   ${END_POINT_PRODUCTSLIST}    # nova forma # ${DADOS_RETORNO_API}     Get Request          alias=MINHA_SESSAO_API   uri=${END_POINT_PRODUCTSLIST}    forma antiga = ao curso
+    ${DADOS_RETORNO_API}     GET On Session          MINHA_SESSAO_API   ${END_POINT_PRODUCTSLIST}    
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
 
@@ -2562,10 +2314,6 @@ API 03: Verifica se no retorno vem somente valor esperado
     ${OBJETOS_JSON}    Get Dictionary Keys    ${DADOS_RETORNO_API.json()}
     ${QTDE_OBJETOS_JSON}    Get Length    ${DADOS_RETORNO_API.json()}
     Should Be Equal    "${QTDE_OBJETOS_JSON}"    "2"
-    # ${OBJETO}    Replace String    ${END_POINT_BRANDSLIST}    /    ${EMPTY}
-    # Log    \n OBJETO: ${OBJETO}    console=${LOG_CONSOLE}
-    # ${OBJETO}    Replace String     ${OBJETO}    List    ${EMPTY}
-    # Log    \n OBJETO: ${OBJETO}    console=${LOG_CONSOLE}
     Dictionary Should Contain Key    ${DADOS_RETORNO_API.json()}    ${OBJETO} 
 
 API 14: Dispara requisicao
@@ -2578,8 +2326,6 @@ API 14: Dispara requisicao
     ${DADOS_RETORNO_API}        GET On Session          MINHA_SESSAO_API   ${uri}    params=${PARAMS}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
-    # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
 API 14: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2590,12 +2336,12 @@ API 14: Verifica Response Code
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
 
-API 14: Verifica retorno dados cadastro    #  /dados/API_11.json     
+API 14: Verifica retorno dados cadastro    
     [Arguments]    ${CAMINHO_DADOS_CADASTRO_USUARIO}
     ${DADOS_PARA_CADASTRAR}    Load Json From File    ${CURDIR}${CAMINHO_DADOS_CADASTRO_USUARIO}
     Should Be Equal As Strings   ${DADOS_PARA_CADASTRAR}     ${DADOS_RETORNO_API.json()}
     
-API 14: Verifica o Schema/Contrato modelo no caminho    # /dados/modelo_contrato_API_14.json
+API 14: Verifica o Schema/Contrato modelo no caminho   
     [Arguments]    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}    Set Variable    ${CURDIR}${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     Validate Json By Schema File    ${DADOS_RETORNO_API.json()}    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
@@ -2616,10 +2362,9 @@ API 04: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
-API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
+API 11: Dispara requisicao    
     [Arguments]    ${ARQ_DADOS_PARA_CADASTRO}    ${ARQ_API_11}
     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}${ARQ_DADOS_PARA_CADASTRO}
-    # Log    \n 1: ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}   console=${LOG_CONSOLE}
     ${NOME_ESPERADO}             Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["name"]}
     ${EMAIL_ESPERADO}            Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["email"]}    
     ${TITULO_ESPERADO}           Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["title"]}
@@ -2646,13 +2391,9 @@ API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
     
     #Envia requisição
     ${DADOS_RETORNO_API}    POST On Session    MINHA_SESSAO_API    ${END_POINT_CREATEACCOUNT}    data=${DADOS_ENVIAR}
-    #ver resultado
-    # Log    \n 6:<${DADOS_RETORNO_API}>    console=${LOG_CONSOLE}
-    # Log    \n 7:<${DADOS_RETORNO_API.json()}>    console=${LOG_CONSOLE}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode    
-    # inicio do disparo do get pra pegar o id e add no arq 11
     &{PARAMS}           Create Dictionary    email=${EMAIL_ESPERADO}
     ${uri}     Set Variable  /getUserDetailByEmail?email=${PARAMS.email}
     ${$DADOS_RETORNO_API_GET}        GET On Session          MINHA_SESSAO_API   ${uri}    params=${PARAMS}
@@ -2667,7 +2408,6 @@ API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
     ${ID_RETORNADO}    Convert To Integer    ${ID_RETORNADO}
     Log    \n _ID_ :${ID_RETORNADO}      console=${LOG_CONSOLE}
 
-    ### > Salvando no arquivo 11 os dados enviado (menos password e celular)
     ${CONTEUDO_ARQ_API_11}   Load JSON From File     ${CURDIR}${ARQ_API_11}    
     ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.responseCode    ${STATUS_CODE}
     ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.user.id    ${ID_RETORNADO}
@@ -2690,8 +2430,8 @@ API 11: Dispara requisicao    # /dados/dados_para_cadastro    /dados/API_11.json
 
 API 11: Verifica Status code 
     [Arguments]  ${STATUS_CODE_ESPERADO}    
-    Log    \nSTATUS_CODE:<${STATUS_CODE}>    console=${True}
-    Log    \STATUS_CODE_ESPERADO:<${STATUS_CODE_ESPERADO}>    console=${True}
+    Log    \nSTATUS_CODE:<${STATUS_CODE}>    console=${LOG_CONSOLE}
+    Log    \STATUS_CODE_ESPERADO:<${STATUS_CODE_ESPERADO}>    console=${LOG_CONSOLE}
     Should Be Equal As Numbers     ${STATUS_CODE_ESPERADO}    ${STATUS_CODE}   
 
 API 11: Verifica Response Code 
@@ -2701,13 +2441,9 @@ API 11: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE_ESPERADO}    ${RESPONSE_CODE_MESSAGE}    
 
-
-
-
-API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/dados_para_cadastro.json    /dados/API_11.json    /dados/API_13.json
+API 13: Dispara requisicao de atualização de endereco   
     [Arguments]    ${NOVO_ENDERECO1_ESPERADO}    ${ARQ_DADOS_PARA_CADASTRO}    ${ARQ_API_11}    ${ARQ_API_13}    
     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}${ARQ_DADOS_PARA_CADASTRO}
-    # Log    \n 1: ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}   console=${LOG_CONSOLE}
     ${NOME_ESPERADO}             Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["name"]}
     ${EMAIL_ESPERADO}            Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["email"]}    
     ${TITULO_ESPERADO}           Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["title"]}
@@ -2731,8 +2467,6 @@ API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/
     ...  company=${EMPRESA_ESPERADO}  address1=${NOVO_ENDERECO1_ESPERADO}  address2=${ENDERECO2_ESPERADO}  country=${PAIS_ESPERADO}  state=${ESTADO_ESPERADO}  
     ...  city=${CIDADE_ESPERADO}  zipcode=${CEP_ESPERADO}  password=${PASSWORD_ESPERADO}  mobile_number=${CELULAR_ESPERADO}
     Log    \n103:${DADOS_ENVIAR}    console=${LOG_CONSOLE}
-
-    
     #Envia requisição
     ${DADOS_RETORNO_API}    PUT On Session    MINHA_SESSAO_API    ${END_POINT_UPDATEACCOUNT}    data=${DADOS_ENVIAR}
     #ver resultado
@@ -2743,7 +2477,6 @@ API 13: Dispara requisicao de atualização de endereco    # Rua Dois    /dados/
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode    
     ### > Salvando no arquivo 11 os dados enviado (menos password e celular)
     ${CONTEUDO_ARQ_API_11}   Load JSON From File     ${CURDIR}${ARQ_API_11}    
-    # ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.user.birth_date    ${DIA_ANIVERSARIO_ESPERADO} 
     ${CONTEUDO_ARQ_API_11}   Update Value To Json    ${CONTEUDO_ARQ_API_11}    $.user.address1    ${NOVO_ENDERECO1_ESPERADO}
     Dump Json To File    ${CURDIR}${ARQ_API_11}    ${CONTEUDO_ARQ_API_11}
 
@@ -2763,57 +2496,39 @@ API 13: Verifica Response Code
 
 API 05: Dispara requisicao    # tshirt
     [Arguments]    ${PRODUTO_PARA_PESQUISAR}    
-    # Log    \n1:${PRODUTO_PARA_PESQUISAR}    console=${LOG_CONSOLE}
     Set Suite Variable  ${PRODUTO_PARA_PESQUISAR}    ${PRODUTO_PARA_PESQUISAR}    
-    # Log    \n2:${PRODUTO_PARA_PESQUISAR}    console=${LOG_CONSOLE}
     ${DADOS_ENVIAR}=    Evaluate    {'search_product': (None, '${PRODUTO_PARA_PESQUISAR}')}
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_SEARCHPRODUCT}     data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
-    # Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    # Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
-API 05: Verifica Status code     #200
+API 05: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}      
-    # Log    \nSTATUS_CODE:<${STATUS_CODE}>    console=${True}
-    # Log    \STATUS_CODE_ESPERADO:<${STATUS_CODE_ESPERADO}>    console=${True}
     Should Be Equal As Numbers    ${STATUS_CODE}    ${STATUS_CODE_ESPERADO}
 
-API 05: Verifica Response Code     #200
+API 05: Verifica Response Code     
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}  
     ${RESPONSE_CODE_STATUS}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
 
 API 05: Verifica retorno dados cadastro
-    # Passo 4: Obter o conteúdo JSON da resposta
-    # ${DADOS_RETORNO_API_json}    Evaluate    ${DADOS_RETORNO_API.json()}    json=${DADOS_RETORNO_API}
-    # Passo 5: Extrair a lista de produtos
     ${REGISTRO}    Get From Dictionary    ${DADOS_RETORNO_API.json()}    products
     ${QTDE_REGISTRO}    Get Length    ${REGISTRO}
-    # Log    \n Dados 9:${REGISTRO}      console=${LOG_CONSOLE}
-    # Log    \n Dados 8:${QTDE_REGISTRO}      console=${LOG_CONSOLE}
     Run Keyword If    ${QTDE_REGISTRO} == 0    Fail    Nenhum produto foi retornado pela API
-    #Fazer verificação para qdo não retorna registro dar erro
-    # Log    \n 1 :${REGISTRO}      console=${LOG_CONSOLE}
     FOR    ${REGISTRO}    IN    @{REGISTRO}
-        # Log   \n1: ${REGISTRO}    console=${LOG_CONSOLE}
-        ${category}    Get From Dictionary    ${REGISTRO['category']}    category
-        
+        ${category}    Get From Dictionary    ${REGISTRO['category']}    category        
         ${category}    Convert To Lowercase    ${category}
         ${PRODUTO_PARA_PESQUISAR}    Convert To Lowercase    ${PRODUTO_PARA_PESQUISAR}
-        
         Should Contain     ${category}    ${PRODUTO_PARA_PESQUISAR}
-        # Should Be Equal    ${category}    ${PRODUTO_PARA_PESQUISAR}
     END
 
-API 05: Verifica o Schema/Contrato modelo no caminho    # /dados/modelo_contrato_API_05.json
+API 05: Verifica o Schema/Contrato modelo no caminho   
     [Arguments]    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}    Set Variable    ${CURDIR}${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
     Validate Json By Schema File    ${DADOS_RETORNO_API.json()}    ${CAMINHO_CONTRATO_DADOS_CADASTRO_USUARIO}
 
 API 06: Dispara requisicao    
-    # ${DADOS_ENVIAR}=    Evaluate    {'search_product': (None, '${PRODUTO_PARA_PESQUISAR}')}
-    ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_SEARCHPRODUCT}    #data=${DADOS_ENVIAR}    #como pede o teste não enviar dados
+    ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_SEARCHPRODUCT}  
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
@@ -2835,12 +2550,9 @@ API 07: Dispara requisicao
     [Arguments]    ${ARQ_API_11}    ${ARQ_DADOS_PARA_CADASTRO}
     ${ARQ_API_11}    Load JSON From File    ${CURDIR}${ARQ_API_11}
     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}${ARQ_DADOS_PARA_CADASTRO}
-
     ${EMAIL_ESPERADO}            Set Variable    ${ARQ_API_11["user"]["email"]}
-    ${SENHA_ESPERADO}            Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}
-    
-    Log    \n 1:${EMAIL_ESPERADO}/${SENHA_ESPERADO}    console=${LOG_CONSOLE}
-    
+    ${SENHA_ESPERADO}            Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}    
+    Log    \n 1:${EMAIL_ESPERADO}/${SENHA_ESPERADO}    console=${LOG_CONSOLE}    
     ${DADOS_ENVIAR}    Evaluate    {'email': (None, '${EMAIL_ESPERADO}'), 'password': (None, '${SENHA_ESPERADO}')}
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}    data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
@@ -2855,8 +2567,7 @@ API 07: Verifica Status code
 API 07: Verifica Response Code 
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
-    Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    
+    Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}    
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
@@ -2868,8 +2579,6 @@ API 08: Dispara requisicao
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}    data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
-    Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
 API 08: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2884,7 +2593,7 @@ API 08: Verifica Response Code
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
 API 09: Dispara requisicao
-    ${DADOS_RETORNO_API}      DELETE On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}    #data=${DADOS_ENVIAR}
+    ${DADOS_RETORNO_API}      DELETE On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}   
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
     Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
@@ -2898,7 +2607,6 @@ API 09: Verifica Response Code
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
@@ -2911,8 +2619,6 @@ API 10: Dispara requisicao
     ${DADOS_RETORNO_API}      POST On Session    MINHA_SESSAO_API    ${END_POINT_VERIFY_LOGIN}    data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
-    Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
 API 10: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2922,7 +2628,6 @@ API 10: Verifica Response Code
     [Arguments]  ${RESPONSE_CODE_STATUS_ESPERADO}   ${RESPONSE_CODE_MESSAGE_ESPERADO}
     ${RESPONSE_CODE_STATUS}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    responseCode
     Should Be Equal As Numbers    ${RESPONSE_CODE_STATUS}    ${RESPONSE_CODE_STATUS_ESPERADO}
-    
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
@@ -2930,18 +2635,12 @@ API 12: Dispara requisicao
     [Arguments]    ${ARQ_API_11}    ${ARQ_DADOS_PARA_CADASTRO}
     ${ARQ_API_11}    Load JSON From File    ${CURDIR}${ARQ_API_11}
     ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO}    Load JSON From File    ${CURDIR}${ARQ_DADOS_PARA_CADASTRO}
-
     ${EMAIL_ESPERADO}            Set Variable    ${ARQ_API_11["user"]["email"]}
     ${SENHA_ESPERADO}            Set Variable    ${CONTEUDO_ARQ_DADOS_PARA_CADASTRO["user"]["password"]}
-    
-    Log    \n 1:${EMAIL_ESPERADO}/${SENHA_ESPERADO}    console=${LOG_CONSOLE}
-    
     ${DADOS_ENVIAR}    Evaluate    {'email': (None, '${EMAIL_ESPERADO}'), 'password': (None, '${SENHA_ESPERADO}')}
     ${DADOS_RETORNO_API}      DELETE On Session    MINHA_SESSAO_API    ${END_POINT_DELETEACCOUNT}    data=${DADOS_ENVIAR}
     Set Suite Variable    ${STATUS_CODE}    ${DADOS_RETORNO_API.status_code}
     Set Suite Variable    ${DADOS_RETORNO_API}    ${DADOS_RETORNO_API}
-    Log    \n Status:${DADOS_RETORNO_API}      console=${LOG_CONSOLE}
-    Log    \n Dados :${DADOS_RETORNO_API.json()}      console=${LOG_CONSOLE}
     
 API 12: Verifica Status code     
     [Arguments]  ${STATUS_CODE_ESPERADO}    
@@ -2955,15 +2654,7 @@ API 12: Verifica Response Code
     ${RESPONSE_CODE_MESSAGE}=    Get From Dictionary    ${DADOS_RETORNO_API.json()}    message
     Should Be Equal As Strings    ${RESPONSE_CODE_MESSAGE}    ${RESPONSE_CODE_MESSAGE_ESPERADO}
 
-Limpa Preco
-    [Arguments]    ${PREÇO_DE_ENTRADA}
-    ${RESULTADO}    Replace String    ${PREÇO_DE_ENTRADA}    Rs.${SPACE}     ${EMPTY}
-    RETURN    ${RESULTADO}
 
-Retirar todos espacos
-    [Arguments]    ${TEXTO_ORIGINAL}
-    ${RESULTADO}    Replace String    ${TEXTO_ORIGINAL}    ${SPACE}     ${EMPTY}
-    RETURN    ${RESULTADO}
 
 
 

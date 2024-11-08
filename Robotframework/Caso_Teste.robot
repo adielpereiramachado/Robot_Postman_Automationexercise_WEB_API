@@ -1,7 +1,5 @@
 *** Settings ***
 Documentation    Suite de Teste https://automationexercise.com  interface WEB(UI) + API
-...    Importante para revisar:
-...    1. Melhorar valores passados para add produto pois em um lugar pede add x e em outro vai cobrar y selecionado.
 
 Resource    Resource_Exec.robot
 Test Teardown    Fechar browser
@@ -10,7 +8,7 @@ Test Teardown    Fechar browser
 *** Test Cases ***
 # inicio código WEB
 WEB Test Case 1: Register User
-    [tags]  WEB 01    WEB OK
+    [tags]  TC_WEB_01       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
     WEB 01: Launch browser 
     WEB 01: Navigate to url   http://automationexercise.com
@@ -33,7 +31,7 @@ WEB Test Case 1: Register User
 
 
 WEB Test Case 2: Login User with correct email and password
-    [tags]  WEB 02    WEB OK
+    [tags]  TC_WEB_02       TC_WEB
     Condicao ter usuario cadastrado: chamando api de criacao 
     WEB 02: Launch browser 
     WEB 02: Navigate to url    http://automationexercise.com
@@ -48,7 +46,7 @@ WEB Test Case 2: Login User with correct email and password
 
 
 WEB Test Case 3: Login User with incorrect email and password
-    [tags]  WEB 03    WEB OK
+    [tags]  TC_WEB_03       TC_WEB
     Condicao ter usuario cadastrado: chamando api de criacao 
     WEB 03: Launch browser
     WEB 03: Navigate to url    http://automationexercise.com
@@ -62,7 +60,7 @@ WEB Test Case 3: Login User with incorrect email and password
 
 
 WEB Test Case 4: Logout User
-    [tags]  WEB 04    WEB OK
+    [tags]  TC_WEB_04       TC_WEB
     Condicao ter usuario cadastrado: chamando api de criacao 
     WEB 04: Launch browser
     WEB 04: Navigate to url    http://automationexercise.com
@@ -76,7 +74,7 @@ WEB Test Case 4: Logout User
     WEB 04: Verify that user is navigated to login page
 
 WEB Test Case 5: Register User with existing email
-    [tags]  WEB 05    WEB OK
+    [tags]  TC_WEB_05       TC_WEB
     WEB 05: Launch browser
     WEB 05: Navigate to url    http://automationexercise.com
     WEB 05: Verify that home page is visible successfully
@@ -87,7 +85,7 @@ WEB Test Case 5: Register User with existing email
     WEB 05: Verify error 'Email Address already exist!' is visible
 
 WEB Test Case 6: Contact Us Form
-    [tags]  WEB 06    WEB OK
+    [tags]  TC_WEB_06       TC_WEB
     WEB 06: Launch browser
     WEB 06: Navigate to url    http://automationexercise.com
     WEB 06: Verify that home page is visible successfully
@@ -101,7 +99,7 @@ WEB Test Case 6: Contact Us Form
     WEB 06: Click 'Home' button and verify that landed to home page successfully
 
 WEB Test Case 7: Verify Test Cases Page
-    [Tags]    WEB 07    WEB OK
+    [Tags]  TC_WEB_07       TC_WEB
     WEB 07: Launch browser
     WEB 07: Navigate to url    http://automationexercise.com
     WEB 07: Verify that home page is visible successfully
@@ -109,7 +107,7 @@ WEB Test Case 7: Verify Test Cases Page
     WEB 07: Verify user is navigated to test cases page successfully
 
 WEB Test Case 8: Verify All Products and product detail page
-    [Tags]    WEB 08    WEB OK
+    [Tags]  TC_WEB_08       TC_WEB
     WEB 08: Launch browser
     WEB 08: Navigate to url    http://automationexercise.com
     WEB 08: Verify that home page is visible successfully
@@ -121,7 +119,7 @@ WEB Test Case 8: Verify All Products and product detail page
     WEB 08: Verify that detail detail is visible: product name, category, price, availability, condition, brand
 
 WEB Test Case 9: Search Product
-    [Tags]    WEB 09    WEB OK
+    [Tags]  TC_WEB_09       TC_WEB
     WEB 09: Launch browser
     WEB 09: Navigate to url    http://automationexercise.com
     WEB 09: Verify that home page is visible successfully
@@ -132,7 +130,7 @@ WEB Test Case 9: Search Product
     WEB 09: Verify all the products related to search are visible
 
 WEB Test Case 10: Verify Subscription in home page
-    [Tags]   WEB 10    WEB OK
+    [Tags]  TC_WEB_10       TC_WEB
     WEB 10: Launch browser
     WEB 10: Navigate to url    http://automationexercise.com
     WEB 10: Verify that home page is visible successfully
@@ -142,7 +140,7 @@ WEB Test Case 10: Verify Subscription in home page
     WEB 10: Verify success message 'You have been successfully subscribed!' is visible
 
 WEB Test Case 11: Verify Subscription in Cart page
-   [Tags]    WEB 11    WEB OK
+   [Tags]  TC_WEB_11       TC_WEB
     WEB 11: Launch browser
     WEB 11: Navigate to url    http://automationexercise.com
     WEB 11: Verify that home page is visible successfully
@@ -153,7 +151,7 @@ WEB Test Case 11: Verify Subscription in Cart page
     WEB 11: Verify success message 'You have been successfully subscribed!' is visible
 
 WEB Test Case 12: Add Products in Cart
-    [Tags]    WEB 12    WEB OK
+    [Tags]  TC_WEB_12       TC_WEB
     WEB 12: Launch browser
     WEB 12: Navigate to url    http://automationexercise.com
     WEB 12: Verify that home page is visible successfully
@@ -166,7 +164,7 @@ WEB Test Case 12: Add Products in Cart
     WEB 12: Verify their prices, quantity and total price
 
 WEB Test Case 13: Verify Product quantity in Cart
-    [Tags]    WEB 13    WEB OK
+    [Tags]  TC_WEB_13       TC_WEB
     WEB 13: Launch browser
     WEB 13: Navigate to url    http://automationexercise.com
     WEB 13: Verify that home page is visible successfully
@@ -178,7 +176,7 @@ WEB Test Case 13: Verify Product quantity in Cart
     WEB 13: Verify that product is displayed in cart page with exact quantity
 
 WEB Test Case 14: Place Order: Register while Checkout
-    [Tags]    WEB 14    WEB OK
+    [Tags]  TC_WEB_14       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
     WEB 14: Launch browser
     WEB 14: Navigate to url    http://automationexercise.com
@@ -202,7 +200,7 @@ WEB Test Case 14: Place Order: Register while Checkout
     WEB 14: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 WEB Test Case 15: Place Order: Register before Checkout
-    [Tags]    WEB 15    WEB OK
+    [Tags]  TC_WEB_15       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
     WEB 15: Launch browser
     WEB 15: Navigate to url    http://automationexercise.com
@@ -224,7 +222,7 @@ WEB Test Case 15: Place Order: Register before Checkout
     WEB 15: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 WEB Test Case 16: Place Order: Login before Checkout
-    [Tags]    WEB 16    WEB OK 
+    [Tags]  TC_WEB_16       TC_WEB 
     Condicao ter usuario cadastrado: chamando api de criacao
     WEB 16: Launch browser
     WEB 16: Navigate to url    http://automationexercise.com
@@ -245,7 +243,7 @@ WEB Test Case 16: Place Order: Login before Checkout
     WEB 16: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 WEB Test Case 17: Remove Products From Cart
-    [Tags]    WEB 17    WEB OK 
+    [Tags]  TC_WEB_17       TC_WEB 
     WEB 17: Launch browser
     WEB 17: Navigate to url    http://automationexercise.com
     WEB 17: Verify that home page is visible successfully
@@ -256,7 +254,7 @@ WEB Test Case 17: Remove Products From Cart
     WEB 17: Verify that product is removed from the cart
 
 WEB Test Case 18: View Category Products
-    [Tags]    WEB 18    WEB OK 
+    [Tags]  TC_WEB_18       TC_WEB 
     WEB 18: Launch browser
     WEB 18: Navigate to url    http://automationexercise.com
     WEB 18: Verify that categories are visible on left side bar
@@ -267,7 +265,7 @@ WEB Test Case 18: View Category Products
     WEB 18: Verify that user is navigated to that category page
 
 WEB Test Case 19: View & Cart Brand Products
-    [Tags]    WEB 19    WEB OK
+    [Tags]  TC_WEB_19       TC_WEB
     WEB 19: Launch browser
     WEB 19: Navigate to url    http://automationexercise.com
     WEB 19: Click on 'Products' button  
@@ -278,7 +276,7 @@ WEB Test Case 19: View & Cart Brand Products
     WEB 19: Verify that user is navigated to that brand page and can see products
 
 WEB Test Case 20: Search Products and Verify Cart After Login
-    [Tags]    WEB 20    WEB OK
+    [Tags]  TC_WEB_20       TC_WEB
     Condicao ter usuario cadastrado: chamando api de criacao
     WEB 20: Launch browser
     WEB 20: Navigate to url    http://automationexercise.com 
@@ -294,7 +292,7 @@ WEB Test Case 20: Search Products and Verify Cart After Login
     WEB 20: Verify that those products are visible in cart after login as well
 
 WEB Test Case 21: Add review on product
-    [Tags]    WEB 21    WEB OK
+    [Tags]  TC_WEB_21       TC_WEB
     WEB 21: Launch browser
     WEB 21: Navigate to url    http://automationexercise.com
     WEB 21: Click on 'Products' button
@@ -306,7 +304,7 @@ WEB Test Case 21: Add review on product
     WEB 21: Verify success message 'Thank you for your review.'
 
 WEB Test Case 22: Add to cart from Recommended items
-    [Tags]    WEB 22    WEB OK
+    [Tags]  TC_WEB_22       TC_WEB
     WEB 22: Launch browser
     WEB 22: Navigate to url    http://automationexercise.com
     WEB 22: Scroll to bottom of page
@@ -316,7 +314,7 @@ WEB Test Case 22: Add to cart from Recommended items
     WEB 22: Verify that product is displayed in cart page
 
 WEB Test Case 23: Verify address details in checkout page
-    [Tags]    WEB 23    WEB OK
+    [Tags]  TC_WEB_23       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
     WEB 23: Launch browser
     WEB 23: Navigate to url    http://automationexercise.com
@@ -335,7 +333,7 @@ WEB Test Case 23: Verify address details in checkout page
     WEB 23: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 WEB Test Case 24: Download Invoice after purchase order
-    [Tags]    WEB 24    WEB OK
+    [Tags]  TC_WEB_24       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
     WEB 24: Launch browser
     WEB 24: Navigate to url    http://automationexercise.com
@@ -361,7 +359,7 @@ WEB Test Case 24: Download Invoice after purchase order
     WEB 24: Verify 'ACCOUNT DELETED!' and click 'Continue' button
 
 WEB Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down functionality
-    [Tags]    WEB 25    WEB OK
+    [Tags]  TC_WEB_25       TC_WEB
     WEB 25: Launch browser
     WEB 25: Navigate to url    http://automationexercise.com
     WEB 25: Verify that home page is visible successfully
@@ -371,7 +369,7 @@ WEB Test Case 25: Verify Scroll Up using 'Arrow' button and Scroll Down function
     WEB 25: Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
 
 WEB Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functionality
-    [Tags]    WEB 26    WEB OK
+    [Tags]  TC_WEB_26       TC_WEB
     WEB 26: Launch browser
     WEB 26: Navigate to url    http://automationexercise.com
     WEB 26: Verify that home page is visible successfully
@@ -381,13 +379,13 @@ WEB Test Case 26: Verify Scroll Up without 'Arrow' button and Scroll Down functi
     WEB 26: Verify that page is scrolled up and 'Full-Fledged practice website for Automation Engineers' text is visible on screen
 
 
-WEB Test Case X nos 6 tipos de Browser
-    [Tags]    Multiplos
-    Executa teste usando
+# WEB Test Case X nos 6 tipos de Browser
+#     [Tags]    Multiplos
+#     Executa teste usando
 
 
 API 01: Get All Products List
-    [tags]  API
+    [tags]   TC_API_01    TC_API
     Cria sessao
     API 01: Dispara requisicao
     API 01: Verifica Status code    200
@@ -395,14 +393,14 @@ API 01: Get All Products List
     API 01: Verifica o Schema/Contrato modelo no caminho    /dados/modelo_contrato_API_01-02.json
 
 API 02: POST To All Products List
-    [tags]  API
+    [tags]   TC_API_02    TC_API
     Cria sessao
     API 02: Dispara requisicao
     API 02: Verifica Status code    200    
     API 02: Verifica Response Code     405    This request method is not supported. 
 
 API 03: Get All Products List
-    [tags]  API
+    [tags]   TC_API_03    TC_API
     Cria sessao
     API 03: Dispara requisicao
     API 03: Verifica Status code    200
@@ -412,28 +410,28 @@ API 03: Get All Products List
     API 03: Verifica se no retorno vem somente valor esperado    brands 
     
 API 04: Get All Products List
-    [tags]  API
+    [tags]   TC_API_04    TC_API
     Cria sessao
     API 04: Dispara requisicao
     API 04: Verifica Status code    200
     API 04: Verifica Response Code     405    This request method is not supported.
 
 API 11: POST To Create/Register User Account 
-    [tags]  API
+    [tags]   TC_API_05    TC_API
     Cria sessao
     API 11: Dispara requisicao   /dados/dados_para_cadastro.json    /dados/API_11.json
     API 11: Verifica Status code    200
     API 11: Verifica Response Code     201    User created!
 
 API 13: PUT METHOD To Update User Account
-    [tags]  API
+    [tags]   TC_API_06    TC_API
     Cria sessao 
     API 13: Dispara requisicao de atualização de endereco    Rua Dois    /dados/dados_para_cadastro.json    /dados/API_11.json    /dados/API_13.json    
     API 13: Verifica Status code    200
     API 13: Verifica Response Code     200    User updated!
 
 API 5: POST To Search Product
-    [tags]  API
+    [tags]   TC_API_07    TC_API
     Cria sessao
     API 05: Dispara requisicao     tshirt 
     API 05: Verifica Status code     200
@@ -442,7 +440,7 @@ API 5: POST To Search Product
     API 05: Verifica o Schema/Contrato modelo no caminho    /dados/modelo_contrato_API_05.json 
 
 API 6: POST To Search Product without search_product parameter
-    [tags]  API
+    [tags]   TC_API_08    TC_API
     Cria sessao
     API 06: Dispara requisicao
     API 06: Verifica Status code    200    
@@ -450,7 +448,7 @@ API 6: POST To Search Product without search_product parameter
 
 
 API 7: POST To Search Product without search_product parameter
-    [tags]  API
+    [tags]   TC_API_09    TC_API
     Cria sessao
     API 07: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
     API 07: Verifica Status code    200    
@@ -458,28 +456,28 @@ API 7: POST To Search Product without search_product parameter
 
 
 API 8: POST To Verify Login without email parameter
-    [tags]  API
+    [tags]   TC_API_10    TC_API
     Cria sessao
     API 08: Dispara requisicao    /dados/dados_para_cadastro.json
     API 08: Verifica Status code    200    
     API 08: Verifica Response Code     400    Bad request, email or password parameter is missing in POST request.
 
 API 9: DELETE To Verify Login
-    [tags]  API
+    [tags]   TC_API_11    TC_API
     Cria sessao
     API 09: Dispara requisicao
     API 09: Verifica Status code    200    
     API 09: Verifica Response Code     405    This request method is not supported.
 
 API 10: POST To Search Product without search_product parameter
-    [tags]  API
+    [tags]   TC_API_12    TC_API
     Cria sessao
     API 10: Dispara requisicao    /dados/API_11.json    
     API 10: Verifica Status code    200    
     API 10: Verifica Response Code     404    User not found!
 
 API 14: GET user account detail by email
-    [tags]  API
+    [tags]   TC_API_13    TC_API
     Cria sessao
     API 14: Dispara requisicao    /dados/API_11.json 
     API 14: Verifica Status code    200
@@ -488,7 +486,7 @@ API 14: GET user account detail by email
     API 14: Verifica o Schema/Contrato modelo no caminho    /dados/modelo_contrato_API_14.json
 
 API 12: DELETE METHOD To Delete User Account
-    [tags]  API
+    [tags]   TC_API_14    TC_API
     Cria sessao
     API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
     API 12: Verifica Status code    200    
