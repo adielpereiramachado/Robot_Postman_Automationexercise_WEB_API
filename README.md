@@ -39,7 +39,7 @@ O repositório está organizado da seguinte forma:
 - `Robotframework/`: Contém os scripts de testes de interface web (UI) usando Robot Framework.
 - `Postman/`: Contém os scripts de API usando Postman & Newman e os mesmos para serem consumidos no Github Actions.
 - `.github/workflows/`: Contém a configuração do GitHub Actions para execução dos testes.
-- `.Arquivos de apoio/`: Contém arquivos com imagens para os Readme.
+- `Arquivos de apoio/`: Contém arquivos com imagens para os Readme.
 
 
 ### Como Executar os Testes

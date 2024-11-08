@@ -4,12 +4,12 @@ Library             Collections
 Library             String
 Library             SeleniumLibrary
 Library             Dialogs
-Library             RequestsLibrary
-Library             JSONSchemaLibrary
-Library             JSONLibrary
 Library             OperatingSystem
 Library             DateTime
 Library             BuiltIn
+Library             RequestsLibrary
+Library             JSONSchemaLibrary
+Library             JSONLibrary
 Resource            ./secreto/secreto.robot
 Resource            ./variaveis/WEB.robot
 Resource            ./variaveis/API.robot
