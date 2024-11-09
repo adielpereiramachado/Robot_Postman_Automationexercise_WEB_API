@@ -44,7 +44,14 @@ O repositório está organizado da seguinte forma:
 
 ### Como Executar os Testes
 
-Instruções detalhadas sobre como executar os testes estão disponíveis nos respectivos subdiretórios. Consulte os READMEs individuais para obter mais informações.
+Instruções detalhadas sobre como executar os testes estão disponíveis nos respectivos link abaixo. Consulte o README individual para obter mais informações.
+
+
+[Teste de API com Postman + Newman + Github Actions](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/tree/main/Postman "Teste de API com Postman + Newman + Github Actions")
+
+
+[Teste de interface WEB (UI) e API Robotframework](https://github.com/adielpereiramachado/Robot_Postman_Automationexercise_WEB_API/tree/main/Robotframework "Teste de interface WEB (UI) e API Robotframework")
+
 
 ### Contribuição
 
