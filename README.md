@@ -57,4 +57,3 @@ Instruções detalhadas sobre como executar os testes estão disponíveis nos re
 
 Contribuições são bem-vindas! Se você encontrar algum problema ou tiver sugestões de melhoria, sinta-se à vontade para abrir uma nova issue ou enviar um e-mail: adielmachado@yahoo.com.br
 
-.
