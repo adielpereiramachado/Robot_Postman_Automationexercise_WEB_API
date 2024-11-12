@@ -2369,24 +2369,3 @@ API 14: Verifica o Schema/Contrato modelo no caminho
 
 
 
-
-
-
-### Apoio web ###
-Executa teste usando    
-    @{LISTA_BROWSER}   Set Variable      Chrome   Firefox   Edge   HeadlessFirefox   HeadlessEdge    HeadlessChrome   #    
-    FOR    ${exec}    IN RANGE    1    4
-        Log    \nExecucao de número.....:${exec}    console=${LOG_CONSOLE}
-        FOR    ${execucao}    IN    @{LISTA_BROWSER}
-            # Pre condições: descomente conforme a necessidade
-            # Condicao ter usuario cadastrado: chamando api de criacao
-            # Condicao não ter usuario cadastrado: chamando api de delecao
-            # Colcar abaixo so CT desejados no loop
-
-           
-
-
-
-            Fechar browser
-        END
-    END

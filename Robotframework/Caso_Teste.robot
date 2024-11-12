@@ -6,7 +6,6 @@ Test Teardown    Fechar browser
 
 
 *** Test Cases ***
-# inicio código WEB
 WEB Test Case 1: Register User
     [tags]  TC_WEB_01       TC_WEB
     Condicao não ter usuario cadastrado: chamando api de delecao
@@ -487,10 +486,3 @@ API 12: DELETE METHOD To Delete User Account
     API 12: Dispara requisicao    /dados/API_11.json    /dados/dados_para_cadastro.json
     API 12: Verifica Status code    200    
     API 12: Verifica Response Code     200    Account deleted!
-
-
-
-
-# WEB Test Case X nos 6 tipos de Browser. Tem que copiar e colar os CT no Resource em questão
-#     [Tags]    Multiplos
-#     Executa teste usando
