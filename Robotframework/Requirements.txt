@@ -1,0 +1,9 @@
+robotframework==7.1
+robotframework-browser==18.9.1
+robotframework-faker==5.0.0
+robotframework-assertion-engine==3.0.3
+robotframework-difflibrary==0.1.0
+robotframework-seleniumlibrary==6.6.1
+robotframework-jsonlibrary==0.5
+robotframework-jsonschemalibrary==1.0
+robotframework-requests==0.9.7
