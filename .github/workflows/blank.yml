@@ -1,11 +1,12 @@
-name: Newman Run
+name: Testes AutomationExercise API e WEB
 
 on:
   push:
     branches:
       - main
+
 jobs:
-  newman:
+  Testes_com_Postman_API:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -27,3 +28,34 @@ jobs:
         with:
           name: Reports
           path: newman
+          retention-days: 2
+          
+  Testes_com_Robot_API_WEB:
+    needs: Testes_com_Postman_API  # Depende do job 'Postman'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Python 3.12.6
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.6'
+
+      - name: Install Requirements
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Robot WEB testes
+        run: |
+          robot -d Logs -v BROWSER:HeadlessChrome Robotframework/Caso_Teste.robot
+
+      - name: Reports Robotframework
+        if: always()
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: Robotframework
+          path: Logs
+          if-no-files-found: ignore
+          retention-days: 2
